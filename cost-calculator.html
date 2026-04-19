@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noah Grove Music Quote Calculator</title>
+  <style>
+    :root {
+      --bg: #171717;
+      --panel: #202020;
+      --text: #ffffff;
+      --muted: #b7b7b7;
+      --accent: #007bff;
+      --accent-hover: #0064d1;
+      --line: #2e2e2e;
+      --danger: #ff8b8b;
+      --success: #8ff0a4;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .quote-wrap {
+      padding: 24px;
+    }
+
+    .quote-wrap h2 {
+      margin: 0 0 6px;
+      font-size: 28px;
+    }
+
+    .quote-wrap .sub {
+      color: var(--muted);
+      margin: 0 0 22px;
+      line-height: 1.45;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .card h3 {
+      margin: 0 0 14px;
+      font-size: 18px;
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+
+    .field label,
+    .field legend {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .hint {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    fieldset {
+      border: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="time"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 13px;
+      border-radius: 10px;
+      border: 1px solid #3b3b3b;
+      background: #121212;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .radio-group,
+    .check-group {
+      display: grid;
+      gap: 10px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #141414;
+      border: 1px solid #313131;
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .summary-row:last-child {
+      border-bottom: 0;
+    }
+
+    .summary-label {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .travel-subnote {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+      text-align: left;
+    }
+
+    .miles-badge {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #1f6f3a;
+      color: #d9ffe7;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .total {
+      margin-top: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .total .amount {
+      font-size: 34px;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+
+    .fine-print {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .error {
+      color: var(--danger);
+      font-size: 12px;
+      margin-top: 8px;
+      display: none;
+      white-space: pre-wrap;
+    }
+
+    .success {
+      color: var(--success);
+      font-size: 12px;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      border: 0;
+      cursor: pointer;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: #2a2a2a;
+      color: #fff;
+      border: 1px solid #3a3a3a;
+    }
+
+    .btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 760px) {
+      .grid,
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .quote-wrap {
+        padding: 18px;
+      }
+
+      .quote-wrap h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="quote-wrap">
+    <h2>Instant Quote</h2>
+    <p class="sub">Choose your event details to get a fast estimate.</p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Event Details</h3>
+
+        <div class="split">
+          <div class="field">
+            <label for="eventDate">Event date</label>
+            <input id="eventDate" type="date" />
+          </div>
+          <div class="field">
+            <label for="startTime">Start time</label>
+            <input id="startTime" type="time" />
+          </div>
+        </div>
+
+        <div class="field">
+          <fieldset>
+            <legend>Live music hours</legend>
+            <div class="radio-group">
+              <label class="option"><input type="radio" name="hours" value="1"> 1 hour</label>
+              <label class="option"><input type="radio" name="hours" value="2" checked> 2 hours</label>
+              <label class="option"><input type="radio" name="hours" value="3"> 3 hours</label>
+              <label class="option"><input type="radio" name="hours" value="4"> 4 hours</label>
+              <label class="option"><input type="radio" name="hours" value="5"> 5 hours</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="field">
+          <fieldset>
+            <legend>Add-ons</legend>
+            <div class="check-group">
+              <label class="option"><input id="wirelessMic" type="checkbox"> Wireless mic</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="field">
+          <label for="songs">New songs to learn <span id="songsCount">(0)</span></label>
+          <input id="songs" type="range" min="0" max="20" step="1" value="0" style="width:100%;">
+          <div class="hint">First song is free, then $20 per additional song.</div>
+        </div>
+
+        <div class="field">
+          <label for="setups">Separate setup locations</label>
+          <select id="setups">
+            <option value="1">1 setup location</option>
+            <option value="2">2 setup locations</option>
+            <option value="3">3 setup locations</option>
+          </select>
+          <div class="hint">1 setup = $0, 2 setups = $100, 3 setups = $200</div>
+        </div>
+
+        <div class="field">
+          <label for="venueName">Venue name</label>
+          <input id="venueName" type="text" placeholder="Venue name">
+        </div>
+
+        <div class="field">
+          <label for="destination">Event venue address</label>
+          <input id="destination" type="text" placeholder="123 Venue St, Charleston, SC">
+        </div>
+
+        <div class="field">
+          <label for="notes">Notes</label>
+          <textarea id="notes" placeholder="Optional notes"></textarea>
+        </div>
+
+        <div class="actions">
+          <button id="submitBtn" class="btn btn-primary" type="button">Submit Quote Request</button>
+          <button id="resetBtn" class="btn btn-secondary" type="button">Reset</button>
+        </div>
+
+        <div id="leadFields" class="hidden">
+          <div class="split" style="margin-top:14px;">
+            <div class="field">
+              <label for="fullName">Full name</label>
+              <input id="fullName" type="text">
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone number</label>
+            <input id="phone" type="tel">
+          </div>
+        </div>
+
+        <div id="calcError" class="error"></div>
+        <div id="calcSuccess" class="success"></div>
+      </div>
+
+      <div class="card">
+        <h3>Quote Summary</h3>
+
+        <div class="summary-row" id="performanceRow">
+          <span>Performance</span>
+          <strong id="perfCost">$0</strong>
+        </div>
+
+        <div class="summary-row hidden" id="micRow">
+          <span>Wireless mic</span>
+          <strong id="micCost">$0</strong>
+        </div>
+
+        <div class="summary-row hidden" id="songsRow">
+          <span>New songs</span>
+          <strong id="songCost">$0</strong>
+        </div>
+
+        <div class="summary-row hidden" id="setupRow">
+          <span>Additional setups</span>
+          <strong id="setupCost">$0</strong>
+        </div>
+
+        <div class="summary-row hidden" id="travelRow">
+          <div class="summary-label">
+            <span>Travel</span>
+            <div class="travel-subnote" id="travelMeta">Enter a venue address to calculate travel.</div>
+          </div>
+          <strong id="travelCost">$0</strong>
+        </div>
+
+        <div class="total">
+          <div>Estimated total</div>
+          <div class="amount" id="grandTotal">$0</div>
+        </div>
+
+        <div class="fine-print">
+          This is an estimate tool. Final pricing can still depend on load-in complexity, parking, overtime, and special requests.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const PRICING = {
+      baseByHours: {
+        1: 375,
+        2: 475,
+        3: 600,
+        4: 750,
+        5: 950
+      },
+      wirelessMic: 25,
+      perSong: 20,
+      freeSongs: 1,
+      extraSetup: 100,
+      travelPerMile: 2,
+      roundTrip: false,
+      hiddenOrigin: "13 Still Shadow Dr, Charleston, SC 29414",
+      publicOriginLabel: "My House"
+    };
+
+    const el = {
+      eventDate: document.getElementById("eventDate"),
+      startTime: document.getElementById("startTime"),
+      wirelessMic: document.getElementById("wirelessMic"),
+      songs: document.getElementById("songs"),
+      songsCount: document.getElementById("songsCount"),
+      setups: document.getElementById("setups"),
+      venueName: document.getElementById("venueName"),
+      destination: document.getElementById("destination"),
+      notes: document.getElementById("notes"),
+      submitBtn: document.getElementById("submitBtn"),
+      leadFields: document.getElementById("leadFields"),
+      fullName: document.getElementById("fullName"),
+      email: document.getElementById("email"),
+      phone: document.getElementById("phone"),
+      resetBtn: document.getElementById("resetBtn"),
+      calcError: document.getElementById("calcError"),
+      calcSuccess: document.getElementById("calcSuccess"),
+      perfCost: document.getElementById("perfCost"),
+      micCost: document.getElementById("micCost"),
+      songCost: document.getElementById("songCost"),
+      setupCost: document.getElementById("setupCost"),
+      travelCost: document.getElementById("travelCost"),
+      grandTotal: document.getElementById("grandTotal"),
+      travelMeta: document.getElementById("travelMeta"),
+      performanceRow: document.getElementById("performanceRow"),
+      micRow: document.getElementById("micRow"),
+      songsRow: document.getElementById("songsRow"),
+      setupRow: document.getElementById("setupRow"),
+      travelRow: document.getElementById("travelRow")
+    };
+
+    let mapsReady = false;
+    let lastTravel = 0;
+    let lastDestination = "";
+
+    function fmtMoney(value) {
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0
+      }).format(Number(value || 0));
+    }
+
+    function getSelectedHours() {
+      return Number(document.querySelector('input[name="hours"]:checked')?.value || 2);
+    }
+
+    function debounce(fn, wait = 700) {
+      let t;
+      return (...args) => {
+        clearTimeout(t);
+        t = setTimeout(() => fn(...args), wait);
+      };
+    }
+
+    function isValidEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || "").trim());
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function setTravelMetaHtml(html, plainText = "") {
+      el.travelMeta.innerHTML = html;
+      el.travelMeta.dataset.plain = plainText || el.travelMeta.textContent.trim();
+    }
+
+    function setError(message = "") {
+      if (!message) {
+        el.calcError.style.display = "none";
+        el.calcError.textContent = "";
+        return;
+      }
+      el.calcError.style.display = "block";
+      el.calcError.textContent = message;
+      el.calcSuccess.style.display = "none";
+      el.calcSuccess.textContent = "";
+    }
+
+    function setSuccess(message = "") {
+      if (!message) {
+        el.calcSuccess.style.display = "none";
+        el.calcSuccess.textContent = "";
+        return;
+      }
+      el.calcSuccess.style.display = "block";
+      el.calcSuccess.textContent = message;
+      el.calcError.style.display = "none";
+      el.calcError.textContent = "";
+    }
+
+    function updateSongsLabel() {
+      el.songsCount.textContent = `(${el.songs.value})`;
+    }
+
+    function getCoreCosts() {
+      const hours = getSelectedHours();
+      const performance = PRICING.baseByHours[hours] || 0;
+      const mic = el.wirelessMic.checked ? PRICING.wirelessMic : 0;
+      const songCount = Number(el.songs.value);
+      const billableSongs = Math.max(0, songCount - PRICING.freeSongs);
+      const songs = billableSongs * PRICING.perSong;
+      const setups = Math.max(0, Number(el.setups.value) - 1) * PRICING.extraSetup;
+      return { performance, mic, songs, setups };
+    }
+
+    function toggleRow(row, shouldShow) {
+      row.classList.toggle("hidden", !shouldShow);
+    }
+
+    function renderSummary(costs) {
+      const total = costs.performance + costs.mic + costs.songs + costs.setups + costs.travel;
+
+      el.perfCost.textContent = fmtMoney(costs.performance);
+      el.micCost.textContent = fmtMoney(costs.mic);
+      el.songCost.textContent = fmtMoney(costs.songs);
+      el.setupCost.textContent = fmtMoney(costs.setups);
+      el.travelCost.textContent = fmtMoney(costs.travel);
+      el.grandTotal.textContent = fmtMoney(total);
+
+      toggleRow(el.performanceRow, costs.performance > 0);
+      toggleRow(el.micRow, costs.mic > 0);
+      toggleRow(el.songsRow, costs.songs > 0);
+      toggleRow(el.setupRow, costs.setups > 0);
+      toggleRow(el.travelRow, costs.travel > 0 || !!el.destination.value.trim());
+    }
+
+    function setTravelPending(message = "Enter a venue address to calculate travel.") {
+      setTravelMetaHtml(escapeHtml(message), message);
+    }
+
+    function calculateWithDirections(origin, destination) {
+      return new Promise((resolve, reject) => {
+        if (!window.google || !google.maps || !google.maps.DirectionsService) {
+          reject(new Error("Google Maps is not available."));
+          return;
+        }
+
+        const service = new google.maps.DirectionsService();
+
+        service.route(
+          {
+            origin,
+            destination,
+            travelMode: google.maps.TravelMode.DRIVING
+          },
+          (result, status) => {
+            if (status !== "OK" || !result?.routes?.[0]?.legs?.length) {
+              reject(new Error("Unable to calculate route distance."));
+              return;
+            }
+
+            const meters = result.routes[0].legs.reduce(
+              (sum, leg) => sum + (leg.distance?.value || 0),
+              0
+            );
+
+            const milesOneWay = meters / 1609.344;
+            const billableMiles = PRICING.roundTrip ? milesOneWay * 2 : milesOneWay;
+            const travel = Math.round(billableMiles * PRICING.travelPerMile);
+
+            const safeDestination = escapeHtml(destination);
+            const milesLabel = `${milesOneWay.toFixed(1)} one-way miles`;
+
+            setTravelMetaHtml(
+              `${escapeHtml(PRICING.publicOriginLabel)} → ${safeDestination} <span class="miles-badge">${escapeHtml(milesLabel)}</span>`,
+              `${PRICING.publicOriginLabel} → ${destination} • ${milesLabel}`
+            );
+
+            resolve(travel);
+          }
+        );
+      });
+    }
+
+    async function calculateQuote() {
+      const destination = el.destination.value.trim();
+      const origin = PRICING.hiddenOrigin;
+      const core = getCoreCosts();
+      let travel = lastTravel;
+
+      try {
+        if (!destination) {
+          travel = 0;
+          lastTravel = 0;
+          lastDestination = "";
+          setTravelPending("Enter a venue address to calculate travel.");
+        } else if (mapsReady && destination !== lastDestination) {
+          travel = await calculateWithDirections(origin, destination);
+          lastTravel = travel;
+          lastDestination = destination;
+        } else if (mapsReady && destination === lastDestination) {
+          travel = lastTravel;
+        } else {
+          travel = 0;
+          setTravelPending("Travel will calculate when Google Maps finishes loading.");
+        }
+      } catch (err) {
+        travel = 0;
+        lastTravel = 0;
+        setTravelMetaHtml(
+          "Could not calculate travel automatically yet.",
+          "Could not calculate travel automatically yet."
+        );
+        setError(err.message || "Unable to calculate travel.");
+      }
+
+      renderSummary({ ...core, travel });
+    }
+
+    function clearFormFields() {
+      document.querySelector('input[name="hours"][value="2"]').checked = true;
+      el.eventDate.value = "";
+      el.startTime.value = "";
+      el.wirelessMic.checked = false;
+      el.songs.value = 0;
+      el.setups.value = "1";
+      el.venueName.value = "";
+      el.destination.value = "";
+      el.notes.value = "";
+      el.fullName.value = "";
+      el.email.value = "";
+      el.phone.value = "";
+      el.leadFields.classList.add("hidden");
+      lastTravel = 0;
+      lastDestination = "";
+      updateSongsLabel();
+      setTravelPending("Enter a venue address to calculate travel.");
+      renderSummary({ ...getCoreCosts(), travel: 0 });
+    }
+
+    function resetCalculator() {
+      clearFormFields();
+      setError("");
+      setSuccess("");
+    }
+
+    async function safeReadError(response) {
+      const contentType = response.headers.get("content-type") || "";
+      if (contentType.includes("application/json")) {
+        const result = await response.json();
+        return (
+          result?.error ||
+          result?.details?.message ||
+          JSON.stringify(result?.details || {}) ||
+          "Failed to send quote request."
+        );
+      }
+
+      const text = await response.text();
+      return text || "Failed to send quote request.";
+    }
+
+    const autoRecalc = debounce(calculateQuote, 700);
+
+    document.querySelectorAll('input[name="hours"]').forEach((radio) => {
+      radio.addEventListener("change", calculateQuote);
+    });
+
+    el.eventDate.addEventListener("change", calculateQuote);
+    el.startTime.addEventListener("change", calculateQuote);
+    el.wirelessMic.addEventListener("change", calculateQuote);
+
+    el.songs.addEventListener("input", () => {
+      updateSongsLabel();
+      calculateQuote();
+    });
+
+    el.setups.addEventListener("change", calculateQuote);
+    el.destination.addEventListener("input", autoRecalc);
+    el.destination.addEventListener("change", calculateQuote);
+    el.resetBtn.addEventListener("click", resetCalculator);
+
+    el.submitBtn.addEventListener("click", async () => {
+      if (el.leadFields.classList.contains("hidden")) {
+        el.leadFields.classList.remove("hidden");
+        setError("Please enter your contact details, then click Submit Quote Request again.");
+        return;
+      }
+
+      if (!el.fullName.value.trim() || !el.email.value.trim() || !el.phone.value.trim()) {
+        setError("Please enter your full name, email address, and phone number.");
+        return;
+      }
+
+      if (!isValidEmail(el.email.value.trim())) {
+        setError("Please enter a valid email address.");
+        return;
+      }
+
+      if (!el.eventDate.value || !el.startTime.value) {
+        setError("Please enter the event date and start time.");
+        return;
+      }
+
+      if (!el.venueName.value.trim()) {
+        setError("Please enter the venue name.");
+        return;
+      }
+
+      if (!el.destination.value.trim()) {
+        setError("Please enter the venue address.");
+        return;
+      }
+
+      setError("");
+      setSuccess("");
+      el.submitBtn.disabled = true;
+      el.submitBtn.textContent = "Sending...";
+
+      const payload = {
+        fullName: el.fullName.value.trim(),
+        email: el.email.value.trim(),
+        phone: el.phone.value.trim(),
+        eventDate: el.eventDate.value,
+        startTime: el.startTime.value,
+        hours: String(getSelectedHours()),
+        wirelessMic: el.wirelessMic.checked,
+        songs: String(Number(el.songs.value)),
+        setups: String(Number(el.setups.value)),
+        venueName: el.venueName.value.trim(),
+        venueAddress: el.destination.value.trim(),
+        notes: el.notes.value.trim(),
+        estimatedTotal: el.grandTotal.textContent,
+        travelNote: el.travelMeta.innerHTML,
+        travelPlain: el.travelMeta.dataset.plain || el.travelMeta.textContent
+      };
+
+      try {
+        const response = await fetch("/send-quote", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error(await safeReadError(response));
+        }
+
+        const result = await response.json();
+
+        if (!result.ok) {
+          throw new Error(result.error || "Failed to send quote request.");
+        }
+
+        clearFormFields();
+        setSuccess("Thanks — your quote request was sent successfully.");
+      } catch (error) {
+        console.error("Quote submit error:", error);
+        setError(error.message || "Failed to send request.");
+      } finally {
+        el.submitBtn.disabled = false;
+        el.submitBtn.textContent = "Submit Quote Request";
+      }
+    });
+
+    updateSongsLabel();
+    resetCalculator();
+    calculateQuote();
+
+    const GOOGLE_MAPS_API_KEY = "AIzaSyCdor2FvSURXJ-8F9wTkEYBA1LvF5SZVyc";
+
+    if (GOOGLE_MAPS_API_KEY) {
+      window.initQuoteCalculatorMaps = function () {
+        mapsReady = true;
+        calculateQuote();
+      };
+
+      const script = document.createElement("script");
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&callback=initQuoteCalculatorMaps`;
+      script.async = true;
+      script.defer = true;
+      script.onerror = () => setError("Google Maps failed to load.");
+      document.head.appendChild(script);
+    }
+  </script>
+</body>
+</html>
