@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Noah Grove Site Stats</title>
+  <style>
+    :root{--bg:#100d0a;--panel:#1b1510;--panel2:#241b13;--ink:#fff1d7;--muted:rgba(255,241,215,.68);--line:rgba(255,241,215,.14);--gold:#f0b35a;--green:#79ff90;--red:#ff715f;--shadow:0 24px 70px rgba(0,0,0,.35)}
+    *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 15% 0,#42240d,transparent 34%),radial-gradient(circle at 90% 10%,#213816,transparent 30%),var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh} a{color:inherit}.wrap{max-width:1200px;margin:0 auto;padding:28px 16px 60px}.top{display:flex;gap:16px;justify-content:space-between;align-items:flex-end;margin-bottom:18px}.eyebrow{color:var(--gold);font-weight:900;letter-spacing:.14em;text-transform:uppercase;font-size:12px}.top h1{font-size:clamp(34px,6vw,74px);line-height:.9;margin:8px 0 0;text-transform:uppercase;letter-spacing:-.04em}.controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.controls input,.controls select,.controls button{border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.06);color:var(--ink);padding:12px 13px;font-weight:800}.controls button{background:linear-gradient(135deg,#fff0c8,#db8e34);color:#1a1008;cursor:pointer}.notice{border:1px solid rgba(240,179,90,.35);background:rgba(240,179,90,.11);border-radius:18px;padding:12px 14px;color:var(--muted);margin:12px 0}.grid{display:grid;gap:14px}.cards{grid-template-columns:repeat(7,minmax(120px,1fr));margin:18px 0}.card,.panel{background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}.card{padding:16px}.label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:900}.value{font-size:32px;font-weight:1000;margin-top:5px}.panels{grid-template-columns:1.35fr .9fr}.panel{padding:18px;overflow:hidden}.panel h2{margin:0 0 14px;text-transform:uppercase;letter-spacing:.06em;font-size:18px}.chart{height:260px;display:flex;align-items:flex-end;gap:7px;border-bottom:1px solid var(--line);padding-top:20px}.bar{flex:1;min-width:8px;background:linear-gradient(180deg,var(--green),var(--gold));border-radius:9px 9px 0 0;position:relative}.bar span{position:absolute;bottom:calc(100% + 5px);left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted);white-space:nowrap}.legend{display:flex;gap:14px;color:var(--muted);font-size:12px;margin-top:10px}.tables{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:14px}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;border-bottom:1px solid var(--line);padding:10px 8px;vertical-align:top}th{color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:.09em}td.num{text-align:right;font-variant-numeric:tabular-nums}.muted{color:var(--muted)}.status{margin:22px 0;color:var(--muted)}.hidden{display:none!important}@media(max-width:900px){.top{display:block}.controls{justify-content:flex-start;margin-top:16px}.cards{grid-template-columns:repeat(2,1fr)}.panels,.tables{grid-template-columns:1fr}.chart{height:190px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="top">
+      <div><div class="eyebrow">NoahGrove.com private dashboard</div><h1>Site Stats</h1></div>
+      <div class="controls">
+        <select id="days"><option value="7">7 days</option><option value="30" selected>30 days</option><option value="90">90 days</option><option value="365">365 days</option></select>
+        <input id="password" type="password" placeholder="Stats password">
+        <button id="load">Load stats</button>
+      </div>
+    </section>
+    <div id="notice" class="notice hidden"></div>
+    <div id="status" class="status">Loading stats…</div>
+    <section id="dashboard" class="hidden">
+      <div class="grid cards" id="cards"></div>
+      <div class="grid panels">
+        <div class="panel"><h2>Visits by day</h2><div class="chart" id="visitsChart"></div><div class="legend"><span>Bars show page views</span><span>Labels show unique visitors</span></div></div>
+        <div class="panel"><h2>Tips & merch by day</h2><div class="chart" id="commerceChart"></div><div class="legend"><span>Bars show dollars collected</span><span>Labels show total sales/tips</span></div></div>
+      </div>
+      <div class="grid panels" style="margin-top:14px">
+        <div class="panel"><h2>Commerce sources</h2><div id="commerceSources"></div></div>
+        <div class="panel"><h2>Traffic breakdown</h2><div id="breakdown"></div></div>
+      </div>
+      <div class="grid tables">
+        <div class="panel"><h2>Top songs</h2><div id="songs"></div></div>
+        <div class="panel"><h2>Song downloads</h2><div id="downloads"></div></div>
+        <div class="panel"><h2>YouTube video plays</h2><div id="youtube"></div></div>
+        <div class="panel"><h2>Tips & merch recent</h2><div id="commerceRecent"></div></div>
+        <div class="panel"><h2>Top pages</h2><div id="pages"></div></div>
+        <div class="panel"><h2>Referrers</h2><div id="referrers"></div></div>
+        <div class="panel"><h2>Recent activity</h2><div id="recent"></div></div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const fmt = new Intl.NumberFormat();
+    const moneyFmt = new Intl.NumberFormat(undefined, { style:'currency', currency:'USD' });
+    const savedPassword = localStorage.getItem('ng_stats_password') || '';
+    $('password').value = savedPassword;
+    $('load').addEventListener('click', loadStats);
+    $('days').addEventListener('change', loadStats);
+    loadStats();
+
+    async function loadStats(){
+      $('status').textContent = 'Loading stats…';
+      $('dashboard').classList.add('hidden');
+      $('notice').classList.add('hidden');
+      const password = $('password').value.trim();
+      if(password) localStorage.setItem('ng_stats_password', password);
+      const res = await fetch(`/api/stats?days=${encodeURIComponent($('days').value)}`, { headers: password ? { 'x-stats-password': password } : {} });
+      const data = await res.json().catch(() => ({ ok:false, error:'Stats response was not valid JSON.' }));
+      if(!res.ok || !data.ok){ $('status').textContent = data.error || 'Could not load stats.'; return; }
+      $('status').textContent = '';
+      if(!data.passwordEnabled){ showNotice('Stats are currently open because STATS_PASSWORD is not set. Add a Cloudflare Pages environment variable named STATS_PASSWORD to make this dashboard private.'); }
+      render(data);
+      $('dashboard').classList.remove('hidden');
+    }
+    function showNotice(text){ $('notice').textContent = text; $('notice').classList.remove('hidden'); }
+    function render(data){
+      const s = data.summary || {};
+      $('cards').innerHTML = card('Page views', s.page_views) + card('Visitors', s.visitors) + card('Sessions', s.sessions) + card('Tips', moneyFmt.format(Number(s.tip_total||0)), s.tip_count ? `${fmt.format(s.tip_count)} tip(s)` : '') + card('Merch', moneyFmt.format(Number(s.merch_total||0)), s.merch_count ? `${fmt.format(s.merch_count)} sale(s)` : '') + card('Downloads', s.song_downloads) + card('YouTube plays', s.youtube_plays);
+      chart(data.visitsByDay || []);
+      commerceChart(data.commerceByDay || []);
+      $('commerceSources').innerHTML = table(data.commerceBySource, ['source','tip_count','tip_total','merch_count','merch_total','total'], { tip_count:'Tips', tip_total:'Tip $', merch_count:'Merch sales', merch_total:'Merch $', total:'Total $' });
+      $('breakdown').innerHTML = '<h3 class="label">Devices</h3>' + table(data.devices, ['device','events']) + '<h3 class="label" style="margin-top:18px">Countries</h3>' + table(data.countries, ['country','events']);
+      $('songs').innerHTML = table(data.songs, ['title','plays','completions','avg_progress','total_seconds'], { avg_progress:'Avg %', total_seconds:'Seconds' });
+      $('downloads').innerHTML = table(data.downloads, ['title','downloads']);
+      $('youtube').innerHTML = table(data.youtube, ['title','plays','max_seconds','max_percent'], { max_seconds:'Max seconds', max_percent:'Max %' });
+      $('commerceRecent').innerHTML = table(data.commerceRecent, ['created_at','event_type','source','item','amount','provider','reference'], { created_at:'When', event_type:'Type' });
+      $('pages').innerHTML = table(data.topPages, ['page','views','visitors']);
+      $('referrers').innerHTML = table(data.referrers, ['referrer','visits']);
+      $('recent').innerHTML = table((data.recent || []).map(r => ({ when:r.created_at, event:r.event_type, item:r.object_title || r.page, place:[r.city,r.region,r.country].filter(Boolean).join(', '), device:r.device })), ['when','event','item','place','device']);
+    }
+    function card(label,value,sub=''){ const rendered = typeof value === 'string' ? value : fmt.format(Number(value||0)); return `<div class="card"><div class="label">${esc(label)}</div><div class="value">${esc(rendered)}</div>${sub ? `<div class="muted">${esc(sub)}</div>` : ''}</div>`; }
+    function chart(rows){
+      const max = Math.max(1, ...rows.map(r => Number(r.visits || 0)));
+      $('visitsChart').innerHTML = rows.map(r => `<div class="bar" title="${esc(r.day)}: ${r.visits||0} views, ${r.visitors||0} visitors" style="height:${Math.max(4, (Number(r.visits||0)/max)*100)}%"><span>${fmt.format(r.visitors||0)}</span></div>`).join('') || '<p class="muted">No page views yet.</p>';
+    }
+    function commerceChart(rows){
+      const max = Math.max(1, ...rows.map(r => Number(r.tip_total || 0) + Number(r.merch_total || 0)));
+      $('commerceChart').innerHTML = rows.map(r => {
+        const total = Number(r.tip_total || 0) + Number(r.merch_total || 0);
+        return `<div class="bar" title="${esc(r.day)}: ${moneyFmt.format(total)}" style="height:${Math.max(4, (total/max)*100)}%"><span>${esc(moneyFmt.format(total))}</span></div>`;
+      }).join('') || '<p class="muted">No tips or merch sales yet.</p>';
+    }
+    function table(rows=[], fields=[], labels={}){
+      if(!rows.length) return '<p class="muted">No data yet.</p>';
+      return `<table><thead><tr>${fields.map(f=>`<th>${esc(labels[f]||f.replaceAll('_',' '))}</th>`).join('')}</tr></thead><tbody>${rows.map(row=>`<tr>${fields.map(f=>cell(row[f])).join('')}</tr>`).join('')}</tbody></table>`;
+    }
+    function cell(value){ const n = typeof value === 'number'; const formatted = n && Math.abs(value) !== Math.floor(Math.abs(value)) ? moneyFmt.format(value) : value; return `<td class="${n?'num':''}">${esc(formatted ?? '')}</td>`; }
+    function esc(v){ return String(v).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
+  </script>
+</body>
+</html>

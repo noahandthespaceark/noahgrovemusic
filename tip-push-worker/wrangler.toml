@@ -1,0 +1,11 @@
+name = "noah-tip-push"
+main = "src/index.js"
+compatibility_date = "2026-05-30"
+
+[[durable_objects.bindings]]
+name = "TIP_PUSH_ROOM"
+class_name = "TipPushRoom"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["TipPushRoom"]

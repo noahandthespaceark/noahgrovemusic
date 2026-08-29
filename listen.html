@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Listen to Noah Grove | Original Music Player & Downloads</title>
+  <meta name="description" content="Listen to Noah Grove original songs, browse the playlist, and download tracks from a phone-friendly music player.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#08101c">
+  <link rel="canonical" href="https://www.noahgrove.com/listen">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta property="og:type" content="website"><meta property="og:site_name" content="Noah Grove Music"><meta property="og:title" content="Listen to Noah Grove"><meta property="og:description" content="A dedicated mobile music player for Noah Grove songs and downloads."><meta property="og:url" content="https://www.noahgrove.com/listen"><meta property="og:image" content="https://www.noahgrove.com/ravenel-bridge-player.jpg">
+  <style>
+    :root{--ink:#f5eadb;--muted:rgba(245,234,219,.72);--gold:#f1c78f;--black:#080807;--line:rgba(245,234,219,.16);--shadow:0 24px 80px rgba(0,0,0,.5)}*{box-sizing:border-box}html{background:#05070a}body{margin:0;min-width:320px;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:radial-gradient(circle at 80% 0,rgba(255,183,104,.35),transparent 20rem),radial-gradient(circle at 12% 18%,rgba(45,119,180,.28),transparent 18rem),#05070a;overflow-x:hidden}a{color:inherit;text-decoration:none}button,a{-webkit-tap-highlight-color:transparent}.page{width:min(100%,560px);min-height:100svh;margin:0 auto;background:rgba(5,7,10,.3);box-shadow:0 0 80px rgba(0,0,0,.54);padding-bottom:calc(22px + env(safe-area-inset-bottom))}.topbar{padding:max(14px,env(safe-area-inset-top)) 16px 0;display:flex;justify-content:space-between;align-items:center;gap:10px}.home-link,.follow-link{padding:10px 12px;border:1px solid rgba(255,255,255,.16);border-radius:999px;color:rgba(255,239,214,.86);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;background:rgba(0,0,0,.28);backdrop-filter:blur(10px)}.hero{padding:14px 16px 12px;text-align:center}.logo{width:min(72%,300px);margin:0 auto 12px;filter:drop-shadow(0 12px 26px rgba(0,0,0,.55))}.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.2em;font-size:11px;font-weight:1000}.hero h1{margin:8px 0 8px;font-size:clamp(45px,16vw,86px);line-height:.84;letter-spacing:-.07em;text-transform:uppercase;font-weight:1000;text-shadow:0 10px 30px rgba(0,0,0,.62)}.hero p{margin:0 auto;max-width:22rem;color:rgba(255,239,214,.82);font-size:13px;line-height:1.45;font-weight:800;text-transform:uppercase;letter-spacing:.1em}.player-frame{margin:8px 12px 14px;border-radius:32px;overflow:hidden;border:1px solid rgba(245,234,219,.16);box-shadow:var(--shadow);background:#0b0b0a}.player{position:relative;left:auto;right:auto;bottom:auto;width:100%;transform:none;color:#fff;padding:0;border:0;border-radius:0;z-index:1;overflow:hidden;box-shadow:none;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);background:linear-gradient(120deg,rgba(7,16,28,.96),rgba(18,38,55,.92) 58%,rgba(10,22,34,.94)),url("/ravenel-bridge-player.jpg") center 45%/cover no-repeat}.player:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(255,255,255,.12) 0 1px,transparent 1px 100%);background-size:auto,58px 100%;mix-blend-mode:screen;opacity:.62}.player.hidden{display:none}.player-shell{position:relative;z-index:1;min-height:62svh;padding:22px 16px 14px;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.035));display:flex;flex-direction:column}.player-main{display:grid;grid-template-columns:1fr;align-items:center;gap:16px}.player-info{min-width:0;text-align:center;padding:12px 4px 2px}#player-title{font-size:clamp(25px,8vw,38px);line-height:.96;font-weight:1000;letter-spacing:-.055em;white-space:normal;overflow:visible;text-wrap:balance;text-shadow:0 3px 16px rgba(0,0,0,.42)}#player-artist{font-size:14px;opacity:.84;margin-top:8px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.progress-container{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 12px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(0,0,0,.26);box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}.player-time{min-width:38px;color:rgba(255,255,255,.78);font-size:12px;font-variant-numeric:tabular-nums}#duration{text-align:right}#progress{width:100%;accent-color:#ffb768;cursor:pointer}.player-controls{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;align-items:center}.player-controls button{border:1px solid rgba(255,255,255,.13);border-radius:22px;min-height:52px;padding:10px 12px;cursor:pointer;font-size:14px;font-weight:1000;background:rgba(255,255,255,.13);color:#fff;box-shadow:0 8px 22px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.12)}.player-controls #play{grid-column:2;grid-row:1;min-height:74px;font-size:22px;background:linear-gradient(135deg,#fff1d9,#ffad62 52%,#e56d4a);color:#122238;border:none;box-shadow:0 12px 32px rgba(255,150,84,.36);border-radius:999px}.player-controls #prev{grid-column:1;grid-row:1}.player-controls #next{grid-column:3;grid-row:1}.player-controls .secondary{grid-column:auto;grid-row:2;background:rgba(8,18,31,.48)}#toggle-playlist{grid-column:1/3}#download{grid-column:3}.player-playlist{margin-top:16px;max-height:none;overflow:visible;border-top:1px solid rgba(255,255,255,.13);padding:12px 0 0;display:grid;grid-template-columns:1fr;gap:8px}.player-playlist.hidden{display:none}.player-playlist-row{min-width:0}.player-playlist-name{display:block;width:100%;text-align:left;font-size:15px;color:rgba(255,255,255,.92);white-space:normal;border:1px solid rgba(255,255,255,.10);border-radius:20px;padding:13px 14px;cursor:pointer;background:rgba(0,0,0,.22)}.player-playlist-name.active{color:#ffcf96;font-weight:1000;border-color:rgba(255,207,150,.34);background:rgba(255,183,104,.13)}.player-empty{color:rgba(255,255,255,.76);font-size:13px;text-align:center;padding:10px}.listen-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 16px 16px}.listen-action{min-height:58px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(245,234,219,.22);border-radius:24px;background:rgba(255,255,255,.075);color:#fff4df;font-weight:1000;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 10px 24px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.08)}.footer{padding:8px 18px 0;text-align:center;color:rgba(245,234,219,.58);font-size:12px}.footer a{color:var(--ink);font-weight:900}@media(max-width:370px){.player-frame{margin-inline:8px}.player-shell{padding-inline:12px}.player-controls{gap:7px}.player-controls button{font-size:13px;padding-inline:9px}.hero h1{font-size:43px}}
+  
+    /* Sticky player title/layout compactness patch. */
+    #player-title { overflow-wrap: normal !important; word-break: normal !important; hyphens: none !important; }
+    @media (min-width: 701px) {
+      .player-shell { padding-left: 56px !important; }
+      .player-main { grid-template-columns: minmax(340px, 1.35fr) minmax(210px, .85fr) max-content !important; }
+      #player-title { font-size: clamp(17px, 1.7vw, 24px) !important; line-height: 1.08 !important; }
+    }
+  
+
+    /* Final sticky player interaction/layout patch.
+       These rules keep the full player compact and centered. */
+    #player .player-shell { padding-right: 58px !important; }
+    #player .player-main { align-items: center !important; }
+    #player .progress-container,
+    #player .player-controls { justify-self: center !important; align-self: center !important; }
+    #player .player-controls { justify-content: center !important; }
+    #player #player-title {
+      max-width: none !important;
+      white-space: normal !important;
+      overflow-wrap: normal !important;
+      word-break: keep-all !important;
+      hyphens: none !important;
+      text-wrap: balance !important;
+    }
+    @media (min-width: 760px) {
+      #player .player-main { grid-template-columns: minmax(420px, 1.7fr) minmax(260px, .9fr) minmax(330px, auto) !important; }
+      #player .player-info { padding-right: 8px !important; }
+      #player #player-title { font-size: clamp(16px, 1.45vw, 22px) !important; line-height: 1.05 !important; }
+    }
+</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar"><a class="home-link" href="/">Home</a><a class="follow-link" href="/follow">Follow</a></div>
+    <section class="hero" aria-label="Listen to Noah Grove original music">
+      <img class="logo" src="/noah-grove-header-logo.png" alt="Noah Grove Music">
+      <div class="eyebrow">Original Songs</div>
+      <h1>Listen<br>Now</h1>
+      <p>Tap play, choose a song, or download a track to keep.</p>
+    </section>
+    <section class="player-frame" aria-label="Noah Grove music player">
+      <div id="player" class="player">
+        <div class="player-shell">
+          <div class="player-main">
+            <div class="player-info"><div id="player-title">Original Music</div><div id="player-artist">Noah Grove</div></div>
+            <div class="progress-container"><span id="current-time" class="player-time">0:00</span><input type="range" id="progress" value="0" min="0" max="100" aria-label="Song progress"><span id="duration" class="player-time">0:00</span></div>
+            <div class="player-controls"><button id="prev" type="button" aria-label="Previous song">⏮</button><button id="play" type="button" aria-label="Play or pause">▶</button><button id="next" type="button" aria-label="Next song">⏭</button><button id="toggle-playlist" type="button" class="secondary">Songs</button><button id="download" type="button" class="secondary">Download</button></div>
+          </div>
+          <div id="player-playlist" class="player-playlist hidden"></div>
+        </div>
+        <audio id="audio" preload="metadata"></audio>
+      </div>
+    </section>
+    <nav class="listen-actions" aria-label="More Noah Grove links"><a class="listen-action" href="/support">Support</a><a class="listen-action" href="/follow">Follow</a></nav>
+    <footer class="footer"><p><a href="mailto:noah@noahgrove.com">noah@noahgrove.com</a> • <a href="/support">Support the music</a></p><p>© 2026 Noah Grove Music</p></footer>
+  </main>
+  <script src="/sticky-player.js"></script>
+  <script src="/analytics.js" defer></script>
+</body>
+</html>

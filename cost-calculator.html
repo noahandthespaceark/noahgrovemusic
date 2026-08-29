@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noah Grove Music Quote Calculator</title>
+  <meta name="description" content="Private quote calculator for Noah Grove Music booking inquiries.">
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://www.noahgrove.com/cost-calculator.html">
+  <style>
+    :root {
+      --bg: #171717;
+      --panel: #202020;
+      --text: #ffffff;
+      --muted: #b7b7b7;
+      --accent: #007bff;
+      --accent-hover: #0064d1;
+      --line: #2e2e2e;
+      --danger: #ff8b8b;
+      --success: #8ff0a4;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .quote-wrap {
+      padding: 24px;
+    }
+
+    .quote-wrap h2 {
+      margin: 0 0 6px;
+      font-size: 28px;
+    }
+
+    .quote-wrap .sub {
+      color: var(--muted);
+      margin: 0 0 22px;
+      line-height: 1.45;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .card h3 {
+      margin: 0 0 14px;
+      font-size: 18px;
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+
+    .field label,
+    .field legend {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .hint {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    fieldset {
+      border: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="time"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 13px;
+      border-radius: 10px;
+      border: 1px solid #3b3b3b;
+      background: #121212;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .radio-group,
+    .check-group {
+      display: grid;
+      gap: 10px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #141414;
+      border: 1px solid #313131;
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    .setup-selector {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      width: 100%;
+    }
+
+    .setup-choice {
+      position: relative;
+      min-width: 0;
+    }
+
+    .setup-choice input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .setup-choice span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 6px;
+      border: 1px solid #3b3b3b;
+      border-radius: 8px;
+      background: #121212;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+    }
+
+    .setup-choice input:checked + span {
+      background: rgba(0, 123, 255, 0.18);
+      border-color: var(--accent);
+      box-shadow: inset 0 0 0 1px var(--accent);
+    }
+
+    .setup-choice input:focus-visible + span {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+
+    .songs-input {
+      max-width: 110px;
+      text-align: center;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .summary-row:last-child {
+      border-bottom: 0;
+    }
+
+    .summary-label {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .travel-subnote {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+      text-align: left;
+    }
+
+    .miles-badge {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #1f6f3a;
+      color: #d9ffe7;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .total {
+      margin-top: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .total .amount {
+      font-size: 34px;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+
+    .fine-print {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .error {
+      color: var(--danger);
+      font-size: 12px;
+      margin-top: 10px;
+      display: none;
+      white-space: pre-wrap;
+    }
+
+    .success {
+      color: var(--success);
+      font-size: 12px;
+      margin-top: 10px;
+      display: none;
+      white-space: pre-wrap;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      border: 0;
+      cursor: pointer;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: #2a2a2a;
+      color: #fff;
+      border: 1px solid #3a3a3a;
+    }
+
+    .contact-panel {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .contact-panel h4 {
+      margin: 0 0 12px;
+      font-size: 15px;
+    }
+
+    @media (max-width: 760px) {
+      .grid,
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .quote-wrap {
+        padding: 18px;
+      }
+
+      .quote-wrap h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="quote-wrap">
+    <h2>Instant Quote</h2>
+    <p class="sub">Choose your event details to get a fast estimate.</p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Event Details</h3>
+
+        <div class="split">
+          <div class="field">
+            <label for="eventDate">Event date</label>
+            <input id="eventDate" type="date" />
+          </div>
+          <div class="field">
+            <label for="startTime">Start time</label>
+            <input id="startTime" type="time" />
+          </div>
+        </div>
+
+        <div class="field">
+          <fieldset>
+            <legend>Live music hours</legend>
+            <div class="radio-group">
+              <label class="option"><input type="radio" name="hours" value="1"> 1 hour</label>
+              <label class="option"><input type="radio" name="hours" value="2" checked> 2 hours</label>
+              <label class="option"><input type="radio" name="hours" value="3"> 3 hours</label>
+              <label class="option"><input type="radio" name="hours" value="4"> 4 hours</label>
+              <label class="option"><input type="radio" name="hours" value="5"> 5 hours</label>
+            </div>
+          </fieldset>
+        </div>
+
+
+        <div class="field">
+          <label for="songs">New songs to learn</label>
+          <input id="songs" class="songs-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" value="0" aria-describedby="songsHint">
+          <div class="hint" id="songsHint">First song is free, then $25 per additional song.</div>
+        </div>
+
+        <div class="field">
+          <fieldset>
+            <legend>Separate setup locations</legend>
+            <div class="setup-selector" id="setups">
+              <label class="setup-choice"><input type="radio" name="setups" value="1" checked><span>1 setup</span></label>
+              <label class="setup-choice"><input type="radio" name="setups" value="2"><span>2 setups</span></label>
+              <label class="setup-choice"><input type="radio" name="setups" value="3"><span>3 setups</span></label>
+            </div>
+          </fieldset>
+          <div class="hint">1 setup = $0, 2 setups = $100, 3 setups = $200</div>
+        </div>
+
+        <div class="field">
+          <label for="venueName">Venue name</label>
+          <input id="venueName" type="text" placeholder="Start typing a venue name" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="destination">Event venue address</label>
+          <input id="destination" type="text" placeholder="123 Venue St, Charleston, SC">
+        </div>
+
+        <div class="field">
+          <label for="notes">Event Details</label>
+          <textarea id="notes" placeholder="Share any helpful event details"></textarea>
+        </div>
+
+        <div id="contactPanel" class="contact-panel hidden">
+          <h4>Your Contact Info</h4>
+
+          <div class="split">
+            <div class="field">
+              <label for="fullName">Full name</label>
+              <input id="fullName" type="text" placeholder="Your full name">
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="you@example.com">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone number</label>
+            <input id="phone" type="tel" placeholder="(555) 555-5555">
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="bookNowBtn" class="btn btn-primary" type="button">Email Me the Quote</button>
+          <button id="resetBtn" class="btn btn-secondary" type="button">Reset</button>
+        </div>
+
+        <div id="calcError" class="error"></div>
+        <div id="bookingHint" class="success"></div>
+      </div>
+
+      <div class="card">
+        <h3>Quote Summary</h3>
+
+        <div class="summary-row" id="performanceRow">
+          <span>Performance</span>
+          <strong id="perfCost">$0</strong>
+        </div>
+
+
+        <div class="summary-row hidden" id="songsRow">
+          <span>New songs</span>
+          <strong id="songCost">$0</strong>
+        </div>
+
+        <div class="summary-row hidden" id="setupRow">
+          <span>Additional setups</span>
+          <strong id="setupCost">$0</strong>
+        </div>
+
+        <div class="summary-row hidden" id="travelRow">
+          <div class="summary-label">
+            <span>Travel</span>
+            <div class="travel-subnote" id="travelMeta">Enter a venue address to calculate travel.</div>
+          </div>
+          <strong id="travelCost">$0</strong>
+        </div>
+
+        <div class="total">
+          <div>Estimated total</div>
+          <div class="amount" id="grandTotal">$0</div>
+        </div>
+
+        <div class="fine-print">
+          This is an estimate tool. Final pricing can still depend on load-in complexity, parking, overtime, and special requests.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const PRICING = {
+      baseByHours: {
+        1: 400,
+        2: 600,
+        3: 800,
+        4: 1000,
+        5: 1250
+      },
+      perSong: 25,
+      freeSongs: 1,
+      extraSetup: 100,
+      travelPerMile: 2,
+      roundTrip: false,
+      hiddenOrigin: "13 Still Shadow Dr, Charleston, SC 29414",
+      publicOriginLabel: "My House",
+      bookingEmail: "noah@noahgrove.com"
+    };
+
+    const el = {
+      eventDate: document.getElementById("eventDate"),
+      startTime: document.getElementById("startTime"),
+      songs: document.getElementById("songs"),
+      setups: document.getElementById("setups"),
+      venueName: document.getElementById("venueName"),
+      destination: document.getElementById("destination"),
+      notes: document.getElementById("notes"),
+      fullName: document.getElementById("fullName"),
+      email: document.getElementById("email"),
+      phone: document.getElementById("phone"),
+      contactPanel: document.getElementById("contactPanel"),
+      bookNowBtn: document.getElementById("bookNowBtn"),
+      resetBtn: document.getElementById("resetBtn"),
+      calcError: document.getElementById("calcError"),
+      bookingHint: document.getElementById("bookingHint"),
+      perfCost: document.getElementById("perfCost"),
+      songCost: document.getElementById("songCost"),
+      setupCost: document.getElementById("setupCost"),
+      travelCost: document.getElementById("travelCost"),
+      grandTotal: document.getElementById("grandTotal"),
+      travelMeta: document.getElementById("travelMeta"),
+      performanceRow: document.getElementById("performanceRow"),
+      songsRow: document.getElementById("songsRow"),
+      setupRow: document.getElementById("setupRow"),
+      travelRow: document.getElementById("travelRow")
+    };
+
+    let mapsReady = false;
+    let venueAutocomplete = null;
+    let lastTravel = 0;
+    let lastDestination = "";
+
+    function fmtMoney(value) {
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0
+      }).format(Number(value || 0));
+    }
+
+    function getSelectedHours() {
+      return Number(document.querySelector('input[name="hours"]:checked')?.value || 2);
+    }
+
+    function debounce(fn, wait = 700) {
+      let t;
+      return (...args) => {
+        clearTimeout(t);
+        t = setTimeout(() => fn(...args), wait);
+      };
+    }
+
+    function isValidEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || "").trim());
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function setTravelMetaHtml(html, plainText = "") {
+      el.travelMeta.innerHTML = html;
+      el.travelMeta.dataset.plain = plainText || el.travelMeta.textContent.trim();
+    }
+
+    function setError(message = "") {
+      if (!message) {
+        el.calcError.style.display = "none";
+        el.calcError.textContent = "";
+        return;
+      }
+      el.calcError.style.display = "block";
+      el.calcError.textContent = message;
+      setBookingHint("");
+    }
+
+    function setBookingHint(message = "") {
+      if (!message) {
+        el.bookingHint.style.display = "none";
+        el.bookingHint.textContent = "";
+        return;
+      }
+      el.bookingHint.style.display = "block";
+      el.bookingHint.textContent = message;
+    }
+
+    function sanitizeSongCount() {
+      const digitsOnly = String(el.songs.value || "").replace(/\D/g, "").slice(0, 2);
+      el.songs.value = digitsOnly;
+      return Number(digitsOnly || 0);
+    }
+
+    function getSelectedSetups() {
+      return Number(document.querySelector('input[name="setups"]:checked')?.value || 1);
+    }
+
+    function getCoreCosts() {
+      const hours = getSelectedHours();
+      const performance = PRICING.baseByHours[hours] || 0;
+      const songCount = sanitizeSongCount();
+      const billableSongs = Math.max(0, songCount - PRICING.freeSongs);
+      const songs = billableSongs * PRICING.perSong;
+      const setups = Math.max(0, getSelectedSetups() - 1) * PRICING.extraSetup;
+      return { performance, songs, setups };
+    }
+
+    function toggleRow(row, shouldShow) {
+      row.classList.toggle("hidden", !shouldShow);
+    }
+
+    function renderSummary(costs) {
+      const total = costs.performance + costs.songs + costs.setups + costs.travel;
+
+      el.perfCost.textContent = fmtMoney(costs.performance);
+      el.songCost.textContent = fmtMoney(costs.songs);
+      el.setupCost.textContent = fmtMoney(costs.setups);
+      el.travelCost.textContent = fmtMoney(costs.travel);
+      el.grandTotal.textContent = fmtMoney(total);
+
+      toggleRow(el.performanceRow, costs.performance > 0);
+      toggleRow(el.songsRow, costs.songs > 0);
+      toggleRow(el.setupRow, costs.setups > 0);
+      toggleRow(el.travelRow, costs.travel > 0 || !!el.destination.value.trim());
+    }
+
+    function setTravelPending(message = "Enter a venue address to calculate travel.") {
+      setTravelMetaHtml(escapeHtml(message), message);
+    }
+
+    function initVenueAutocomplete() {
+      if (!window.google?.maps?.places || !el.venueName) return;
+
+      venueAutocomplete = new google.maps.places.Autocomplete(el.venueName, {
+        fields: ["name", "formatted_address"],
+        types: ["establishment"]
+      });
+
+      venueAutocomplete.addListener("place_changed", () => {
+        const place = venueAutocomplete.getPlace();
+        const venueName = String(place?.name || el.venueName.value || "").trim();
+        const address = String(place?.formatted_address || "").trim();
+
+        if (venueName) el.venueName.value = venueName;
+
+        if (address) {
+          el.destination.value = address;
+          lastDestination = "";
+          calculateQuote();
+        }
+      });
+    }
+
+    function calculateWithDirections(origin, destination) {
+      return new Promise((resolve, reject) => {
+        if (!window.google || !google.maps || !google.maps.DirectionsService) {
+          reject(new Error("Google Maps is not available."));
+          return;
+        }
+
+        const service = new google.maps.DirectionsService();
+
+        service.route(
+          {
+            origin,
+            destination,
+            travelMode: google.maps.TravelMode.DRIVING
+          },
+          (result, status) => {
+            if (status !== "OK" || !result?.routes?.[0]?.legs?.length) {
+              reject(new Error("Unable to calculate route distance."));
+              return;
+            }
+
+            const meters = result.routes[0].legs.reduce(
+              (sum, leg) => sum + (leg.distance?.value || 0),
+              0
+            );
+
+            const milesOneWay = meters / 1609.344;
+            const billableMiles = PRICING.roundTrip ? milesOneWay * 2 : milesOneWay;
+            const travel = Math.round(billableMiles * PRICING.travelPerMile);
+
+            const safeDestination = escapeHtml(destination);
+            const milesLabel = `${milesOneWay.toFixed(1)} one-way miles`;
+
+            setTravelMetaHtml(
+              `${escapeHtml(PRICING.publicOriginLabel)} → ${safeDestination} <span class="miles-badge">${escapeHtml(milesLabel)}</span>`,
+              `${PRICING.publicOriginLabel} → ${destination} • ${milesLabel}`
+            );
+
+            resolve(travel);
+          }
+        );
+      });
+    }
+
+    async function calculateQuote() {
+      const destination = el.destination.value.trim();
+      const origin = PRICING.hiddenOrigin;
+      const core = getCoreCosts();
+      let travel = lastTravel;
+
+      try {
+        if (!destination) {
+          travel = 0;
+          lastTravel = 0;
+          lastDestination = "";
+          setTravelPending("Enter a venue address to calculate travel.");
+        } else if (mapsReady && destination !== lastDestination) {
+          travel = await calculateWithDirections(origin, destination);
+          lastTravel = travel;
+          lastDestination = destination;
+        } else if (mapsReady && destination === lastDestination) {
+          travel = lastTravel;
+        } else {
+          travel = 0;
+          setTravelPending("Travel will calculate when Google Maps finishes loading.");
+        }
+      } catch (err) {
+        travel = 0;
+        lastTravel = 0;
+        setTravelMetaHtml(
+          "Could not calculate travel automatically yet.",
+          "Could not calculate travel automatically yet."
+        );
+      }
+
+      renderSummary({ ...core, travel });
+    }
+
+    function formatDateForEmail(value) {
+      if (!value) return "Not provided";
+      const d = new Date(value + "T00:00:00");
+      if (Number.isNaN(d.getTime())) return value;
+      return d.toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+    }
+
+    function formatTimeForEmail(value) {
+      if (!value) return "Not provided";
+      const [hours, minutes] = String(value).split(":");
+      if (hours == null || minutes == null) return value;
+      const d = new Date();
+      d.setHours(Number(hours), Number(minutes), 0, 0);
+      return d.toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit"
+      });
+    }
+
+    function buildQuotePayload() {
+      const hours = getSelectedHours();
+      const core = getCoreCosts();
+      const travel = lastTravel || 0;
+      const total = core.performance + core.songs + core.setups + travel;
+
+      return {
+        bookingEmail: PRICING.bookingEmail,
+        fullName: el.fullName.value.trim(),
+        email: el.email.value.trim(),
+        phone: el.phone.value.trim(),
+        venueName: el.venueName.value.trim(),
+        destination: el.destination.value.trim(),
+        eventDate: el.eventDate.value || "",
+        eventDateFormatted: formatDateForEmail(el.eventDate.value),
+        startTime: el.startTime.value || "",
+        startTimeFormatted: formatTimeForEmail(el.startTime.value),
+        hours,
+        songCount: sanitizeSongCount(),
+        setups: getSelectedSetups(),
+        notes: el.notes.value.trim(),
+        eventDetails: el.notes.value.trim(),
+        performance: core.performance,
+        songs: core.songs,
+        setupsCost: core.setups,
+        travel,
+        travelMeta: el.travelMeta?.dataset?.plain || "",
+        total
+      };
+    }
+
+    async function submitQuoteRequest() {
+      const payload = buildQuotePayload();
+
+      const response = await fetch("/api/send-quote", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok || !data.ok) {
+        throw new Error(data?.error || "Failed to send quote request.");
+      }
+
+      return data;
+    }
+
+    function clearFormFields() {
+      document.querySelector('input[name="hours"][value="2"]').checked = true;
+      el.eventDate.value = "";
+      el.startTime.value = "";
+      el.songs.value = "0";
+      document.querySelector('input[name="setups"][value="1"]').checked = true;
+      el.venueName.value = "";
+      el.destination.value = "";
+      el.notes.value = "";
+      el.fullName.value = "";
+      el.email.value = "";
+      el.phone.value = "";
+      el.contactPanel.classList.add("hidden");
+      lastTravel = 0;
+      lastDestination = "";
+      sanitizeSongCount();
+      setTravelPending("Enter a venue address to calculate travel.");
+      renderSummary({ ...getCoreCosts(), travel: 0 });
+      setError("");
+      setBookingHint("");
+      el.bookNowBtn.textContent = "Email Me the Quote";
+    }
+
+    function resetCalculator() {
+      clearFormFields();
+    }
+
+    function validateBeforeSubmit() {
+      if (!el.fullName.value.trim() || !el.email.value.trim() || !el.phone.value.trim()) {
+        setError("Please enter your full name, email address, and phone number.");
+        return false;
+      }
+
+      if (!isValidEmail(el.email.value.trim())) {
+        setError("Please enter a valid email address.");
+        return false;
+      }
+
+      setError("");
+      return true;
+    }
+
+    const autoRecalc = debounce(calculateQuote, 700);
+
+    document.querySelectorAll('input[name="hours"]').forEach((radio) => {
+      radio.addEventListener("change", calculateQuote);
+    });
+
+    el.eventDate.addEventListener("change", calculateQuote);
+    el.startTime.addEventListener("change", calculateQuote);
+
+    el.songs.addEventListener("input", () => {
+      sanitizeSongCount();
+      calculateQuote();
+    });
+
+    el.songs.addEventListener("blur", () => {
+      if (!el.songs.value) el.songs.value = "0";
+      calculateQuote();
+    });
+
+    document.querySelectorAll('input[name="setups"]').forEach((radio) => {
+      radio.addEventListener("change", calculateQuote);
+    });
+    el.destination.addEventListener("input", autoRecalc);
+    el.destination.addEventListener("change", calculateQuote);
+    el.resetBtn.addEventListener("click", resetCalculator);
+
+    el.bookNowBtn.addEventListener("click", async () => {
+      setBookingHint("");
+
+      if (el.contactPanel.classList.contains("hidden")) {
+        el.contactPanel.classList.remove("hidden");
+        setError("Please enter your contact information, then click Email Me the Quote again.");
+        return;
+      }
+
+      if (!validateBeforeSubmit()) return;
+
+      try {
+        el.bookNowBtn.disabled = true;
+        el.bookNowBtn.textContent = "Sending...";
+        setError("");
+
+        await calculateQuote();
+        await submitQuoteRequest();
+
+        setBookingHint("Success — your quote request was sent to Noah and a confirmation was sent to your email.");
+        setError("");
+      } catch (error) {
+        setError(error?.message || "Failed to send quote request.");
+      } finally {
+        el.bookNowBtn.disabled = false;
+        el.bookNowBtn.textContent = "Email Me the Quote";
+      }
+    });
+
+    sanitizeSongCount();
+    resetCalculator();
+    calculateQuote();
+
+    const GOOGLE_MAPS_API_KEY = "";
+
+    if (GOOGLE_MAPS_API_KEY) {
+      window.initQuoteCalculatorMaps = function () {
+        mapsReady = true;
+        initVenueAutocomplete();
+        calculateQuote();
+      };
+
+      const script = document.createElement("script");
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places&callback=initQuoteCalculatorMaps`;
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+  </script>
+  <script src="/analytics.js" defer></script>
+</body>
+</html>

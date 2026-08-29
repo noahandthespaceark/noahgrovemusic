@@ -1,0 +1,3277 @@
+<script>
+const genres = [
+  "All",
+  "Rock",
+  "Pop",
+  "Country",
+  "Oldies",
+  "Soul / Motown",
+  "Beach / Island",
+  "Folk / Acoustic",
+  "Alternative / Indie",
+  "Christian / Worship",
+  "Party / Dance",
+  "Jazz / Standards",
+  "Blues / Roots",
+  "Disney / Family",
+  "Patriotic"
+];
+
+const songs = [
+  {
+    "title": "Amber",
+    "artist": "311",
+    "genres": [
+      "Rock",
+      "Alternative / Indie",
+      "Beach / Island"
+    ]
+  },
+  {
+    "title": "Love Song",
+    "artist": "311",
+    "genres": [
+      "Rock",
+      "Alternative / Indie",
+      "Beach / Island"
+    ]
+  },
+  {
+    "title": "Away From the Sun",
+    "artist": "3 Doors Down",
+    "genres": [
+      "Rock"
+    ]
+  },
+  {
+    "title": "Take On Me",
+    "artist": "a-ha",
+    "genres": [
+      "Pop",
+      "Oldies",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "How Long",
+    "artist": "Ace",
+    "genres": [
+      "Oldies",
+      "Rock"
+    ]
+  },
+  {
+    "title": "I’ll Fly Away",
+    "artist": "Albert Brumley",
+    "genres": [
+      "Christian / Worship",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Let Me Down Slowly",
+    "artist": "Alec Benjamin",
+    "genres": [
+      "Pop"
+    ]
+  },
+  {
+    "title": "No One",
+    "artist": "Alicia Keys",
+    "genres": [
+      "Pop",
+      "Soul / Motown"
+    ]
+  },
+  {
+    "title": "If I Ain’t Got You",
+    "artist": "Alicia Keys",
+    "genres": [
+      "Pop",
+      "Soul / Motown"
+    ]
+  },
+  {
+    "title": "Stormy Monday",
+    "artist": "Allman Brothers",
+    "genres": [
+      "Rock",
+      "Blues / Roots"
+    ]
+  },
+  {
+    "title": "Valerie",
+    "artist": "Amy Winehouse",
+    "genres": [
+      "Pop",
+      "Soul / Motown"
+    ]
+  },
+  {
+    "title": "Mardy Bum",
+    "artist": "Arctic Monkeys",
+    "genres": [
+      "Alternative / Indie",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Respect",
+    "artist": "Aretha Franklin",
+    "genres": [
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Singin’ in the Rain",
+    "artist": "Arthur Freed",
+    "genres": [
+      "Jazz / Standards",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Fire on the Mountain",
+    "artist": "Asa",
+    "genres": [
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Get Down",
+    "artist": "Audio Adrenaline",
+    "genres": [
+      "Christian / Worship",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Big House",
+    "artist": "Audio Adrenaline",
+    "genres": [
+      "Christian / Worship",
+      "Rock"
+    ]
+  },
+  {
+    "title": "February Seven",
+    "artist": "Avett Brothers",
+    "genres": [
+      "Folk / Acoustic",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Raindrops Keep Falling on my Head",
+    "artist": "B.J. Thomas",
+    "genres": [
+      "Oldies",
+      "Pop"
+    ]
+  },
+  {
+    "title": "No One’s Gonna Love You",
+    "artist": "Band of Horses",
+    "genres": [
+      "Alternative / Indie",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "How Deep Is Your Love",
+    "artist": "Bee Gees",
+    "genres": [
+      "Pop",
+      "Oldies",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "How Can You Mend a Broken Heart",
+    "artist": "Bee Gees",
+    "genres": [
+      "Pop",
+      "Oldies",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Stand By Me",
+    "artist": "Ben E. King",
+    "genres": [
+      "Oldies",
+      "Soul / Motown"
+    ]
+  },
+  {
+    "title": "Better Way",
+    "artist": "Ben Harper",
+    "genres": [
+      "Folk / Acoustic",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Lean on Me",
+    "artist": "Bill Withers",
+    "genres": [
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Lovely Day",
+    "artist": "Bill Withers",
+    "genres": [
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Just the Two of Us",
+    "artist": "Bill Withers",
+    "genres": [
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Moonglow",
+    "artist": "Billie Holiday",
+    "genres": [
+      "Jazz / Standards",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Piano Man",
+    "artist": "Billy Joel",
+    "genres": [
+      "Rock",
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Movin’ Out",
+    "artist": "Billy Joel",
+    "genres": [
+      "Rock",
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "She’s Always a Woman",
+    "artist": "Billy Joel",
+    "genres": [
+      "Rock",
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Swingin’ on a Star",
+    "artist": "Bing Crosby",
+    "genres": [
+      "Jazz / Standards",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Pennies From Heaven",
+    "artist": "Bing Crosby",
+    "genres": [
+      "Jazz / Standards",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Nobody But You",
+    "artist": "Blake Shelton",
+    "genres": [
+      "Country"
+    ]
+  },
+  {
+    "title": "What’s My Age Again",
+    "artist": "Blink 182",
+    "genres": [
+      "Rock",
+      "Alternative / Indie",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Knockin’ on Heaven’s Door",
+    "artist": "Bob Dylan",
+    "genres": [
+      "Folk / Acoustic",
+      "Country",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Wagon Wheel",
+    "artist": "Bob Dylan",
+    "genres": [
+      "Folk / Acoustic",
+      "Country",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Don’t Think Twice",
+    "artist": "Bob Dylan",
+    "genres": [
+      "Folk / Acoustic",
+      "Country",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "To Make You Feel My Love",
+    "artist": "Bob Dylan",
+    "genres": [
+      "Folk / Acoustic",
+      "Country",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Is This Love?",
+    "artist": "Bob Marley",
+    "genres": [
+      "Beach / Island",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Jammin’",
+    "artist": "Bob Marley",
+    "genres": [
+      "Beach / Island",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Three Little Birds",
+    "artist": "Bob Marley",
+    "genres": [
+      "Beach / Island",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Redemption Song",
+    "artist": "Bob Marley",
+    "genres": [
+      "Beach / Island",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "You Must Have Been a Beautiful Baby",
+    "artist": "Bobby Darin",
+    "genres": [
+      "Jazz / Standards",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Don’t Worry Be Happy",
+    "artist": "Bobby McFarin",
+    "genres": [
+      "Jazz / Standards",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Southern Sun",
+    "artist": "Boy and Bear",
+    "genres": [
+      "Alternative / Indie",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Lowdown",
+    "artist": "Boz Scaggs",
+    "genres": [
+      "Soul / Motown",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Hungry Heart",
+    "artist": "Bruce Springsteen",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Act Naturally",
+    "artist": "Buck Owens",
+    "genres": [
+      "Country",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Hot Hot Hot",
+    "artist": "Buster Poindexter",
+    "genres": [
+      "Party / Dance",
+      "Beach / Island",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "The Girl From Ipanema",
+    "artist": "Carlos Antonio Jobim",
+    "genres": [
+      "Jazz / Standards",
+      "Beach / Island"
+    ]
+  },
+  {
+    "title": "Peace Train",
+    "artist": "Cat Stevens",
+    "genres": [
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Morning Has Broken",
+    "artist": "Cat Stevens",
+    "genres": [
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Father and Son",
+    "artist": "Cat Stevens",
+    "genres": [
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Hard Headed Woman",
+    "artist": "Cat Stevens",
+    "genres": [
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Attention",
+    "artist": "Charlie Puth",
+    "genres": [
+      "Pop",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "The Red",
+    "artist": "Chevelle",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Wicked Game",
+    "artist": "Chris Isaak",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Tennessee Whiskey",
+    "artist": "Chris Stapleton",
+    "genres": [
+      "Country",
+      "Blues / Roots"
+    ]
+  },
+  {
+    "title": "The Twist",
+    "artist": "Chubby Checker",
+    "genres": [
+      "Oldies",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Tubthumping",
+    "artist": "Chumbawumba",
+    "genres": [
+      "Party / Dance",
+      "Rock"
+    ]
+  },
+  {
+    "title": "The Girl",
+    "artist": "City and Colour",
+    "genres": [
+      "Folk / Acoustic",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Viva La Vida",
+    "artist": "Coldplay",
+    "genres": [
+      "Pop",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Yellow",
+    "artist": "Coldplay",
+    "genres": [
+      "Pop",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Green Eyes",
+    "artist": "Coldplay",
+    "genres": [
+      "Pop",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Overkill",
+    "artist": "Colin Hay",
+    "genres": [
+      "Folk / Acoustic",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Higher",
+    "artist": "Creed",
+    "genres": [
+      "Rock"
+    ]
+  },
+  {
+    "title": "One Last Breath",
+    "artist": "Creed",
+    "genres": [
+      "Rock"
+    ]
+  },
+  {
+    "title": "Down on the Corner",
+    "artist": "Creedence Clearwater Revival",
+    "genres": [
+      "Rock",
+      "Oldies",
+      "Blues / Roots"
+    ]
+  },
+  {
+    "title": "Proud Mary",
+    "artist": "Creedence Clearwater Revival",
+    "genres": [
+      "Rock",
+      "Oldies",
+      "Blues / Roots"
+    ]
+  },
+  {
+    "title": "Have You Ever Seen the Rain",
+    "artist": "Creedence Clearwater Revival",
+    "genres": [
+      "Rock",
+      "Oldies",
+      "Blues / Roots"
+    ]
+  },
+  {
+    "title": "Heard It Through the Grapevine",
+    "artist": "Creedence Clearwater Revival",
+    "genres": [
+      "Rock",
+      "Oldies",
+      "Blues / Roots"
+    ]
+  },
+  {
+    "title": "Lookin’ Out My Back Door",
+    "artist": "Creedence Clearwater Revival",
+    "genres": [
+      "Rock",
+      "Oldies",
+      "Blues / Roots"
+    ]
+  },
+  {
+    "title": "Time After Time",
+    "artist": "Cyndi Lauper",
+    "genres": [
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Get Lucky",
+    "artist": "Daft Punk",
+    "genres": [
+      "Party / Dance",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Speechless",
+    "artist": "Dan and Shay",
+    "genres": [
+      "Country",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Best Part",
+    "artist": "Daniel Caesar",
+    "genres": [
+      "Soul / Motown",
+      "Pop"
+    ]
+  },
+  {
+    "title": "You and Me",
+    "artist": "Dave Matthews",
+    "genres": [
+      "Folk / Acoustic",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Starman",
+    "artist": "David Bowie",
+    "genres": [
+      "Rock",
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Titanium",
+    "artist": "David Guetta",
+    "genres": [
+      "Party / Dance",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Jesus Freak",
+    "artist": "DC Talk",
+    "genres": [
+      "Christian / Worship",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Godsend",
+    "artist": "DC Talk",
+    "genres": [
+      "Christian / Worship",
+      "Rock"
+    ]
+  },
+  {
+    "title": "What If I Stumble",
+    "artist": "DC Talk",
+    "genres": [
+      "Christian / Worship",
+      "Rock"
+    ]
+  },
+  {
+    "title": "We All Wanna Be Loved",
+    "artist": "DC Talk",
+    "genres": [
+      "Christian / Worship",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Colored People",
+    "artist": "DC Talk",
+    "genres": [
+      "Christian / Worship",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Consume Me",
+    "artist": "DC Talk",
+    "genres": [
+      "Christian / Worship",
+      "Rock"
+    ]
+  },
+  {
+    "title": "You Spin Me Round (Like a Record)",
+    "artist": "Dead or Alive",
+    "genres": [
+      "Party / Dance",
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Chapel of Love",
+    "artist": "Dixie Cups",
+    "genres": [
+      "Oldies",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "American Pie",
+    "artist": "Don McClean",
+    "genres": [
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Listen to the Music",
+    "artist": "Doobie Brothers",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Long Train Runnin’",
+    "artist": "Doobie Brothers",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Spooky",
+    "artist": "Dusty Springfield",
+    "genres": [
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "September",
+    "artist": "Earth Wind & Fire",
+    "genres": [
+      "Soul / Motown",
+      "Party / Dance",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "That’s the Way of the World",
+    "artist": "Earth Wind & Fire",
+    "genres": [
+      "Soul / Motown",
+      "Party / Dance",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Perfect",
+    "artist": "Ed Sheeran",
+    "genres": [
+      "Pop",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Thinkin’ Out Loud",
+    "artist": "Ed Sheeran",
+    "genres": [
+      "Pop",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Galway Girl",
+    "artist": "Ed Sheeran",
+    "genres": [
+      "Pop",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Rise",
+    "artist": "Eddie Vedder",
+    "genres": [
+      "Rock",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "La Vie En Rose",
+    "artist": "Edith Piaf",
+    "genres": [
+      "Jazz / Standards",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Blue",
+    "artist": "Eiffel",
+    "genres": [
+      "Alternative / Indie",
+      "Pop"
+    ]
+  },
+  {
+    "title": "It’s Only a Paper Moon",
+    "artist": "Ella Fitzgerald",
+    "genres": [
+      "Jazz / Standards",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Rocketman",
+    "artist": "Elton John",
+    "genres": [
+      "Rock",
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Bennie and the Jets",
+    "artist": "Elton John",
+    "genres": [
+      "Rock",
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Your Song",
+    "artist": "Elton John",
+    "genres": [
+      "Rock",
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "All Shook Up",
+    "artist": "Elvis Presley",
+    "genres": [
+      "Oldies",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Can’t Help Falling In Love",
+    "artist": "Elvis Presley",
+    "genres": [
+      "Oldies",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Layla",
+    "artist": "Eric Clapton",
+    "genres": [
+      "Rock",
+      "Blues / Roots"
+    ]
+  },
+  {
+    "title": "Wonderful Tonight",
+    "artist": "Eric Clapton",
+    "genres": [
+      "Rock",
+      "Blues / Roots"
+    ]
+  },
+  {
+    "title": "The Way",
+    "artist": "Fastball",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Go Your Own Way",
+    "artist": "Fleetwood Mac",
+    "genres": [
+      "Rock",
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Landslide",
+    "artist": "Fleetwood Mac",
+    "genres": [
+      "Rock",
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Rhiannon",
+    "artist": "Fleetwood Mac",
+    "genres": [
+      "Rock",
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Most Beautiful Girl in the Room",
+    "artist": "Flight of the Conchords",
+    "genres": [
+      "Alternative / Indie",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Bret You Got It Goin’ On",
+    "artist": "Flight of the Conchords",
+    "genres": [
+      "Alternative / Indie",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "My Hero",
+    "artist": "Foo Fighters",
+    "genres": [
+      "Rock"
+    ]
+  },
+  {
+    "title": "Urgent",
+    "artist": "Foreigner",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "May I Have This Dance",
+    "artist": "Francis and The Lights",
+    "genres": [
+      "Pop",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "All of Me",
+    "artist": "Frank Sinatra",
+    "genres": [
+      "Jazz / Standards",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "The Way You Look Tonight",
+    "artist": "Frank Sinatra",
+    "genres": [
+      "Jazz / Standards",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Fly Me to the Moon",
+    "artist": "Frank Sinatra",
+    "genres": [
+      "Jazz / Standards",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Can’t Take My Eyes Off You",
+    "artist": "Frankie Valli",
+    "genres": [
+      "Oldies",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Mad World",
+    "artist": "Gary Jules",
+    "genres": [
+      "Alternative / Indie",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Careless Whisper",
+    "artist": "George Michael",
+    "genres": [
+      "Pop",
+      "Oldies",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Baker Street",
+    "artist": "Gerry Rafferty",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "I Will Survive",
+    "artist": "Gloria Gaynor",
+    "genres": [
+      "Party / Dance",
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Slide",
+    "artist": "Goo Goo Dolls",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Iris",
+    "artist": "Goo Goo Dolls",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Boulevard of Broken Dreams",
+    "artist": "Green Day",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Sarah Smile",
+    "artist": "Hall & Oates",
+    "genres": [
+      "Pop",
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "You Make My Dreams",
+    "artist": "Hall & Oates",
+    "genres": [
+      "Pop",
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Mmmbop",
+    "artist": "Hansen",
+    "genres": [
+      "Pop",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Yellow Bird",
+    "artist": "Harry Belafonte",
+    "genres": [
+      "Beach / Island",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "This Little Light of Mine",
+    "artist": "Harry Dixon Loes",
+    "genres": [
+      "Christian / Worship",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Moon River",
+    "artist": "Henry Mancini",
+    "genres": [
+      "Jazz / Standards",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Only Wanna Be With You",
+    "artist": "Hootie & the Blowfish",
+    "genres": [
+      "Rock",
+      "Country"
+    ]
+  },
+  {
+    "title": "Inaudible Melodies",
+    "artist": "Inaudible Melodies",
+    "genres": [
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Drive",
+    "artist": "Incubus",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "The Way I Am",
+    "artist": "Ingrid Michaelson",
+    "genres": [
+      "Pop",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Over the Rainbow",
+    "artist": "Ishmael Kamakawiwo’ole",
+    "genres": [
+      "Beach / Island",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Upside Down",
+    "artist": "Jack Johnson",
+    "genres": [
+      "Beach / Island",
+      "Folk / Acoustic",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Good People",
+    "artist": "Jack Johnson",
+    "genres": [
+      "Beach / Island",
+      "Folk / Acoustic",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Better Together",
+    "artist": "Jack Johnson",
+    "genres": [
+      "Beach / Island",
+      "Folk / Acoustic",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Never Know",
+    "artist": "Jack Johnson",
+    "genres": [
+      "Beach / Island",
+      "Folk / Acoustic",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Sittin’ Waitin’ Wishin’",
+    "artist": "Jack Johnson",
+    "genres": [
+      "Beach / Island",
+      "Folk / Acoustic",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Do You Remember",
+    "artist": "Jack Johnson",
+    "genres": [
+      "Beach / Island",
+      "Folk / Acoustic",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Your Love Keeps Lifting Me Higher",
+    "artist": "Jackie Wilson",
+    "genres": [
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "ABC",
+    "artist": "Jackson 5",
+    "genres": [
+      "Soul / Motown",
+      "Party / Dance",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Doctor My Eyes",
+    "artist": "Jackson Browne",
+    "genres": [
+      "Rock",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Made for You",
+    "artist": "Jake Owens",
+    "genres": [
+      "Country"
+    ]
+  },
+  {
+    "title": "Say You Won’t Let Go",
+    "artist": "James Arthur",
+    "genres": [
+      "Pop"
+    ]
+  },
+  {
+    "title": "How Sweet It Is",
+    "artist": "James Taylor",
+    "genres": [
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Shower the People",
+    "artist": "James Taylor",
+    "genres": [
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Flood",
+    "artist": "Jars of Clay",
+    "genres": [
+      "Christian / Worship",
+      "Rock",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "No One Loves Me Like You",
+    "artist": "Jars of Clay",
+    "genres": [
+      "Christian / Worship",
+      "Rock",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Love Song for a Savior",
+    "artist": "Jars of Clay",
+    "genres": [
+      "Christian / Worship",
+      "Rock",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "I’m Yours",
+    "artist": "Jason Mraz",
+    "genres": [
+      "Pop",
+      "Folk / Acoustic",
+      "Beach / Island"
+    ]
+  },
+  {
+    "title": "Lucky",
+    "artist": "Jason Mraz",
+    "genres": [
+      "Pop",
+      "Folk / Acoustic",
+      "Beach / Island"
+    ]
+  },
+  {
+    "title": "One Less Set of Footsteps",
+    "artist": "Jim Croche",
+    "genres": [
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "I’ll Have to Say I Love You in a Song",
+    "artist": "Jim Croche",
+    "genres": [
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Margartivaille",
+    "artist": "Jimmy Buffet",
+    "genres": [
+      "Beach / Island",
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "A Pirate Looks at 40",
+    "artist": "Jimmy Buffet",
+    "genres": [
+      "Beach / Island",
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "The Middle",
+    "artist": "Jimmy Eat World",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Lookin’ For Love",
+    "artist": "Jimmy Lee",
+    "genres": [
+      "Country"
+    ]
+  },
+  {
+    "title": "You Are So Beautiful",
+    "artist": "Joe Cocker",
+    "genres": [
+      "Rock",
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Believe It or Not",
+    "artist": "Joey Scarbury",
+    "genres": [
+      "Oldies",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Take Me Home Country Roads",
+    "artist": "John Denver",
+    "genres": [
+      "Country",
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Leaving on a Jet Plane",
+    "artist": "John Denver",
+    "genres": [
+      "Country",
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Perfectly Lonely",
+    "artist": "John Mayer",
+    "genres": [
+      "Pop",
+      "Rock",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Gravity",
+    "artist": "John Mayer",
+    "genres": [
+      "Pop",
+      "Rock",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Neon",
+    "artist": "John Mayer",
+    "genres": [
+      "Pop",
+      "Rock",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Waiting on the World to Change",
+    "artist": "John Mayer",
+    "genres": [
+      "Pop",
+      "Rock",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "New Light",
+    "artist": "John Mayer",
+    "genres": [
+      "Pop",
+      "Rock",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Heart of Life",
+    "artist": "John Mayer",
+    "genres": [
+      "Pop",
+      "Rock",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Your Body is a Wonderland",
+    "artist": "John Mayer",
+    "genres": [
+      "Pop",
+      "Rock",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Still Feel Like Your Man",
+    "artist": "John Mayer",
+    "genres": [
+      "Pop",
+      "Rock",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Slow Dancing in a Burning Room",
+    "artist": "John Mayer",
+    "genres": [
+      "Pop",
+      "Rock",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Stop This Train",
+    "artist": "John Mayer",
+    "genres": [
+      "Pop",
+      "Rock",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "You’re Gonna Live Forever in Me",
+    "artist": "John Mayer",
+    "genres": [
+      "Pop",
+      "Rock",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Ring of Fire",
+    "artist": "Johnny Cash",
+    "genres": [
+      "Country",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Big Yellow Taxi",
+    "artist": "Joni Mitchell",
+    "genres": [
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Don’t Stop Believing",
+    "artist": "Journey",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Lights",
+    "artist": "Journey",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Baby",
+    "artist": "Justin Bieber",
+    "genres": [
+      "Pop"
+    ]
+  },
+  {
+    "title": "Cry Me a River",
+    "artist": "Justin Timberlake",
+    "genres": [
+      "Pop",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Slow Burn",
+    "artist": "Kacey Musgraves",
+    "genres": [
+      "Country",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Somewhere Only We Know",
+    "artist": "Keane",
+    "genres": [
+      "Pop",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Footloose",
+    "artist": "Kenny Loggins",
+    "genres": [
+      "Pop",
+      "Oldies",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Danny’s Song",
+    "artist": "Kenny Loggins",
+    "genres": [
+      "Pop",
+      "Oldies",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "House of Gold",
+    "artist": "Kenny Rankin",
+    "genres": [
+      "Jazz / Standards",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "The Rainbow Connection",
+    "artist": "Kermit the Frog",
+    "genres": [
+      "Disney / Family"
+    ]
+  },
+  {
+    "title": "Rock N Roll All Nite",
+    "artist": "KISS",
+    "genres": [
+      "Rock",
+      "Party / Dance",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Get Down On It",
+    "artist": "Kool & The Gang",
+    "genres": [
+      "Party / Dance",
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "God Bless the USA",
+    "artist": "Lee Greenwood",
+    "genres": [
+      "Country",
+      "Patriotic"
+    ]
+  },
+  {
+    "title": "American Woman",
+    "artist": "Lenny Kravitz",
+    "genres": [
+      "Rock"
+    ]
+  },
+  {
+    "title": "Hallelujah",
+    "artist": "Leonard Cohen",
+    "genres": [
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "It’s My Party",
+    "artist": "Leslie Gore",
+    "genres": [
+      "Oldies",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "The Dutchman",
+    "artist": "Liam Clancy",
+    "genres": [
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "In The End",
+    "artist": "Linkin Park",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "My Own Worst Enemy",
+    "artist": "Lit",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "The Loco-Motion",
+    "artist": "Little Eva",
+    "genres": [
+      "Oldies",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Royals",
+    "artist": "Lorde",
+    "genres": [
+      "Pop",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Casi Que Me Pierdo",
+    "artist": "Los Cafres",
+    "genres": [
+      "Beach / Island"
+    ]
+  },
+  {
+    "title": "Heaven",
+    "artist": "Los Lonely Boys",
+    "genres": [
+      "Rock",
+      "Blues / Roots"
+    ]
+  },
+  {
+    "title": "What a Wonderful World",
+    "artist": "Louis Armstrong",
+    "genres": [
+      "Jazz / Standards",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Beautiful Crazy",
+    "artist": "Luke Combs",
+    "genres": [
+      "Country"
+    ]
+  },
+  {
+    "title": "Sweet Home Alabama",
+    "artist": "Lynyrd Skynyrd",
+    "genres": [
+      "Rock",
+      "Country",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Paper Planes",
+    "artist": "M.I.A.",
+    "genres": [
+      "Pop",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Rude",
+    "artist": "Magic!",
+    "genres": [
+      "Pop",
+      "Beach / Island"
+    ]
+  },
+  {
+    "title": "Telepath",
+    "artist": "Manchester Orchestra",
+    "genres": [
+      "Alternative / Indie",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Only Hope",
+    "artist": "Mandy Moore",
+    "genres": [
+      "Pop"
+    ]
+  },
+  {
+    "title": "Sunday Morning",
+    "artist": "Maroon 5",
+    "genres": [
+      "Pop",
+      "Rock"
+    ]
+  },
+  {
+    "title": "This Love",
+    "artist": "Maroon 5",
+    "genres": [
+      "Pop",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Let’s Get It On",
+    "artist": "Marvin Gaye",
+    "genres": [
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Ain’t No Mountain High Enough",
+    "artist": "Marvin Gaye",
+    "genres": [
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Unwell",
+    "artist": "Matchbox 20",
+    "genres": [
+      "Rock",
+      "Pop"
+    ]
+  },
+  {
+    "title": "3am",
+    "artist": "Matchbox 20",
+    "genres": [
+      "Rock",
+      "Pop"
+    ]
+  },
+  {
+    "title": "One Day",
+    "artist": "Matisyahu",
+    "genres": [
+      "Beach / Island",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Like I’m Gonna Lose You",
+    "artist": "Meghan Trainor",
+    "genres": [
+      "Pop"
+    ]
+  },
+  {
+    "title": "Til There Was You",
+    "artist": "Meredith Wilson",
+    "genres": [
+      "Jazz / Standards",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Man in the Mirror",
+    "artist": "Michael Jackson",
+    "genres": [
+      "Pop",
+      "Party / Dance",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Smooth Criminal",
+    "artist": "Michael Jackson",
+    "genres": [
+      "Pop",
+      "Party / Dance",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Bluer Than Blue",
+    "artist": "Michael Johnson",
+    "genres": [
+      "Country",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Missing Person",
+    "artist": "Michael W. Smith",
+    "genres": [
+      "Christian / Worship",
+      "Pop"
+    ]
+  },
+  {
+    "title": "I Took A Pill in Ibiza",
+    "artist": "Mike Posner",
+    "genres": [
+      "Pop"
+    ]
+  },
+  {
+    "title": "Flowers",
+    "artist": "Miley Cyrus",
+    "genres": [
+      "Pop"
+    ]
+  },
+  {
+    "title": "Extreme Ways",
+    "artist": "Moby",
+    "genres": [
+      "Alternative / Indie",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Your Wildest Dreams",
+    "artist": "Moody Blues",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Hysteria",
+    "artist": "Muse",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Starlight",
+    "artist": "Muse",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Endlessly",
+    "artist": "Muse",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Sweet Caroline",
+    "artist": "Neil Diamond",
+    "genres": [
+      "Oldies",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Harvest Moon",
+    "artist": "Neil Young",
+    "genres": [
+      "Folk / Acoustic",
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Forget My Name",
+    "artist": "New Found Glory",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Shine",
+    "artist": "Newsboys",
+    "genres": [
+      "Christian / Worship",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Entertaining Angels",
+    "artist": "Newsboys",
+    "genres": [
+      "Christian / Worship",
+      "Rock"
+    ]
+  },
+  {
+    "title": "The Fox",
+    "artist": "Nickel Creek",
+    "genres": [
+      "Folk / Acoustic",
+      "Country",
+      "Christian / Worship"
+    ]
+  },
+  {
+    "title": "The Lighthouse’s Tale",
+    "artist": "Nickel Creek",
+    "genres": [
+      "Folk / Acoustic",
+      "Country",
+      "Christian / Worship"
+    ]
+  },
+  {
+    "title": "Doubting Thomas",
+    "artist": "Nickel Creek",
+    "genres": [
+      "Folk / Acoustic",
+      "Country",
+      "Christian / Worship"
+    ]
+  },
+  {
+    "title": "When You Come Back Down",
+    "artist": "Nickel Creek",
+    "genres": [
+      "Folk / Acoustic",
+      "Country",
+      "Christian / Worship"
+    ]
+  },
+  {
+    "title": "Smells Like Teen Spirit",
+    "artist": "Nirvana",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Don’t Know Why",
+    "artist": "Norah Jones",
+    "genres": [
+      "Jazz / Standards",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Spirit in the Sky",
+    "artist": "Norman Greenbaum",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Wonderwall",
+    "artist": "Oasis",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Alive",
+    "artist": "P.O.D.",
+    "genres": [
+      "Rock",
+      "Christian / Worship"
+    ]
+  },
+  {
+    "title": "Let Her Go",
+    "artist": "Passenger",
+    "genres": [
+      "Folk / Acoustic",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Crazy",
+    "artist": "Patsy Cline",
+    "genres": [
+      "Country",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "She’s Got You",
+    "artist": "Patsy Cline",
+    "genres": [
+      "Country",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Walkin’ After Midnight",
+    "artist": "Patsy Cline",
+    "genres": [
+      "Country",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Me and Julio Down By the Schoolyard",
+    "artist": "Paul Simon",
+    "genres": [
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Baby I Love Your Way",
+    "artist": "Peter Frampton",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "In The Air Tonight",
+    "artist": "Phil Collins",
+    "genres": [
+      "Pop",
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Cover Me in Sunshine",
+    "artist": "Pink",
+    "genres": [
+      "Pop"
+    ]
+  },
+  {
+    "title": "Brain Damage",
+    "artist": "Pink Floyd",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "When You Wish Upon a Star",
+    "artist": "Pinocchio",
+    "genres": [
+      "Disney / Family"
+    ]
+  },
+  {
+    "title": "When Doves Cry",
+    "artist": "Prince",
+    "genres": [
+      "Pop",
+      "Party / Dance",
+      "Soul / Motown"
+    ]
+  },
+  {
+    "title": "Kiss",
+    "artist": "Prince",
+    "genres": [
+      "Pop",
+      "Party / Dance",
+      "Soul / Motown"
+    ]
+  },
+  {
+    "title": "We Are The Champions",
+    "artist": "Queen",
+    "genres": [
+      "Rock",
+      "Party / Dance",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "We Will Rock You",
+    "artist": "Queen",
+    "genres": [
+      "Rock",
+      "Party / Dance",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Radio Ga Ga",
+    "artist": "Queen",
+    "genres": [
+      "Rock",
+      "Party / Dance",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "It’s the End of the World as We Know It",
+    "artist": "R.E.M.",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Feels Like Home",
+    "artist": "Randy Newman",
+    "genres": [
+      "Disney / Family",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "You’ve Got a Friend in Me",
+    "artist": "Randy Newman",
+    "genres": [
+      "Disney / Family",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Bless the Broken Road",
+    "artist": "Rascal Flatts",
+    "genres": [
+      "Country",
+      "Pop"
+    ]
+  },
+  {
+    "title": "You Don’t Know Me",
+    "artist": "Ray Charles",
+    "genres": [
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Hold You in My Arms",
+    "artist": "Ray LaMontagne",
+    "genres": [
+      "Folk / Acoustic",
+      "Soul / Motown"
+    ]
+  },
+  {
+    "title": "Angel",
+    "artist": "Rayvon and Shaggy",
+    "genres": [
+      "Beach / Island",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Can’t Stop",
+    "artist": "Red Hot Chili Peppers",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Under the Bridge",
+    "artist": "Red Hot Chili Peppers",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Scar Tissue",
+    "artist": "Red Hot Chili Peppers",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Otherside",
+    "artist": "Red Hot Chili Peppers",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Easy",
+    "artist": "Richie Lionel",
+    "genres": [
+      "Soul / Motown",
+      "Party / Dance",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "All Night Long",
+    "artist": "Richie Lionel",
+    "genres": [
+      "Soul / Motown",
+      "Party / Dance",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "La Bamba",
+    "artist": "Ritchie Valens",
+    "genres": [
+      "Oldies",
+      "Party / Dance",
+      "Beach / Island"
+    ]
+  },
+  {
+    "title": "Smooth",
+    "artist": "Rob Thomas",
+    "genres": [
+      "Pop",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Oh, Pretty Woman",
+    "artist": "Roy Orbison",
+    "genres": [
+      "Oldies",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Tell Me Something Good",
+    "artist": "Rufus",
+    "genres": [
+      "Soul / Motown",
+      "Party / Dance",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Escape (The Piña Colada Song)",
+    "artist": "Rupert Holmes",
+    "genres": [
+      "Oldies",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Truly Madly Deeply",
+    "artist": "Savage Garden",
+    "genres": [
+      "Pop"
+    ]
+  },
+  {
+    "title": "Closing Time",
+    "artist": "Semisonic",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "You’re Still the One",
+    "artist": "Shania Twain",
+    "genres": [
+      "Country",
+      "Pop"
+    ]
+  },
+  {
+    "title": "The Sound of Silence",
+    "artist": "Simon and Garfunkel",
+    "genres": [
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "The Parting Glass",
+    "artist": "Sir Isaac Boswell",
+    "genres": [
+      "Folk / Acoustic",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Kiss Me",
+    "artist": "Sixpence None the Richer",
+    "genres": [
+      "Pop",
+      "Alternative / Indie",
+      "Christian / Worship"
+    ]
+  },
+  {
+    "title": "Don’t Dream It’s Over",
+    "artist": "Sixpence None the Richer",
+    "genres": [
+      "Pop",
+      "Alternative / Indie",
+      "Christian / Worship"
+    ]
+  },
+  {
+    "title": "Allstar",
+    "artist": "Smash Mouth",
+    "genres": [
+      "Pop",
+      "Rock",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "I’m a Believer",
+    "artist": "Smash Mouth",
+    "genres": [
+      "Pop",
+      "Rock",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Waste",
+    "artist": "Smash Mouth",
+    "genres": [
+      "Pop",
+      "Rock",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "1979",
+    "artist": "Smashing Pumpkins",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "The Joker",
+    "artist": "Steve Miller Band",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Dive",
+    "artist": "Steven Curtis Chapman",
+    "genres": [
+      "Christian / Worship",
+      "Pop"
+    ]
+  },
+  {
+    "title": "The Great Adventure",
+    "artist": "Steven Curtis Chapman",
+    "genres": [
+      "Christian / Worship",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Isn’t She Lovely",
+    "artist": "Stevie Wonder",
+    "genres": [
+      "Soul / Motown",
+      "Oldies",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Signed Sealed Delivered",
+    "artist": "Stevie Wonder",
+    "genres": [
+      "Soul / Motown",
+      "Oldies",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Ribbon in the Sky",
+    "artist": "Stevie Wonder",
+    "genres": [
+      "Soul / Motown",
+      "Oldies",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Badfish",
+    "artist": "Sublime",
+    "genres": [
+      "Beach / Island",
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Santeria",
+    "artist": "Sublime",
+    "genres": [
+      "Beach / Island",
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Fly",
+    "artist": "Sugar Ray",
+    "genres": [
+      "Pop",
+      "Beach / Island",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Someday",
+    "artist": "Sugar Ray",
+    "genres": [
+      "Pop",
+      "Beach / Island",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Give a Little Bit",
+    "artist": "Supertramp",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Dare You To Move",
+    "artist": "Switchfoot",
+    "genres": [
+      "Rock",
+      "Alternative / Indie",
+      "Christian / Worship"
+    ]
+  },
+  {
+    "title": "Weak",
+    "artist": "SWV",
+    "genres": [
+      "Soul / Motown",
+      "Pop"
+    ]
+  },
+  {
+    "title": "You’ll Be In My Heart",
+    "artist": "Tarzan",
+    "genres": [
+      "Disney / Family"
+    ]
+  },
+  {
+    "title": "Shake It Of",
+    "artist": "Taylor Swift",
+    "genres": [
+      "Pop",
+      "Country"
+    ]
+  },
+  {
+    "title": "Blank Space",
+    "artist": "Taylor Swift",
+    "genres": [
+      "Pop",
+      "Country"
+    ]
+  },
+  {
+    "title": "Love Story",
+    "artist": "Taylor Swift",
+    "genres": [
+      "Pop",
+      "Country"
+    ]
+  },
+  {
+    "title": "Teardrops on my Guitar",
+    "artist": "Taylor Swift",
+    "genres": [
+      "Pop",
+      "Country"
+    ]
+  },
+  {
+    "title": "Everybody Wants to Rule the World",
+    "artist": "Tears for Fears",
+    "genres": [
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Love Shack",
+    "artist": "The B-52s",
+    "genres": [
+      "Party / Dance",
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Wouldn’t It Be Nice",
+    "artist": "The Beach Boys",
+    "genres": [
+      "Beach / Island",
+      "Oldies",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Kokomo",
+    "artist": "The Beach Boys",
+    "genres": [
+      "Beach / Island",
+      "Oldies",
+      "Pop"
+    ]
+  },
+  {
+    "title": "God Only Knows",
+    "artist": "The Beach Boys",
+    "genres": [
+      "Beach / Island",
+      "Oldies",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Help Me Rhonda",
+    "artist": "The Beach Boys",
+    "genres": [
+      "Beach / Island",
+      "Oldies",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Little Surfer Girl",
+    "artist": "The Beach Boys",
+    "genres": [
+      "Beach / Island",
+      "Oldies",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Day Tripper",
+    "artist": "The Beatles",
+    "genres": [
+      "Rock",
+      "Oldies",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Hey Jude",
+    "artist": "The Beatles",
+    "genres": [
+      "Rock",
+      "Oldies",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Across the Universe",
+    "artist": "The Beatles",
+    "genres": [
+      "Rock",
+      "Oldies",
+      "Pop"
+    ]
+  },
+  {
+    "title": "All My Loving",
+    "artist": "The Beatles",
+    "genres": [
+      "Rock",
+      "Oldies",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Help!",
+    "artist": "The Beatles",
+    "genres": [
+      "Rock",
+      "Oldies",
+      "Pop"
+    ]
+  },
+  {
+    "title": "She Loves You",
+    "artist": "The Beatles",
+    "genres": [
+      "Rock",
+      "Oldies",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Something",
+    "artist": "The Beatles",
+    "genres": [
+      "Rock",
+      "Oldies",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Here Comes the Sun",
+    "artist": "The Beatles",
+    "genres": [
+      "Rock",
+      "Oldies",
+      "Pop"
+    ]
+  },
+  {
+    "title": "She Talks to Angels",
+    "artist": "The Black Crowes",
+    "genres": [
+      "Rock",
+      "Blues / Roots"
+    ]
+  },
+  {
+    "title": "Zombie",
+    "artist": "The Cranberries",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Light My Fire",
+    "artist": "The Doors",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "People Are Strange",
+    "artist": "The Doors",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Hotel California",
+    "artist": "The Eagles",
+    "genres": [
+      "Rock",
+      "Country",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Peaceful Easy Feeling",
+    "artist": "The Eagles",
+    "genres": [
+      "Rock",
+      "Country",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Tequila Sunrise",
+    "artist": "The Eagles",
+    "genres": [
+      "Rock",
+      "Country",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Build Me Up Buttercup",
+    "artist": "The Foundations",
+    "genres": [
+      "Oldies",
+      "Party / Dance",
+      "Soul / Motown"
+    ]
+  },
+  {
+    "title": "In Over My Head",
+    "artist": "The Fray",
+    "genres": [
+      "Rock",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Long Cool Woman",
+    "artist": "The Hollies",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "All These Things I’ve Done",
+    "artist": "The Killers",
+    "genres": [
+      "Rock",
+      "Alternative / Indie",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "All Day and All of the Night",
+    "artist": "The Kinks",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "My Sharona",
+    "artist": "The Knack",
+    "genres": [
+      "Rock",
+      "Party / Dance",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "The Lion Sleeps Tonight",
+    "artist": "The Lion King",
+    "genres": [
+      "Disney / Family"
+    ]
+  },
+  {
+    "title": "Kiss the Girl",
+    "artist": "The Little Mermaid",
+    "genres": [
+      "Disney / Family"
+    ]
+  },
+  {
+    "title": "Under the Sea",
+    "artist": "The Little Mermaid",
+    "genres": [
+      "Disney / Family"
+    ]
+  },
+  {
+    "title": "Do You Believe in Magic",
+    "artist": "The Lovin’ Spoonful",
+    "genres": [
+      "Oldies",
+      "Pop"
+    ]
+  },
+  {
+    "title": "Hey Ho",
+    "artist": "The Lumineers",
+    "genres": [
+      "Folk / Acoustic",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Flowers in Your Hair",
+    "artist": "The Lumineers",
+    "genres": [
+      "Folk / Acoustic",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Everybody Plays the Fool",
+    "artist": "The Main Ingredient",
+    "genres": [
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Love Train",
+    "artist": "The O’Jays",
+    "genres": [
+      "Soul / Motown",
+      "Party / Dance",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Earth Angel",
+    "artist": "The Penguins",
+    "genres": [
+      "Oldies",
+      "Soul / Motown"
+    ]
+  },
+  {
+    "title": "Every Little Thing She Does is Magic",
+    "artist": "The Police",
+    "genres": [
+      "Rock",
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Such Great Heights",
+    "artist": "The Postal Service",
+    "genres": [
+      "Alternative / Indie",
+      "Pop"
+    ]
+  },
+  {
+    "title": "I Can’t Get No Satisfaction",
+    "artist": "The Rolling Stones",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Wild Horses",
+    "artist": "The Rolling Stones",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "You Can’t Always Get What You Want",
+    "artist": "The Rolling Stones",
+    "genres": [
+      "Rock",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Mama Said",
+    "artist": "The Shirelles",
+    "genres": [
+      "Oldies",
+      "Soul / Motown"
+    ]
+  },
+  {
+    "title": "The Dreamer",
+    "artist": "The Tallest Man on Earth",
+    "genres": [
+      "Folk / Acoustic",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "My Girl",
+    "artist": "The Temptations",
+    "genres": [
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Wild Thing",
+    "artist": "The Troggs",
+    "genres": [
+      "Rock",
+      "Oldies",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Bittersweet Symphony",
+    "artist": "The Verve",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "How’s It Gonna Be",
+    "artist": "Third Eye Blind",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "I Hate Everything About You",
+    "artist": "Three Days Grace",
+    "genres": [
+      "Rock"
+    ]
+  },
+  {
+    "title": "My Best Friend",
+    "artist": "Tim McGraw",
+    "genres": [
+      "Country"
+    ]
+  },
+  {
+    "title": "You Got Lucky",
+    "artist": "Tom Petty",
+    "genres": [
+      "Rock",
+      "Oldies",
+      "Country"
+    ]
+  },
+  {
+    "title": "Free Falling",
+    "artist": "Tom Petty",
+    "genres": [
+      "Rock",
+      "Oldies",
+      "Country"
+    ]
+  },
+  {
+    "title": "I Won’t Back Down",
+    "artist": "Tom Petty",
+    "genres": [
+      "Rock",
+      "Oldies",
+      "Country"
+    ]
+  },
+  {
+    "title": "Rosanna",
+    "artist": "Toto",
+    "genres": [
+      "Rock",
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Hold the Line",
+    "artist": "Toto",
+    "genres": [
+      "Rock",
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Africa",
+    "artist": "Toto",
+    "genres": [
+      "Rock",
+      "Pop",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Give Me One Reason",
+    "artist": "Tracy Chapman",
+    "genres": [
+      "Folk / Acoustic",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Fast Car",
+    "artist": "Tracy Chapman",
+    "genres": [
+      "Folk / Acoustic",
+      "Rock"
+    ]
+  },
+  {
+    "title": "Marry Me",
+    "artist": "Train",
+    "genres": [
+      "Pop",
+      "Rock"
+    ]
+  },
+  {
+    "title": "All Yourn",
+    "artist": "Tyler Childers",
+    "genres": [
+      "Country",
+      "Folk / Acoustic"
+    ]
+  },
+  {
+    "title": "Crazy Love",
+    "artist": "Van Morrison",
+    "genres": [
+      "Rock",
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Into the Mystic",
+    "artist": "Van Morrison",
+    "genres": [
+      "Rock",
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Brown Eyed Girl",
+    "artist": "Van Morrison",
+    "genres": [
+      "Rock",
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Moondance",
+    "artist": "Van Morrison",
+    "genres": [
+      "Rock",
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Georgia",
+    "artist": "Vance Joy",
+    "genres": [
+      "Pop",
+      "Folk / Acoustic",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Riptide",
+    "artist": "Vance Joy",
+    "genres": [
+      "Pop",
+      "Folk / Acoustic",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "A Thousand Miles",
+    "artist": "Vanessa Carlton",
+    "genres": [
+      "Pop"
+    ]
+  },
+  {
+    "title": "Everything You Want",
+    "artist": "Vertical Horizon",
+    "genres": [
+      "Rock",
+      "Pop"
+    ]
+  },
+  {
+    "title": "YMCA",
+    "artist": "Village People",
+    "genres": [
+      "Party / Dance",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Island in the Sun",
+    "artist": "Weezer",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "More Than Words",
+    "artist": "Westlife",
+    "genres": [
+      "Pop"
+    ]
+  },
+  {
+    "title": "I Wanna Dance With Somebody Who Loves Me",
+    "artist": "Whitney Houston",
+    "genres": [
+      "Pop",
+      "Soul / Motown",
+      "Party / Dance"
+    ]
+  },
+  {
+    "title": "Play That Funky Music",
+    "artist": "Wild Cherry",
+    "genres": [
+      "Party / Dance",
+      "Soul / Motown",
+      "Oldies"
+    ]
+  },
+  {
+    "title": "Pure Imagination",
+    "artist": "Willy Wonka",
+    "genres": [
+      "Disney / Family"
+    ]
+  },
+  {
+    "title": "Testify to Love",
+    "artist": "Wynona Judd",
+    "genres": [
+      "Christian / Worship",
+      "Country"
+    ]
+  },
+  {
+    "title": "Ocean Avenue",
+    "artist": "Yellowcard",
+    "genres": [
+      "Rock",
+      "Alternative / Indie"
+    ]
+  },
+  {
+    "title": "Chicken Fried",
+    "artist": "Zac Brown Band",
+    "genres": [
+      "Country",
+      "Beach / Island"
+    ]
+  },
+  {
+    "title": "Toes",
+    "artist": "Zac Brown Band",
+    "genres": [
+      "Country",
+      "Beach / Island"
+    ]
+  }
+];
+
+const genreContainer = document.getElementById("genreButtons");
+let activeGenre = "All";
+
+function renderGenreButtons() {
+  genreContainer.innerHTML = "";
+
+  genres.forEach((genre) => {
+    const btn = document.createElement("button");
+    btn.textContent = genre;
+    btn.type = "button";
+    btn.style.margin = "4px";
+    btn.style.padding = "8px 12px";
+    btn.style.borderRadius = "999px";
+    btn.style.border = "1px solid " + (activeGenre === genre ? "#1db954" : "#444");
+    btn.style.background = activeGenre === genre ? "#1db954" : "#1d1d1d";
+    btn.style.color = "#fff";
+    btn.style.cursor = "pointer";
+    btn.style.fontSize = "13px";
+    btn.style.fontWeight = "600";
+
+    btn.addEventListener("click", () => {
+      activeGenre = genre;
+      renderGenreButtons();
+      renderSongs();
+    });
+
+    genreContainer.appendChild(btn);
+  });
+}
+
+function renderSongs() {
+  const search = document.getElementById("songSearch").value.trim().toLowerCase();
+  const list = document.getElementById("songList");
+
+  const filtered = songs.filter((song) => {
+    const matchesGenre = activeGenre === "All" || song.genres.includes(activeGenre);
+    const haystack = `${song.title} ${song.artist} ${song.genres.join(" ")}`.toLowerCase();
+    const matchesSearch = !search || haystack.includes(search);
+    return matchesGenre && matchesSearch;
+  });
+
+  filtered.sort((a, b) => {
+    if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
+    if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
+    return a.artist.localeCompare(b.artist);
+  });
+
+  list.innerHTML = `
+    <div style="margin-bottom:12px; color:#bbb; font-size:13px;">
+      ${filtered.length} song${filtered.length === 1 ? "" : "s"} shown
+    </div>
+  `;
+
+  if (!filtered.length) {
+    list.innerHTML += `<div style="color:#bbb;">No songs matched your search.</div>`;
+    return;
+  }
+
+  filtered.forEach((song) => {
+    const row = document.createElement("div");
+    row.style.padding = "10px 0";
+    row.style.borderBottom = "1px solid #2a2a2a";
+
+    const genresHtml = song.genres
+      .map((genre) => `<span style="display:inline-block; margin:4px 6px 0 0; padding:3px 8px; font-size:11px; border-radius:999px; background:#222; color:#bfe9c9;">${genre}</span>`)
+      .join("");
+
+    row.innerHTML = `
+      <div style="font-weight:700; color:#fff;">${song.title}</div>
+      <div style="color:#cfcfcf;">${song.artist}</div>
+      <div>${genresHtml}</div>
+    `;
+
+    list.appendChild(row);
+  });
+}
+
+document.getElementById("songSearch").addEventListener("input", renderSongs);
+
+renderGenreButtons();
+renderSongs();
+</script>

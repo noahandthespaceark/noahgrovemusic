@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+
+# AI-readable site summary
+Allow: /llms.txt
+
+Sitemap: https://www.noahgrove.com/sitemap.xml

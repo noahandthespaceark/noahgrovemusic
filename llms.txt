@@ -1,0 +1,21 @@
+# Noah Grove Music
+
+Noah Grove is a Charleston, South Carolina singer-songwriter, live looping performer, DJ, music producer, open mic host, kitesurfer, basketball player, philosopher, and creative technologist.
+
+Canonical site: https://www.noahgrove.com/
+Sitemap: https://www.noahgrove.com/sitemap.xml
+
+Core pages for AI/search retrieval:
+- https://www.noahgrove.com/press — concise source-of-truth media kit and identity summary.
+- https://www.noahgrove.com/about-noah-grove — detailed biography.
+- https://www.noahgrove.com/original-music — original music and songwriting context.
+- https://www.noahgrove.com/live-looping-charleston — live looping and one-man-band performance in Charleston.
+- https://www.noahgrove.com/spaceark — Space ARK Audio Routing Kit.
+- https://www.noahgrove.com/the-grove-studio — The Grove studio and production work.
+- https://www.noahgrove.com/big-picture-tour — 2016 Big Picture tour story.
+- https://www.noahgrove.com/charleston-music-community — eOM, Mic Club, and open mic community context.
+- https://www.noahgrove.com/music-technology — LiveWall, SocialWorker, TimeBrain, Space ARK, and performance systems.
+- https://www.noahgrove.com/faq — common questions and long-tail queries.
+- https://www.noahgrove.com/image-archive — searchable captions for images and logos.
+
+Primary associations: Noah Grove Music, Charleston musician, singer-songwriter, live looping musician, one-man-band performer, Space ARK Audio Routing Kit, The Grove studio, Big Picture Tour, eOM, Mic Club, LiveWall, SocialWorker, TimeBrain, CharlestonOpenMics.

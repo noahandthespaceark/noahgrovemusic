@@ -1,0 +1,5 @@
+{
+  "name": "noahgrove-outreach-reminder-worker",
+  "private": true,
+  "scripts": {"deploy":"npx --yes wrangler@latest deploy"}
+}

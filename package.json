@@ -1,0 +1,10 @@
+{
+  "name": "noahgrovemusic",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static website for Noah Grove Music.",
+  "scripts": {
+    "deploy": "npx --yes wrangler@latest pages deploy . --project-name noahgrovemusic",
+    "deploy:preview": "npx --yes wrangler@latest pages deploy . --project-name noahgrovemusic --branch preview"
+  }
+}

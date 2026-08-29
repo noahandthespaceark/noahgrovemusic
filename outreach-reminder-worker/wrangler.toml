@@ -1,0 +1,11 @@
+name = "noahgrove-outreach-reminder"
+main = "src/index.js"
+compatibility_date = "2026-08-20"
+
+[triggers]
+# Cloudflare cron uses UTC. Running at both 12:05 and 13:05 UTC lets the Pages
+# endpoint choose 8 AM America/New_York correctly across daylight-saving time.
+crons = ["5 12 * * *", "5 13 * * *"]
+
+[vars]
+OUTREACH_REMINDER_URL = "https://noahgrove.com/api/outreach-reminders"

@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Support the Music | Noah Grove</title>
+  <meta name="description" content="Support Noah Grove Music, listen to original songs, download tracks, join the newsletter, and shop merch.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#080807">
+  <link rel="canonical" href="https://www.noahgrove.com/support">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Noah Grove Music">
+  <meta property="og:title" content="Support the Music | Noah Grove">
+  <meta property="og:description" content="Tip the music, listen to original songs, download tracks, join the newsletter, and shop merch.">
+  <meta property="og:url" content="https://www.noahgrove.com/support">
+  <meta property="og:image" content="https://www.noahgrove.com/support-assets/hero-performance.jpg">
+  <style>
+    :root {
+      --ink: #f5eadb;
+      --muted: rgba(245,234,219,.72);
+      --paper: #d8b98d;
+      --paper-dark: #9d7044;
+      --black: #080807;
+      --charcoal: #11100e;
+      --line: rgba(245,234,219,.16);
+      --gold: #f1c78f;
+      --orange: #d97835;
+      --green: #2ac56a;
+      --shadow: 0 20px 70px rgba(0,0,0,.45);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--black); }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 78% 0%, rgba(226,134,53,.32), transparent 34rem),
+        radial-gradient(circle at 18% 22%, rgba(241,199,143,.08), transparent 18rem),
+        #080807;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      opacity: .035;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 7px 7px, 11px 11px;
+      mix-blend-mode: screen;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .page { width: min(100%, 560px); margin: 0 auto; background: rgba(8,8,7,.42); box-shadow: 0 0 80px rgba(0,0,0,.5); }
+
+    .hero {
+      position: relative;
+      min-height: min(78svh, 720px);
+      padding: max(18px, env(safe-area-inset-top)) 18px 168px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      isolation: isolate;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(8,8,7,.18) 0%, rgba(8,8,7,.2) 24%, rgba(8,8,7,.72) 68%, #080807 100%),
+        linear-gradient(90deg, rgba(8,8,7,.78) 0%, rgba(8,8,7,.20) 58%, rgba(8,8,7,.35) 100%),
+        url("support-assets/hero-performance.jpg") center top / cover no-repeat;
+      z-index: -2;
+      transform: scale(1.03);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 64% 12%, rgba(241,199,143,.42), transparent 15rem),
+        radial-gradient(circle at 50% 80%, rgba(217,120,53,.22), transparent 20rem);
+      mix-blend-mode: screen;
+      opacity: .42;
+    }
+
+    .topbar { position: absolute; top: max(14px, env(safe-area-inset-top)); left: 18px; right: 18px; display: flex; align-items: center; justify-content: space-between; z-index: 2; }
+    .script-logo { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-size: 22px; letter-spacing: .02em; color: rgba(255,239,214,.92); text-shadow: 0 4px 18px rgba(0,0,0,.65); }
+    .home-link { padding: 10px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px; color: rgba(255,239,214,.78); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; background: rgba(0,0,0,.25); backdrop-filter: blur(10px); }
+
+    .hero-content { position: relative; z-index: 1; padding-bottom: 0; transform: translateY(34px); }
+    .hero-actions { margin-top: clamp(28px, 7svh, 72px); }
+    .eyebrow, .section-kicker { color: var(--gold); text-transform: uppercase; letter-spacing: .22em; font-size: 11px; font-weight: 900; }
+    .hero h1 { margin: 10px 0 0; font-size: clamp(56px, 18vw, 96px); line-height: .85; letter-spacing: -.06em; text-transform: uppercase; font-weight: 1000; text-shadow: 0 8px 28px rgba(0,0,0,.58); }
+    .hero-subtitle { margin: 12px 0 0; max-width: 17rem; color: rgba(255,239,214,.86); font-size: 13px; line-height: 1.55; letter-spacing: .18em; text-transform: uppercase; font-weight: 800; }
+    .hero-note { margin: 18px 0 28px; max-width: 19rem; color: rgba(255,239,214,.88); font-family: Georgia, "Times New Roman", serif; font-size: 18px; font-style: italic; line-height: 1.35; }
+    .hero-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: center; }
+    .hero-actions .merch-jump { grid-column: 1 / -1; width: min(68%, 220px); justify-self: center; }
+
+    .btn {
+      display: inline-flex;
+      min-height: 52px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 24px;
+      padding: 14px 18px;
+      color: #17100a;
+      background: linear-gradient(135deg, #fff1d7, #f3c98e 55%, #cf7c38);
+      box-shadow: 0 16px 34px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.5);
+      font-weight: 1000;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .btn.secondary { color: var(--ink); background: rgba(0,0,0,.42); border-color: rgba(245,234,219,.22); box-shadow: none; backdrop-filter: blur(10px); }
+    .btn.tiny { min-height: 42px; border-radius: 14px; padding: 10px 14px; font-size: 12px; letter-spacing: .12em; }
+
+    .support-card {
+      margin: -86px 14px 0;
+      position: relative;
+      z-index: 3;
+      border: 1px solid rgba(245,234,219,.18);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(circle at 85% 5%, rgba(241,199,143,.22), transparent 16rem),
+        linear-gradient(180deg, rgba(21,20,17,.98), rgba(10,10,9,.98));
+    }
+    .support-inner { padding: 24px 16px 18px; text-align: center; }
+    .support-card h2, .section-title { margin: 6px 0 0; font-size: 34px; line-height: .9; letter-spacing: .06em; text-transform: uppercase; font-weight: 1000; }
+    .support-copy { margin: 10px auto 20px; max-width: 22rem; color: var(--muted); font-size: 13px; line-height: 1.45; }
+    .amount-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
+    .amount-btn { display: flex; min-height: 78px; align-items: center; justify-content: center; border: 1px solid rgba(245,234,219,.22); border-radius: 24px; background: rgba(255,255,255,.045); color: var(--ink); font-size: 28px; font-weight: 1000; box-shadow: inset 0 1px 0 rgba(255,255,255,.08); }
+    .custom-tip { width: 100%; color: #17100a; display:inline-flex; align-items:center; justify-content:center; gap:8px; white-space:normal; line-height:1.15; }
+    .square-button-logo { width:18px; height:18px; flex:0 0 auto; display:inline-block; vertical-align:middle; }
+    .square-button-text { display:inline-flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap; }
+    .method-card .square-button-logo { width:22px; height:22px; }
+    .tip-custom-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 12px; }
+    .tip-custom-row input { width: 100%; border: 1px solid rgba(23,16,10,.18); border-radius: 999px; padding: 12px 14px; font: inherit; color: #17100a; background: rgba(255,255,255,.92); outline: none; }
+    .tip-status { display: none; margin: 10px auto 0; max-width: 25rem; font-size: 13px; line-height: 1.35; color: var(--muted); }
+    .tip-status.show { display: block; }
+    .tip-status.error { color: #8b1f14; }
+
+    .method-grid { display:grid; grid-template-columns:1fr; gap:10px; margin-top:16px; }
+    .tip-method-grid { gap:12px; }
+    .method-card { display:flex; align-items:center; justify-content:center; gap:12px; text-align:center; padding:14px 15px; border:1px solid rgba(245,234,219,.17); border-radius:24px; background:rgba(255,255,255,.055); box-shadow:inset 0 1px 0 rgba(255,255,255,.08); min-height:84px; width:100%; cursor:pointer; }
+    button.method-card { font: inherit; }
+    .method-card > span { min-width:0; width:100%; }
+    .method-card strong, .method-card span span { overflow:hidden; text-overflow:ellipsis; }
+    .method-card.venmo-card { background: linear-gradient(135deg, #008CFF, #006CFF); border-color: rgba(255,255,255,.24); }
+    .method-card.cashapp-card { background: linear-gradient(135deg, #00D632, #00A826); border-color: rgba(255,255,255,.24); }
+    .method-card.venmo-card strong,
+    .method-card.venmo-card span,
+    .method-card.venmo-card b,
+    .method-card.cashapp-card strong,
+    .method-card.cashapp-card span,
+    .method-card.cashapp-card b { color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,.22); }
+    .method-card.venmo-card b,
+    .method-card.cashapp-card b { color: rgba(255,255,255,.92); }
+    .method-card strong { display:block; color:var(--ink); font-size:14px; text-transform:uppercase; letter-spacing:.08em; white-space:nowrap; }
+    .method-card span { display:block; margin-top:3px; color:rgba(245,234,219,.64); font-size:12px; }
+    .method-card.cashapp-card { min-height:72px; }
+    .method-card.cashapp-card span span { font-size:13px; letter-spacing:.02em; text-transform:none; }
+    .tip-payment-button-zone { width:100%; max-width:100%; overflow:hidden; margin-top:0; border-radius:24px; }
+    .tip-payment-button-zone iframe { max-width:100% !important; }
+    .tip-payment-placeholder { min-height:54px; width:100%; border:1px solid rgba(255,255,255,.24); border-radius:999px; padding:9px 12px; background:rgba(0,0,0,.14); color:#fff; font-size:12px; font-weight:900; text-transform:uppercase; letter-spacing:.08em; text-align:center; }
+    .tip-payment-placeholder strong, .tip-payment-placeholder span { display:block; color:#fff; line-height:1.15; }
+    .tip-payment-placeholder span { margin-top:3px; font-size:12px; text-transform:none; letter-spacing:.02em; }
+    .venmo-placeholder { background:linear-gradient(135deg, #008CFF, #006CFF); border-color:rgba(255,255,255,.24); }
+    .paypal-placeholder { color:#17100a; background:#ffc439; border-color:rgba(23,16,10,.12); }
+    .method-card b { color:var(--gold); font-size:12px; text-transform:uppercase; letter-spacing:.1em; white-space:nowrap; }
+
+    .section { padding: 42px 18px; scroll-margin-top: 18px; }
+    .paper-section { margin: 24px 14px 0; border-radius: 28px; color: #1b130c; background: linear-gradient(180deg, #e2c69a, #caa06e); position: relative; overflow: hidden; box-shadow: 0 18px 50px rgba(0,0,0,.28); }
+    .paper-section::before { content:""; position:absolute; inset:0; opacity:.22; background: url("support-assets/backyard-show.jpg") center / cover no-repeat; mix-blend-mode:multiply; }
+    .paper-section > * { position: relative; z-index:1; }
+    .story-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 16px; align-items: center; }
+    .polaroids { position: relative; min-height: 170px; }
+    .polaroid { position: absolute; width: 120px; padding: 7px 7px 24px; background: #f4e7d5; box-shadow: 0 10px 20px rgba(0,0,0,.24); }
+    .polaroid img { width:100%; aspect-ratio: 1/1; object-fit: cover; filter: sepia(.2) contrast(1.02); }
+    .polaroid.one { left: 0; top: 26px; transform: rotate(-8deg); z-index: 1; }
+    .polaroid.two { left: 52px; top: 0; transform: rotate(4deg); z-index: 2; }
+    .polaroid.three { left: 88px; top: 32px; transform: rotate(8deg); z-index: 3; width: 136px; }
+    .story h2 { margin: 0 0 10px; font-size: 28px; line-height: .95; text-transform: uppercase; letter-spacing: .03em; }
+    .story p { margin: 0; font-size: 13px; line-height: 1.52; color: rgba(27,19,12,.82); }
+    .signature { margin-top: 14px; font-family: Georgia, "Times New Roman", serif; font-style: italic; font-size: 22px; }
+
+    .listen-section { background: linear-gradient(180deg, #080807, #11100e); padding-top: 50px; padding-bottom: 34px; }
+    .listen-head { text-align:center; margin-bottom: 18px; }
+    .listen-head .section-title { font-size: 32px; }
+    .player-frame { border-radius: 26px; overflow: hidden; border: 1px solid rgba(245,234,219,.16); box-shadow: var(--shadow); background: #0b0b0a; }
+
+    /* Embedded version of the main-site sticky player. sticky-player.js controls these IDs. */
+    .player { position: relative; left: auto; right: auto; bottom: auto; width: 100%; transform: none; color: #fff; padding: 0; border: 0; border-radius: 0; z-index: 1; overflow: hidden; box-shadow: none; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); background: linear-gradient(110deg, rgba(7,16,28,.95), rgba(18,38,55,.92) 58%, rgba(10,22,34,.94)), url("ravenel-bridge-player.jpg") center 45% / cover no-repeat; }
+    .player::before { content:""; position:absolute; inset:0; pointer-events:none; background: linear-gradient(90deg, rgba(255,255,255,.12) 0 1px, transparent 1px 100%); background-size:auto, 58px 100%; mix-blend-mode:screen; opacity:.62; }
+    .player::after { display:none; }
+    .player.hidden { display:none; }.player-shell { position:relative; z-index:1; padding:16px; background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.035)); }
+    .player-main { display:grid; grid-template-columns:1fr; align-items:center; gap:13px; }
+    .player-info { min-width:0; text-align:center; }
+    #player-title { font-size: clamp(20px, 7vw, 32px); line-height:1.02; font-weight:1000; letter-spacing:-.04em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-shadow:0 2px 14px rgba(0,0,0,.35); }
+    #player-artist { font-size:13px; opacity:.82; margin-top:5px; }
+    .progress-container { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:8px; padding:10px 12px; border:1px solid rgba(255,255,255,.13); border-radius:999px; background:rgba(0,0,0,.24); box-shadow: inset 0 1px 0 rgba(255,255,255,.07); }
+    .player-time { min-width:38px; color:rgba(255,255,255,.78); font-size:12px; font-variant-numeric:tabular-nums; }
+    #duration { text-align:right; }
+    #progress { width:100%; accent-color:#ffb768; cursor:pointer; }
+    .player-controls { display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap; }
+    .player-controls button { border:1px solid rgba(255,255,255,.13); border-radius:999px; min-width:42px; min-height:42px; padding:10px 13px; cursor:pointer; font-size:14px; font-weight:900; background:rgba(255,255,255,.13); color:#fff; box-shadow:0 8px 22px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.12); }
+    .player-controls #play { min-width:58px; min-height:58px; font-size:18px; background:linear-gradient(135deg, #fff1d9, #ffad62 52%, #e56d4a); color:#122238; border:none; box-shadow:0 12px 32px rgba(255,150,84,.36); order:-1; }
+    .player-controls button.secondary { padding-inline:15px; background:rgba(8,18,31,.42); }
+    .player-playlist { margin-top:13px; max-height:360px; overflow-y:auto; border-top:1px solid rgba(255,255,255,.13); padding:10px 2px 2px; display:grid; grid-template-columns:1fr; gap:8px; }
+    .player-playlist.hidden { display:none; }
+    .player-playlist-row { min-width:0; }
+    .player-playlist-name { display:block; width:100%; text-align:left; font-size:14px; color:rgba(255,255,255,.9); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border:1px solid rgba(255,255,255,.10); border-radius:20px; padding:12px 13px; cursor:pointer; background:rgba(0,0,0,.20); }
+    .player-playlist-name.active { color:#ffcf96; font-weight:1000; border-color:rgba(255,207,150,.34); background:rgba(255,183,104,.12); }
+    .player-empty { grid-column:1 / -1; color:rgba(255,255,255,.76); font-size:13px; text-align:center; padding:10px; }
+
+    .connect-section { margin: 24px 14px; border-radius: 28px; overflow: hidden; background: linear-gradient(180deg, #d7b888, #c99c67); color: #1b130c; box-shadow: 0 18px 50px rgba(0,0,0,.26); }
+    .connect-grid { display: grid; gap: 12px; margin-top: 18px; }
+    .connect-card { border: 1px solid rgba(27,19,12,.16); border-radius: 24px; padding: 16px; background: rgba(255,255,255,.24); box-shadow: inset 0 1px 0 rgba(255,255,255,.35); }
+    .connect-card h3 { margin:0 0 5px; text-transform:uppercase; letter-spacing:.08em; font-size:14px; }
+    .connect-card p { margin:0 0 12px; font-size:13px; line-height:1.4; color:rgba(27,19,12,.78); }
+    .social-row { display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px; }
+    .social-row a { flex:1 1 46%; min-height:44px; display:flex; align-items:center; justify-content:center; border-radius:20px; border:1px solid rgba(27,19,12,.16); background:rgba(255,255,255,.28); font-weight:900; font-size:12px; text-transform:uppercase; letter-spacing:.1em; }
+    .icon-social-row { display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; }
+    .icon-social-row .social-icon { flex:auto; min-height:62px; border-radius:22px; border:2px solid rgba(27,19,12,.18); box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 8px 20px rgba(0,0,0,.14); font-size:38px; line-height:1; letter-spacing:0; text-transform:none; display:flex; align-items:center; justify-content:center; padding:0; }
+    .social-icon.instagram { background:radial-gradient(circle at 31% 76%, #ffe778 0 15%, transparent 16% 100%), radial-gradient(circle at 31% 77%, #ff8c20 0 30%, transparent 31% 100%), linear-gradient(135deg,#f62f5e 0%,#d72ed3 55%,#4964f5 100%); }
+    .social-icon.youtube { background:#f20b3d; color:#fff; }
+    .social-icon.facebook { background:#4979ec; color:#fff; font-family:Arial, sans-serif; font-size:48px; font-weight:1000; padding-top:7px; }
+    .social-icon.x-twitter { background:#050505; color:#fff; font-size:36px; }
+    .ig-glyph { width:28px; height:28px; border:4px solid #fff; border-radius:10px; display:block; position:relative; margin:0 auto; }
+    .ig-glyph::after { content:""; position:absolute; width:7px; height:7px; right:3px; top:3px; border-radius:999px; background:#fff; }
+    .yt-glyph { width:0; height:0; border-top:12px solid transparent; border-bottom:12px solid transparent; border-left:20px solid #fff; margin-left:5px; display:block; }
+
+    .merch-section { background: linear-gradient(180deg, #11100e, #080807); }
+    .merch-group { margin-top:20px; }
+    .merch-group-title { margin:0 0 10px; color:var(--gold); font-size:13px; text-transform:uppercase; letter-spacing:.16em; }
+    .merch-grid { display:grid; gap:14px; margin-top:12px; }
+    .merch-card { display:grid; grid-template-columns: 118px 1fr; gap:14px; align-items:center; border:1px solid rgba(245,234,219,.15); border-radius:28px; overflow:hidden; background:linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.025)); box-shadow:inset 0 1px 0 rgba(255,255,255,.06); }
+    .merch-card img { width:118px; height:118px; object-fit:cover; padding:8px; background:radial-gradient(circle at center, rgba(241,199,143,.10), transparent 62%); filter: drop-shadow(0 14px 22px rgba(0,0,0,.45)); border-radius:20px; }
+    .merch-card img.logo-art { object-fit:contain; background:#fff; }
+    .merch-info { padding: 12px 12px 12px 0; }
+    .merch-info h3 { margin:0; font-size:16px; text-transform:uppercase; letter-spacing:.04em; }
+    .merch-info p { margin:6px 0 10px; font-size:13px; line-height:1.35; color:var(--muted); }
+    .choice-row { display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin:12px 0; }
+    .choice-card { border:2px solid rgba(245,234,219,.16); border-radius:20px; padding:6px; background:rgba(255,255,255,.045); cursor:pointer; transition:border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+    .choice-card[aria-pressed="true"] { border-color:rgba(97,173,255,.92); box-shadow:0 0 0 3px rgba(97,173,255,.18), 0 12px 30px rgba(0,0,0,.25); transform:translateY(-1px); }
+    .choice-card img { width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:14px; display:block; background:rgba(255,255,255,.08); }
+    .choice-card img.logo-art { object-fit:contain; background:#fff; }
+    .choice-label { display:block; margin-top:6px; color:var(--ink); font-size:10px; line-height:1.1; text-transform:uppercase; letter-spacing:.04em; font-weight:1000; text-align:center; }
+    .selector-panel { border:1px solid rgba(245,234,219,.15); border-radius:28px; padding:14px; background:linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.025)); box-shadow:inset 0 1px 0 rgba(255,255,255,.06); }
+    .selector-panel p { margin:6px 0 10px; font-size:13px; line-height:1.35; color:var(--muted); }
+    .selector-actions { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; }
+    .selected-item-name { color:var(--gold); font-size:12px; text-transform:uppercase; letter-spacing:.08em; font-weight:1000; }
+    .price-row { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+    .price { color:var(--gold); font-weight:1000; }
+    .size-select { min-height:34px; border:1px solid rgba(245,234,219,.18); border-radius:999px; padding:5px 10px; background:rgba(255,255,255,.07); color:var(--ink); font:inherit; font-size:12px; font-weight:900; }
+    .qty-control { display:inline-flex; align-items:center; gap:8px; }
+    .qty-btn { width:34px; height:34px; border-radius:999px; border:1px solid rgba(245,234,219,.22); color:#17100a; background:linear-gradient(135deg, #fff1d7, #f3c98e 58%, #cf7c38); font-size:19px; line-height:1; font-weight:1000; cursor:pointer; box-shadow:0 8px 16px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.45); }
+    .qty-count { min-width:22px; text-align:center; color:var(--ink); font-weight:1000; }
+    .purchase-note { margin-top:14px; color:rgba(245,234,219,.58); font-size:12px; line-height:1.4; }
+    .order-block { display:none; margin-top:22px; border:1px solid rgba(245,234,219,.17); border-radius:28px; padding:16px; background:rgba(0,0,0,.24); box-shadow:inset 0 1px 0 rgba(255,255,255,.06); }
+    .order-block.open { display:block; }
+    .order-block h3 { margin:0 0 10px; font-size:20px; text-transform:uppercase; letter-spacing:.05em; }
+    .order-list { display:grid; gap:8px; margin:0 0 12px; }
+    .order-row { display:grid; grid-template-columns:1fr auto auto; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid rgba(245,234,219,.10); font-size:13px; }
+    .order-row b { display:block; font-size:14px; color:var(--ink); }
+    .order-row span { color:rgba(245,234,219,.66); }
+    .order-row-controls { display:inline-flex; align-items:center; gap:7px; }
+    .order-row-controls .qty-btn { width:30px; height:30px; font-size:17px; }
+    .order-total { display:flex; justify-content:space-between; align-items:center; gap:12px; margin:12px 0; padding:12px; border-radius:18px; background:rgba(255,255,255,.055); font-size:18px; font-weight:1000; }
+    .purchase-btn { width:100%; display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:12px 16px; border-radius:999px; border:1px solid rgba(245,234,219,.20); color:#17100a; background:linear-gradient(135deg, #fff1d7, #f3c98e 58%, #cf7c38); font-size:12px; text-transform:uppercase; letter-spacing:.1em; font-weight:1000; cursor:pointer; box-shadow:0 8px 16px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.45); }
+    .purchase-btn:disabled { opacity:.62; cursor:not-allowed; }
+    .purchase-modal { position:fixed; inset:0; display:none; align-items:flex-end; justify-content:center; padding:18px; z-index:80; background:rgba(0,0,0,.66); backdrop-filter:blur(8px); }
+    .purchase-modal.open { display:flex; }
+    .purchase-panel { width:min(100%, 520px); max-height:92svh; overflow:auto; border:1px solid rgba(245,234,219,.18); border-radius:28px; background:linear-gradient(180deg, #17140f, #090908); color:var(--ink); box-shadow:0 22px 80px rgba(0,0,0,.6); padding:18px; }
+    .purchase-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:12px; }
+    .purchase-head h2 { margin:0; font-size:24px; line-height:.95; text-transform:uppercase; letter-spacing:.04em; }
+    .purchase-summary { margin:0 0 14px; color:rgba(245,234,219,.72); font-size:13px; line-height:1.4; }
+    .purchase-form { display:grid; gap:10px; }
+    .purchase-form label { display:grid; gap:6px; color:rgba(245,234,219,.72); font-size:11px; text-transform:uppercase; letter-spacing:.12em; font-weight:900; }
+    .purchase-form input, .purchase-form textarea, .purchase-form select { width:100%; border:1px solid rgba(245,234,219,.16); border-radius:16px; padding:12px 13px; background:rgba(255,255,255,.06); color:var(--ink); font:inherit; outline:none; }
+    .purchase-form textarea { min-height:74px; resize:vertical; }
+    .delivery-options { display:grid; grid-template-columns:1fr; gap:9px; }
+    .delivery-option { display:flex !important; align-items:flex-start; gap:10px !important; border:1px solid rgba(245,234,219,.15); border-radius:18px; padding:12px; background:rgba(255,255,255,.045); text-transform:none !important; letter-spacing:0 !important; font-size:13px !important; line-height:1.35; color:var(--ink) !important; }
+    .delivery-option input { width:auto; margin-top:2px; }
+    .delivery-option span { display:block; color:rgba(245,234,219,.62); font-size:12px; margin-top:2px; }
+    .address-fields.hidden { display:none; }
+    .purchase-error { display:none; border:1px solid rgba(255,90,90,.35); border-radius:14px; padding:10px 12px; background:rgba(255,70,70,.10); color:#ffd0d0; font-size:13px; line-height:1.35; }
+    .purchase-error.show { display:block; }
+    .purchase-total { display:flex; align-items:center; justify-content:space-between; gap:12px; border:1px solid rgba(245,234,219,.16); border-radius:18px; padding:12px; background:rgba(255,255,255,.045); font-weight:1000; }
+    .payment-choice-block { display:grid; gap:10px; margin-top:2px; }
+    .payment-choice-title { color:rgba(245,234,219,.72); font-size:11px; text-transform:uppercase; letter-spacing:.12em; font-weight:1000; }
+    .payment-button-zone { min-height:46px; }
+    .secondary-square-btn { background:rgba(255,255,255,.08); color:var(--ink); border:1px solid rgba(245,234,219,.20); box-shadow:none; }
+    .venmo-fallback-btn { background:#3d95ce; color:#fff; }
+    .cashapp-fallback-btn { background:#00d632; color:#061506; }
+    .payment-note { margin:.45rem 0 0; color:rgba(255,255,255,.62); font-size:.82rem; line-height:1.35; }
+
+
+    .footer { padding: 28px 18px calc(34px + env(safe-area-inset-bottom)); text-align:center; color:rgba(245,234,219,.56); font-size:12px; }
+    .footer a { color: var(--ink); font-weight:900; }
+
+    .modal { position:fixed; inset:0; z-index:1000; display:none; align-items:flex-end; justify-content:center; background:rgba(0,0,0,.72); backdrop-filter:blur(12px); padding:18px; }
+    .modal.open { display:flex; }
+    .modal-panel { width:min(100%, 520px); max-height:88svh; border-radius:24px; overflow:hidden; border:1px solid rgba(245,234,219,.16); background:#0f0e0c; box-shadow:var(--shadow); }
+    .modal-head { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 16px; border-bottom:1px solid rgba(245,234,219,.12); }
+    .modal-head h2 { margin:0; font-size:18px; text-transform:uppercase; letter-spacing:.08em; }
+    .close { min-width:42px; min-height:42px; border-radius:999px; border:1px solid rgba(245,234,219,.18); background:rgba(255,255,255,.06); color:var(--ink); font-size:20px; cursor:pointer; }
+    .newsletter-iframe { display:block; width:100%; height:72svh; border:0; background:white; }
+
+    @media (min-width: 500px) {
+      .hero-actions { grid-template-columns: 1fr 1fr; }
+      .custom-tip { grid-column: 1 / -1; }
+      .connect-grid { grid-template-columns: 1fr 1fr; }
+      .connect-card.socials { grid-column: 1 / -1; }
+    }
+    @media (max-width: 390px) {
+      .amount-grid { grid-template-columns: 1fr; }
+      .amount-btn { min-height: 58px; }
+      .story-grid { grid-template-columns: 1fr; }
+      .polaroids { transform: scale(.88); transform-origin: left top; min-height: 145px; }
+      .merch-card { grid-template-columns: 102px 1fr; }
+      .merch-card img { width:102px; height:102px; }
+    }
+  
+    .method-card.cashapp-card { background: linear-gradient(135deg, #00D632, #00A826) !important; border-color: rgba(255,255,255,.24); }
+    .method-card.cashapp-card * { color: #fff !important; }
+
+    /* Sticky player title/layout compactness patch. */
+    #player-title { overflow-wrap: normal !important; word-break: normal !important; hyphens: none !important; }
+    @media (min-width: 701px) {
+      .player-shell { padding-left: 56px !important; }
+      .player-main { grid-template-columns: minmax(340px, 1.35fr) minmax(210px, .85fr) max-content !important; }
+      #player-title { font-size: clamp(17px, 1.7vw, 24px) !important; line-height: 1.08 !important; }
+    }
+  
+
+    /* Final sticky player interaction/layout patch.
+       These rules keep the full player compact and centered. */
+    #player .player-shell { padding-right: 58px !important; }
+    #player .player-main { align-items: center !important; }
+    #player .progress-container,
+    #player .player-controls { justify-self: center !important; align-self: center !important; }
+    #player .player-controls { justify-content: center !important; }
+    #player #player-title {
+      max-width: none !important;
+      white-space: normal !important;
+      overflow-wrap: normal !important;
+      word-break: keep-all !important;
+      hyphens: none !important;
+      text-wrap: balance !important;
+    }
+    @media (min-width: 760px) {
+      #player .player-main { grid-template-columns: minmax(420px, 1.7fr) minmax(260px, .9fr) minmax(330px, auto) !important; }
+      #player .player-info { padding-right: 8px !important; }
+      #player #player-title { font-size: clamp(16px, 1.45vw, 22px) !important; line-height: 1.05 !important; }
+    }
+</style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero" aria-label="Support Noah Grove Music">
+      <div class="topbar">
+        <span aria-hidden="true"></span>
+        <a class="home-link" href="/">Home</a>
+      </div>
+      <div class="hero-content">
+        <div class="eyebrow">Charleston, SC • Live Music</div>
+        <h1>Noah<br>Grove</h1>
+        <p class="hero-subtitle">Independent musician & songwriter</p>
+        <div class="hero-actions">
+          <a class="btn" href="#connect">Follow</a>
+          <a class="btn secondary" href="#listen">Listen Now</a>
+          <a class="btn secondary" href="#song-requests">Song Requests</a>
+          <a class="btn secondary" href="#livewall">Join the LiveWall</a>
+          <a class="btn secondary merch-jump" href="#merch">Merch</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="support-card" id="tip" aria-label="Tip the music">
+      <div class="support-inner">
+        <div class="section-kicker">Thank you for supporting independent music</div>
+        <h2>Tip the Music</h2>
+        <p class="support-copy">Choose a quick tip amount or enter a custom amount. Square/Cash App tips route through Square, and PayPal/Venmo tips route through PayPal Checkout so confirmed tips can trigger stacked live Firebot effects at $1, $5, $10, $20, $50, and $100.</p>
+        <div class="amount-grid">
+          <button class="amount-btn" type="button" data-tip-amount="1">$1</button>
+          <button class="amount-btn" type="button" data-tip-amount="5">$5</button>
+          <button class="amount-btn" type="button" data-tip-amount="10">$10</button>
+          <button class="amount-btn" type="button" data-tip-amount="20">$20</button>
+          <button class="amount-btn" type="button" data-tip-amount="50">$50</button>
+          <button class="amount-btn" type="button" data-tip-amount="100">$100</button>
+        </div>
+        <div class="tip-custom-row">
+          <input id="customTipAmount" type="number" min="1" max="500" step="1" inputmode="decimal" placeholder="Custom tip amount" aria-label="Custom tip amount">
+          <button class="btn custom-tip" type="button" data-custom-tip><img class="square-button-logo" src="support-assets/square-logo.svg" alt="" aria-hidden="true"><span class="square-button-text"><strong>SQUARE</strong> (Credit/Apple Pay/Google Pay)</span></button>
+        </div>
+        <p class="tip-status" data-tip-status aria-live="polite"></p>
+        <div class="method-grid tip-method-grid" aria-label="Payment methods">
+          <div id="tip-paypal-button-container" class="tip-payment-button-zone tip-paypal-button-zone"><button class="tip-payment-placeholder paypal-placeholder" type="button" disabled>Loading PayPal…</button></div>
+          <div id="tip-venmo-button-container" class="tip-payment-button-zone tip-venmo-button-zone"><button class="tip-payment-placeholder venmo-placeholder" type="button" disabled><strong>Venmo</strong><span>@noahgrovemusic</span></button></div>
+          <button class="method-card cashapp-card" type="button" data-cashapp-tip><span><strong>CASH APP</strong><span>$noahandthespaceark</span></span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section paper-section" aria-label="How support helps">
+      <div class="story-grid">
+        <div class="polaroids" aria-hidden="true">
+          <div class="polaroid one"><img src="support-assets/live-sign.jpg" alt=""></div>
+          <div class="polaroid two"><img src="support-assets/backyard-show.jpg" alt=""></div>
+          <div class="polaroid three"><img src="support-assets/beach-performance.jpg" alt=""></div>
+        </div>
+        <div class="story">
+          <h2>You just helped make this possible</h2>
+          <p>I see every tip as evidence of positive impact and it means the world to me. Additionally, as an independent musician, everything helps!</p>
+          <div class="signature">Thank you — Noah</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section connect-section" id="song-requests" aria-label="Song requests">
+      <div class="section-kicker" style="color:#5d391e;">Performance & karaoke requests</div>
+      <h2 class="section-title">Song Requests</h2>
+      <p class="section-copy" style="color:rgba(27,19,12,.78);">Want to hear something specific? Use the song request system to send performance requests, karaoke requests, and live-show ideas directly into the set request flow.</p>
+      <div class="social-row">
+        <a class="btn" href="https://setbliss.noahgrove.com/request" target="_blank" rel="noopener">Open Song Requests</a>
+      </div>
+    </section>
+
+    <section class="section connect-section" id="livewall" aria-label="Join the LiveWall">
+      <div class="section-kicker" style="color:#5d391e;">Join the live session</div>
+      <h2 class="section-title">LiveWall</h2>
+      <p class="section-copy" style="color:rgba(27,19,12,.78);">The LiveWall is a shared audience wall where fans can add photos and memories during the show so the live room and the digital audience become part of the experience together.</p>
+      <div class="social-row">
+        <a class="btn" href="https://livewall.noahgrove.com/?wall=main&token=dbbd953eddb34217a2dbe11f8327df330f717fff8d95498f8c962b98ee250cdf" target="_blank" rel="noopener">Join the LiveWall</a>
+      </div>
+    </section>
+
+    <section class="section listen-section" id="listen" aria-label="Listen to Noah Grove original songs">
+      <div class="listen-head">
+        <div class="section-kicker">Start here</div>
+        <h2 class="section-title">Listen Now</h2>
+      </div>
+      <div class="player-frame">
+        <div id="player" class="player">
+          <div class="player-shell">
+            <div class="player-main">
+              <div class="player-info">
+                <div id="player-title">Original Music</div>
+                <div id="player-artist">Noah Grove</div>
+              </div>
+              <div class="progress-container">
+                <span id="current-time" class="player-time">0:00</span>
+                <input type="range" id="progress" value="0" min="0" max="100" aria-label="Song progress">
+                <span id="duration" class="player-time">0:00</span>
+              </div>
+              <div class="player-controls">
+                <button id="prev" type="button" aria-label="Previous song">⏮</button>
+                <button id="play" type="button" aria-label="Play or pause">▶</button>
+                <button id="next" type="button" aria-label="Next song">⏭</button>
+                <button id="toggle-playlist" type="button" class="secondary">Songs</button>
+                <button id="download" type="button" class="secondary">Download</button>
+              </div>
+            </div>
+            <div id="player-playlist" class="player-playlist hidden"></div>
+          </div>
+          <audio id="audio" preload="metadata"></audio>
+        </div>
+      </div>
+    </section>
+
+    <section class="section connect-section" id="connect" aria-label="Stay connected">
+      <div class="section-kicker" style="color:#5d391e;">Stay connected</div>
+      <h2 class="section-title">Follow</h2>
+      <div class="connect-grid">
+        <div class="connect-card">
+          <h3>Text List</h3>
+          <p>Best for show updates, new music, and quick announcements.</p>
+          <a class="btn tiny" href="sms:+16158383187?&body=NOAH">Text “NOAH”</a>
+        </div>
+        <div class="connect-card">
+          <h3>Email Newsletter</h3>
+          <p>Behind the scenes updates, new songs, and exclusive content.</p>
+          <button class="btn tiny" type="button" data-open-newsletter>Join the List</button>
+        </div>
+        <div class="connect-card socials">
+          <h3>Follow Along</h3>
+          <p>@booknoahgrove</p>
+          <div class="social-row icon-social-row" aria-label="Social media links">
+            <a class="social-icon instagram" href="https://instagram.com/booknoahgrove" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><span class="ig-glyph"></span></a>
+            <a class="social-icon youtube" href="https://youtube.com/@booknoahgrove" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><span class="yt-glyph"></span></a>
+            <a class="social-icon facebook" href="https://facebook.com/booknoahgrove" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+            <a class="social-icon x-twitter" href="https://x.com/booknoahgrove" target="_blank" rel="noopener noreferrer" aria-label="X">𝕏</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section merch-section" id="merch" aria-label="Merch">
+      <div class="section-kicker">Wear the music</div>
+      <h2 class="section-title">Merch</h2>
+      <p class="section-copy">Choose items with the + and – buttons. Your order summary appears below, then choose PayPal, Venmo, real Cash App Pay, or the Square card checkout fallback.</p>
+
+      <div class="merch-group">
+        <h3 class="merch-group-title">Albums • $10 each</h3>
+        <div class="selector-panel" data-choice-group="album">
+          <p>Tap an album cover to select it, then use + or – to adjust that album in your order.</p>
+          <div class="choice-row">
+            <button class="choice-card" type="button" aria-pressed="true" data-choice-option="album" data-item-id="album-big-picture" data-item-name="Big Picture Album" data-item-price="10">
+              <img src="support-assets/big-picture-album-cover.jpg" alt="Big Picture album cover"><span class="choice-label">Big Picture</span>
+            </button>
+            <button class="choice-card" type="button" aria-pressed="false" data-choice-option="album" data-item-id="album-beautiful-frankenstein" data-item-name="Beautiful Frankenstein Album" data-item-price="10">
+              <img src="support-assets/beautiful-frankenstein-album-cover.jpg" alt="Beautiful Frankenstein album cover"><span class="choice-label">Beautiful Frankenstein</span>
+            </button>
+            <button class="choice-card" type="button" aria-pressed="false" data-choice-option="album" data-item-id="album-li-shuang" data-item-name="Noah Grove by Li Shuang Album" data-item-price="10">
+              <img src="support-assets/noah-grove-li-shuang-album.jpg" alt="Noah Grove by Li Shuang album"><span class="choice-label">Li Shuang</span>
+            </button>
+          </div>
+          <div class="selector-actions"><span class="selected-item-name" data-selected-label="album">Selected: Big Picture Album</span><div class="qty-control"><button class="qty-btn" type="button" data-selection-minus="album">−</button><span class="qty-count" data-selection-count="album">0</span><button class="qty-btn" type="button" data-selection-plus="album">+</button></div></div>
+        </div>
+      </div>
+
+      <div class="merch-group">
+        <h3 class="merch-group-title">Stickers • $1 each</h3>
+        <div class="selector-panel" data-choice-group="sticker">
+          <p>Tap a sticker design to select it, then use + or – to adjust that sticker in your order.</p>
+          <div class="choice-row">
+            <button class="choice-card" type="button" aria-pressed="true" data-choice-option="sticker" data-item-id="sticker-big-picture" data-item-name="Big Picture Sticker" data-item-price="1">
+              <img src="support-assets/big-picture-album-cover.jpg" alt="Big Picture sticker artwork"><span class="choice-label">Big Picture</span>
+            </button>
+            <button class="choice-card" type="button" aria-pressed="false" data-choice-option="sticker" data-item-id="sticker-beautiful-frankenstein" data-item-name="Beautiful Frankenstein Sticker" data-item-price="1">
+              <img src="support-assets/beautiful-frankenstein-album-cover.jpg" alt="Beautiful Frankenstein sticker artwork"><span class="choice-label">Beautiful Frankenstein</span>
+            </button>
+            <button class="choice-card" type="button" aria-pressed="false" data-choice-option="sticker" data-item-id="sticker-spaceark-logo" data-item-name="Space ARK Logo Sticker" data-item-price="1">
+              <img class="logo-art" src="support-assets/noah-spaceark-logo-sticker.png" alt="Noah and the Space ARK logo sticker artwork"><span class="choice-label">Space ARK</span>
+            </button>
+          </div>
+          <div class="selector-actions"><span class="selected-item-name" data-selected-label="sticker">Selected: Big Picture Sticker</span><div class="qty-control"><button class="qty-btn" type="button" data-selection-minus="sticker">−</button><span class="qty-count" data-selection-count="sticker">0</span><button class="qty-btn" type="button" data-selection-plus="sticker">+</button></div></div>
+        </div>
+      </div>
+
+      <div class="merch-group">
+        <div class="merch-grid">
+          <article class="merch-card">
+            <img src="support-assets/merch-shirt.png" alt="Noah and the SpaceArk white shirt">
+            <div class="merch-info">
+              <h3>SpaceArk Shirt</h3>
+              <p>White tee with Noah and the SpaceArk logo. Select a size, then add that size to your order.</p>
+              <div class="price-row"><span class="price">$20</span><select class="size-select" aria-label="SpaceArk shirt size" data-shirt-size><option>S</option><option>M</option><option>L</option><option>XL</option></select><div class="qty-control"><button class="qty-btn" type="button" data-shirt-minus>−</button><span class="qty-count" data-shirt-current-count>0</span><button class="qty-btn" type="button" data-shirt-plus data-item-id="shirt" data-item-name="SpaceArk Shirt" data-item-price="20">+</button></div></div>
+            </div>
+          </article>
+          <article class="merch-card">
+            <img src="support-assets/merch-hat.png" alt="Noah and the SpaceArk black hat">
+            <div class="merch-info">
+              <h3>SpaceArk Hat</h3>
+              <p>Black cap with embroidered SpaceArk logo.</p>
+              <div class="price-row"><span class="price">$10</span><div class="qty-control"><button class="qty-btn" type="button" data-cart-minus="hat">−</button><span class="qty-count" data-cart-count="hat">0</span><button class="qty-btn" type="button" data-cart-plus data-item-id="hat" data-item-name="SpaceArk Hat" data-item-price="10">+</button></div></div>
+            </div>
+          </article>
+          <article class="merch-card">
+            <img src="support-assets/merch-mug.png" alt="Noah and the SpaceArk mug">
+            <div class="merch-info">
+              <h3>SpaceArk Mug</h3>
+              <p>Coffee mug with Noah and the SpaceArk logo.</p>
+              <div class="price-row"><span class="price">$15</span><div class="qty-control"><button class="qty-btn" type="button" data-cart-minus="mug">−</button><span class="qty-count" data-cart-count="mug">0</span><button class="qty-btn" type="button" data-cart-plus data-item-id="mug" data-item-name="SpaceArk Mug" data-item-price="15">+</button></div></div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="order-block" id="order-block" aria-live="polite">
+        <h3>Your order</h3>
+        <div class="order-list" id="order-list"></div>
+        <div class="order-total"><span>Subtotal</span><strong id="order-subtotal">$0</strong></div>
+        <button class="purchase-btn" type="button" id="open-purchase-checkout">PLACE ORDER</button>
+      </div>
+      <p class="purchase-note">Shipping is selected at checkout. Mailing adds $5 to the order total; pickup from Noah at a gig has no shipping charge.</p>
+    </section>
+
+    <footer class="footer">
+      <div class="script-logo" style="font-size:24px;margin-bottom:10px;">Noah Grove</div>
+      <p><a href="mailto:noah@noahgrove.com">noah@noahgrove.com</a> • <a href="/">noahgrove.com</a></p>
+      <p>© 2026 Noah Grove Music</p>
+    </footer>
+  </main>
+
+
+  <div class="purchase-modal" id="purchase-modal" aria-hidden="true" role="dialog" aria-label="Merch purchase checkout">
+    <div class="purchase-panel">
+      <div class="purchase-head">
+        <div>
+          <div class="section-kicker">Secure checkout</div>
+          <h2 id="purchase-title">Purchase Merch</h2>
+        </div>
+        <button class="close" type="button" data-close-purchase aria-label="Close purchase form">×</button>
+      </div>
+      <p class="purchase-summary" id="purchase-summary">Enter your contact and delivery details, then choose PayPal, Venmo, real Cash App Pay, or Square card checkout. Venmo falls back to @noahgrovemusic when PayPal-powered Venmo is unavailable.</p>
+      <form class="purchase-form" id="purchase-form">
+        <input type="hidden" name="cartItems" id="purchase-cart-items">
+
+        <label>Full name
+          <input name="fullName" autocomplete="name" required>
+        </label>
+        <label>Email
+          <input name="email" type="email" autocomplete="email" required>
+        </label>
+        <label>Phone
+          <input name="phone" type="tel" autocomplete="tel" required>
+        </label>
+
+        <div class="delivery-options" aria-label="Delivery method">
+          <label class="delivery-option">
+            <input type="radio" name="deliveryMethod" value="pickup" checked>
+            <span><strong>Pick up from Noah at a gig</strong><span>No shipping charge. I’ll coordinate with you by text/email.</span></span>
+          </label>
+          <label class="delivery-option">
+            <input type="radio" name="deliveryMethod" value="ship">
+            <span><strong>Mail it to me</strong><span>Adds $5 shipping.</span></span>
+          </label>
+        </div>
+
+        <div class="address-fields hidden" id="address-fields">
+          <label>Shipping address
+            <input name="address1" autocomplete="address-line1">
+          </label>
+          <label>Apartment / unit / notes
+            <input name="address2" autocomplete="address-line2">
+          </label>
+          <label>City
+            <input name="city" autocomplete="address-level2">
+          </label>
+          <label>State
+            <input name="state" autocomplete="address-level1" maxlength="32">
+          </label>
+          <label>ZIP
+            <input name="zip" autocomplete="postal-code" inputmode="numeric">
+          </label>
+        </div>
+
+        <label>Notes / pickup details
+          <textarea name="notes" placeholder="Pickup show, delivery notes, or anything Noah should know."></textarea>
+        </label>
+
+        <div class="purchase-total"><span>Total</span><strong id="purchase-total">$0</strong></div>
+        <div class="payment-choice-block">
+          <div class="payment-choice-title">Pay with</div>
+          <div id="paypal-button-container" class="payment-button-zone"><button class="btn secondary-square-btn" type="button" disabled>Loading PayPal…</button></div>
+          <div id="venmo-button-container" class="payment-button-zone"><button class="btn secondary-square-btn" type="button" disabled>Loading Venmo…</button></div>
+          <div id="cashapp-pay-container" class="payment-button-zone"><button class="btn secondary-square-btn" type="button" disabled>Loading Cash App Pay…</button></div>
+          <button class="btn secondary-square-btn" id="purchase-submit" type="submit">Continue to Square Checkout</button>
+        </div>
+        <div class="purchase-error" id="purchase-error"></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="newsletter-modal" aria-hidden="true" role="dialog" aria-label="Newsletter signup">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <h2>Join the Newsletter</h2>
+        <button class="close" type="button" data-close-newsletter aria-label="Close newsletter">×</button>
+      </div>
+      <iframe
+        class="newsletter-iframe"
+        src="https://dbca144f.sibforms.com/serve/MUIFAPkVcGQN4qy9vfVklwNjXUX1YWp68kTd-XhOLjPdyHSmjC1HDVpLevWuUJUc41jL2DGBEoYFOjstkhAZ8V8PZ_uQ76uWxTlbnJPV3OIyFEEn5EbJqG3TpYBIeUtr80gktvJPOE_g_jB73kAsP2wQOpbAOPDU-2MI6LKHKx_F9b803ruWrO6NThB66vDD0FN1TVQXtahyGJA8"
+        title="Noah Grove newsletter signup"
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
+
+  <script src="sticky-player.js"></script>
+  <script>
+    const modal = document.getElementById('newsletter-modal');
+    const openButtons = document.querySelectorAll('[data-open-newsletter]');
+    const closeButtons = document.querySelectorAll('[data-close-newsletter]');
+
+    function openNewsletter() {
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeNewsletter() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    openButtons.forEach(button => button.addEventListener('click', openNewsletter));
+    closeButtons.forEach(button => button.addEventListener('click', closeNewsletter));
+    modal.addEventListener('click', event => { if (event.target === modal) closeNewsletter(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeNewsletter(); closePurchase(); } });
+
+    const purchaseModal = document.getElementById('purchase-modal');
+    const purchaseForm = document.getElementById('purchase-form');
+    const purchaseCloseButtons = document.querySelectorAll('[data-close-purchase]');
+    const purchaseTitle = document.getElementById('purchase-title');
+    const purchaseSummary = document.getElementById('purchase-summary');
+    const purchaseTotal = document.getElementById('purchase-total');
+    const purchaseError = document.getElementById('purchase-error');
+    const purchaseSubmit = document.getElementById('purchase-submit');
+    const paypalButtonContainer = document.getElementById('paypal-button-container');
+    const venmoButtonContainer = document.getElementById('venmo-button-container');
+    const cashAppPayContainer = document.getElementById('cashapp-pay-container');
+    let merchConfig = null;
+    let paypalButtonsRendered = false;
+    let venmoButtonsRendered = false;
+    let cashAppPayRendered = false;
+    let cashAppPayObject = null;
+    const addressFields = document.getElementById('address-fields');
+    const orderBlock = document.getElementById('order-block');
+    const orderList = document.getElementById('order-list');
+    const orderSubtotal = document.getElementById('order-subtotal');
+    const openPurchaseCheckout = document.getElementById('open-purchase-checkout');
+    const cartInput = document.getElementById('purchase-cart-items');
+    const shippingCost = 5;
+    const cart = new Map();
+
+    function moneyDisplay(value) { return '$' + Number(value || 0).toFixed(0); }
+    const tipStatus = document.querySelector('[data-tip-status]');
+    const customTipAmount = document.getElementById('customTipAmount');
+    const tipPayPalButtonContainer = document.getElementById('tip-paypal-button-container');
+    const tipVenmoButtonContainer = document.getElementById('tip-venmo-button-container');
+    const tipCashAppButton = document.querySelector('[data-cashapp-tip]');
+    let tipPayPalRendered = false;
+    let tipVenmoRendered = false;
+    let selectedTipAmount = '';
+    async function openTipCheckout(amount, sourceButton) {
+      const dollars = Number(String(amount || '').replace(/[^0-9.]/g, ''));
+      if (!Number.isFinite(dollars) || dollars < 1 || dollars > 500) {
+        showTipStatus('Please enter a tip amount between $1 and $500.', true);
+        customTipAmount?.focus();
+        return;
+      }
+      const originalText = sourceButton?.textContent;
+      const shouldSwapText = sourceButton && !sourceButton.classList?.contains('method-card');
+      if (sourceButton) {
+        sourceButton.disabled = true;
+        if (shouldSwapText) sourceButton.textContent = 'Opening…';
+      }
+      showTipStatus('Opening secure Square checkout… Cash App Pay is available inside Square when eligible.', false);
+      try {
+        const response = await fetch('/api/create-tip-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount: dollars })
+        });
+        const result = await response.json();
+        if (!response.ok || !result.ok || !result.checkoutUrl) throw new Error(result.error || 'Could not create tip checkout.');
+        window.location.href = result.checkoutUrl;
+      } catch (error) {
+        showTipStatus(error.message || 'Could not create tip checkout.', true);
+        if (sourceButton) {
+          sourceButton.disabled = false;
+          if (shouldSwapText) sourceButton.textContent = originalText;
+        }
+      }
+    }
+    function currentTipAmountForSquareMethod() {
+      const customAmount = Number(String(customTipAmount?.value || '').replace(/[^0-9.]/g, ''));
+      const amount = Number.isFinite(customAmount) && customAmount >= 1 ? customAmount : Number(selectedTipAmount || 0);
+      if (!Number.isFinite(amount) || amount < 1 || amount > 500) {
+        showTipStatus('Choose a tip amount or enter a custom tip between $1 and $500 before using Cash App Pay.', true);
+        customTipAmount?.focus();
+        return 0;
+      }
+      return Math.round(amount * 100) / 100;
+    }
+
+    function showTipStatus(message, isError) {
+      if (!tipStatus) return;
+      tipStatus.textContent = message;
+      tipStatus.classList.add('show');
+      tipStatus.classList.toggle('error', Boolean(isError));
+    }
+    document.querySelectorAll('[data-tip-amount]').forEach(button => button.addEventListener('click', () => { selectedTipAmount = button.dataset.tipAmount || ''; openTipCheckout(selectedTipAmount, button); }));
+    document.querySelector('[data-custom-tip]')?.addEventListener('click', event => { selectedTipAmount = customTipAmount?.value || ''; openTipCheckout(selectedTipAmount, event.currentTarget); });
+    tipCashAppButton?.addEventListener('click', event => {
+      const amount = currentTipAmountForSquareMethod();
+      if (amount) openTipCheckout(amount, event.currentTarget);
+    });
+
+
+    function currentTipAmountForPayPalVenmo() {
+      const amount = Number(String(customTipAmount?.value || '').replace(/[^0-9.]/g, ''));
+      if (!Number.isFinite(amount) || amount < 1 || amount > 500) {
+        showTipStatus('Enter a custom tip amount between $1 and $500 before using PayPal/Venmo.', true);
+        customTipAmount?.focus();
+        throw new Error('Please enter a tip amount between $1 and $500.');
+      }
+      return Math.round(amount * 100) / 100;
+    }
+
+    function tipPayPalButtonConfig(isVenmo) {
+      return {
+        fundingSource: isVenmo ? window.paypal?.FUNDING?.VENMO : window.paypal?.FUNDING?.PAYPAL,
+        style: isVenmo ? { layout: 'vertical', shape: 'pill' } : { layout: 'vertical', shape: 'pill', label: 'paypal' },
+        createOrder: async () => {
+          const amount = currentTipAmountForPayPalVenmo();
+          showTipStatus(`Opening ${isVenmo ? 'Venmo' : 'PayPal'} checkout…`, false);
+          const response = await fetch('/api/create-paypal-tip-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount })
+          });
+          const result = await response.json();
+          if (!response.ok || !result.ok || !result.id) throw new Error(result.error || `Could not create ${isVenmo ? 'Venmo' : 'PayPal'} tip checkout.`);
+          return result.id;
+        },
+        onApprove: async data => {
+          const amount = currentTipAmountForPayPalVenmo();
+          showTipStatus(`Finalizing ${isVenmo ? 'Venmo' : 'PayPal'} tip…`, false);
+          const response = await fetch('/api/capture-paypal-tip-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount, paypalOrderId: data.orderID })
+          });
+          const result = await response.json();
+          if (!response.ok || !result.ok) throw new Error(result.error || `Could not capture ${isVenmo ? 'Venmo' : 'PayPal'} tip.`);
+          window.location.href = '/support?tip=thanks';
+        },
+        onCancel: () => showTipStatus(`${isVenmo ? 'Venmo' : 'PayPal'} checkout was cancelled.`, true),
+        onError: error => showTipStatus(error?.message || `${isVenmo ? 'Venmo' : 'PayPal'} checkout could not be completed.`, true)
+      };
+    }
+
+    async function setupTipPayPalVenmoCheckout() {
+      if ((!tipPayPalButtonContainer || tipPayPalRendered) && (!tipVenmoButtonContainer || tipVenmoRendered)) return;
+      if (tipPayPalButtonContainer) tipPayPalButtonContainer.innerHTML = '<button class="tip-payment-placeholder paypal-placeholder" type="button" disabled>Loading PayPal…</button>';
+      if (tipVenmoButtonContainer) tipVenmoButtonContainer.innerHTML = '<button class="tip-payment-placeholder venmo-placeholder" type="button" disabled><strong>Venmo</strong><span>@noahgrovemusic</span></button>';
+      try {
+        const config = await loadMerchConfig();
+        if (!config.paypalClientId) {
+          if (tipPayPalButtonContainer) {
+            tipPayPalButtonContainer.innerHTML = '<button class="tip-payment-placeholder paypal-placeholder" type="button">PayPal setup needed</button>';
+            tipPayPalButtonContainer.querySelector('button')?.addEventListener('click', () => showTipStatus('PayPal Checkout needs PAYPAL_CLIENT_ID and PAYPAL_CLIENT_SECRET in Cloudflare first.', true));
+          }
+          if (tipVenmoButtonContainer) {
+            tipVenmoButtonContainer.innerHTML = '<button class="tip-payment-placeholder venmo-placeholder" type="button"><strong>Venmo</strong><span>@noahgrovemusic</span></button>';
+            tipVenmoButtonContainer.querySelector('button')?.addEventListener('click', () => showTipStatus('Venmo uses PayPal Checkout. Add PAYPAL_CLIENT_ID and PAYPAL_CLIENT_SECRET in Cloudflare first.', true));
+          }
+          tipPayPalRendered = true;
+          tipVenmoRendered = true;
+          return;
+        }
+        await loadScriptOnce(`https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(config.paypalClientId)}&currency=USD&intent=capture&commit=true&components=buttons&enable-funding=venmo&disable-funding=card,paylater`, 'paypal-checkout-sdk');
+        if (!window.paypal?.Buttons) throw new Error('PayPal Checkout is unavailable on this browser/account.');
+
+        if (tipPayPalButtonContainer && !tipPayPalRendered) {
+          tipPayPalButtonContainer.innerHTML = '';
+          const paypalButton = window.paypal.Buttons(tipPayPalButtonConfig(false));
+          if (paypalButton.isEligible()) await paypalButton.render('#tip-paypal-button-container');
+          else tipPayPalButtonContainer.innerHTML = '<button class="tip-payment-placeholder paypal-placeholder" type="button" disabled>PayPal unavailable</button>';
+          tipPayPalRendered = true;
+        }
+
+        if (tipVenmoButtonContainer && !tipVenmoRendered) {
+          tipVenmoButtonContainer.innerHTML = '';
+          const venmoButton = window.paypal.Buttons(tipPayPalButtonConfig(true));
+          if (venmoButton.isEligible()) await venmoButton.render('#tip-venmo-button-container');
+          else {
+            tipVenmoButtonContainer.innerHTML = '<button class="tip-payment-placeholder venmo-placeholder" type="button"><strong>Venmo</strong><span>@noahgrovemusic</span></button>';
+            tipVenmoButtonContainer.querySelector('button')?.addEventListener('click', () => showTipStatus('Venmo is not eligible on this browser/account through PayPal Checkout. Try a different phone/account, or use PayPal/Cash App.', true));
+          }
+          tipVenmoRendered = true;
+        }
+      } catch (error) {
+        if (tipPayPalButtonContainer && !tipPayPalRendered) {
+          tipPayPalButtonContainer.innerHTML = '<button class="tip-payment-placeholder paypal-placeholder" type="button">PayPal unavailable</button>';
+          tipPayPalButtonContainer.querySelector('button')?.addEventListener('click', () => showTipStatus(error.message || 'PayPal checkout is unavailable right now.', true));
+          tipPayPalRendered = true;
+        }
+        if (tipVenmoButtonContainer && !tipVenmoRendered) {
+          tipVenmoButtonContainer.innerHTML = '<button class="tip-payment-placeholder venmo-placeholder" type="button"><strong>Venmo</strong><span>@noahgrovemusic</span></button>';
+          tipVenmoButtonContainer.querySelector('button')?.addEventListener('click', () => showTipStatus(error.message || 'Venmo checkout is unavailable right now.', true));
+          tipVenmoRendered = true;
+        }
+      }
+    }
+    setupTipPayPalVenmoCheckout();
+
+    function cartKey(item) { return item.size ? `${item.id}::${item.size}` : item.id; }
+    function cartArray() { return Array.from(cart.values()).filter(item => item.quantity > 0); }
+    function cartSubtotal() { return cartArray().reduce((sum, item) => sum + (Number(item.price || 0) * Number(item.quantity || 0)), 0); }
+    function selectedDelivery() { return purchaseForm.querySelector('input[name="deliveryMethod"]:checked')?.value || 'pickup'; }
+    function updateCounts() {
+      document.querySelectorAll('[data-cart-count]').forEach(el => {
+        const id = el.dataset.cartCount;
+        el.textContent = String(cart.get(id)?.quantity || 0);
+      });
+      document.querySelectorAll('[data-selection-count]').forEach(el => {
+        const selected = getSelectedChoice(el.dataset.selectionCount);
+        el.textContent = String(selected ? (cart.get(selected.id)?.quantity || 0) : 0);
+      });
+      const size = document.querySelector('[data-shirt-size]')?.value || 'M';
+      const shirtKey = `shirt::${size}`;
+      const shirtCount = document.querySelector('[data-shirt-current-count]');
+      if (shirtCount) shirtCount.textContent = String(cart.get(shirtKey)?.quantity || 0);
+    }
+    function renderCart() {
+      const items = cartArray();
+      updateCounts();
+      if (!items.length) {
+        orderBlock.classList.remove('open');
+        orderList.innerHTML = '';
+        orderSubtotal.textContent = '$0';
+        return;
+      }
+      orderBlock.classList.add('open');
+      orderSubtotal.textContent = moneyDisplay(cartSubtotal());
+      orderList.innerHTML = items.map(item => {
+        const title = item.size ? `${item.name} — Size ${item.size}` : item.name;
+        const line = Number(item.price) * Number(item.quantity);
+        return `<div class="order-row"><div><b>${escapeHtml(title)}</b><span>${item.quantity} × ${moneyDisplay(item.price)}</span></div><div class="order-row-controls"><button class="qty-btn" type="button" data-order-minus="${escapeHtml(item.key)}">−</button><button class="qty-btn" type="button" data-order-plus="${escapeHtml(item.key)}">+</button></div><strong>${moneyDisplay(line)}</strong></div>`;
+      }).join('');
+      orderList.querySelectorAll('[data-order-plus]').forEach(button => button.addEventListener('click', () => {
+        const existing = cart.get(button.dataset.orderPlus);
+        if (existing) addCartItem(existing, 1);
+      }));
+      orderList.querySelectorAll('[data-order-minus]').forEach(button => button.addEventListener('click', () => {
+        const existing = cart.get(button.dataset.orderMinus);
+        if (existing) addCartItem(existing, -1);
+      }));
+    }
+    function addCartItem(item, delta) {
+      const key = cartKey(item);
+      const current = cart.get(key) || { ...item, key, quantity: 0 };
+      current.quantity = Math.max(0, Number(current.quantity || 0) + delta);
+      if (current.quantity <= 0) cart.delete(key); else cart.set(key, current);
+      renderCart();
+      if (cart.size) orderBlock.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    document.querySelectorAll('[data-cart-plus]').forEach(button => button.addEventListener('click', () => {
+      addCartItem({ id: button.dataset.itemId, name: button.dataset.itemName, price: Number(button.dataset.itemPrice || 0) }, 1);
+    }));
+    document.querySelectorAll('[data-cart-minus]').forEach(button => button.addEventListener('click', () => {
+      const existing = cart.get(button.dataset.cartMinus);
+      if (existing) addCartItem(existing, -1);
+    }));
+    const shirtSize = document.querySelector('[data-shirt-size]');
+    shirtSize?.addEventListener('change', updateCounts);
+    document.querySelector('[data-shirt-plus]')?.addEventListener('click', buttonEvent => {
+      const button = buttonEvent.currentTarget;
+      const size = shirtSize?.value || 'M';
+      addCartItem({ id: 'shirt', name: button.dataset.itemName, price: Number(button.dataset.itemPrice || 0), size }, 1);
+    });
+    document.querySelector('[data-shirt-minus]')?.addEventListener('click', () => {
+      const size = shirtSize?.value || 'M';
+      const key = `shirt::${size}`;
+      const existing = cart.get(key);
+      if (existing) addCartItem(existing, -1);
+    });
+    function getSelectedChoice(group) {
+      const selected = document.querySelector(`[data-choice-option="${group}"][aria-pressed="true"]`);
+      if (!selected) return null;
+      return { id: selected.dataset.itemId, name: selected.dataset.itemName, price: Number(selected.dataset.itemPrice || 0) };
+    }
+    function selectChoice(button) {
+      const group = button.dataset.choiceOption;
+      document.querySelectorAll(`[data-choice-option="${group}"]`).forEach(option => option.setAttribute('aria-pressed', option === button ? 'true' : 'false'));
+      const label = document.querySelector(`[data-selected-label="${group}"]`);
+      if (label) label.textContent = `Selected: ${button.dataset.itemName}`;
+      updateCounts();
+    }
+    document.querySelectorAll('[data-choice-option]').forEach(button => button.addEventListener('click', () => selectChoice(button)));
+    document.querySelectorAll('[data-selection-plus]').forEach(button => button.addEventListener('click', () => {
+      const selected = getSelectedChoice(button.dataset.selectionPlus);
+      if (selected) addCartItem(selected, 1);
+    }));
+    document.querySelectorAll('[data-selection-minus]').forEach(button => button.addEventListener('click', () => {
+      const selected = getSelectedChoice(button.dataset.selectionMinus);
+      if (selected) {
+        const existing = cart.get(selected.id);
+        if (existing) addCartItem(existing, -1);
+      }
+    }));
+
+    function updatePurchaseTotal() {
+      const total = cartSubtotal() + (selectedDelivery() === 'ship' ? shippingCost : 0);
+      purchaseTotal.textContent = moneyDisplay(total);
+      addressFields.classList.toggle('hidden', selectedDelivery() !== 'ship');
+      addressFields.querySelectorAll('input').forEach(input => {
+        input.required = selectedDelivery() === 'ship' && ['address1','city','state','zip'].includes(input.name);
+      });
+    }
+    function openPurchase() {
+      const items = cartArray();
+      if (!items.length) return;
+      purchaseTitle.textContent = 'Purchase Order';
+      purchaseSummary.textContent = `${items.reduce((sum, item) => sum + item.quantity, 0)} item(s) selected — ${moneyDisplay(cartSubtotal())} before optional shipping.`;
+      cartInput.value = JSON.stringify(items);
+      purchaseError.classList.remove('show');
+      purchaseError.textContent = '';
+      purchaseModal.classList.add('open');
+      purchaseModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      updatePurchaseTotal();
+      setupPaymentOptions();
+      setTimeout(() => purchaseForm.querySelector('input[name="fullName"]').focus(), 50);
+    }
+    function closePurchase() {
+      purchaseModal.classList.remove('open');
+      purchaseModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = modal.classList.contains('open') ? 'hidden' : '';
+    }
+    openPurchaseCheckout?.addEventListener('click', openPurchase);
+    purchaseCloseButtons.forEach(button => button.addEventListener('click', closePurchase));
+    purchaseModal.addEventListener('click', event => { if (event.target === purchaseModal) closePurchase(); });
+    purchaseForm.querySelectorAll('input[name="deliveryMethod"]').forEach(input => input.addEventListener('change', () => { updatePurchaseTotal(); resetRenderedPaymentButtons(); setupPaymentOptions(); }));
+
+    function formDataObject() {
+      cartInput.value = JSON.stringify(cartArray());
+      return Object.fromEntries(new FormData(purchaseForm).entries());
+    }
+    function validatePurchaseForm() {
+      cartInput.value = JSON.stringify(cartArray());
+      if (!cartArray().length) throw new Error('Your order is empty.');
+      if (!purchaseForm.reportValidity()) throw new Error('Please complete the required order details first.');
+    }
+    function resetRenderedPaymentButtons() {
+      paypalButtonsRendered = false;
+      venmoButtonsRendered = false;
+      if (paypalButtonContainer) paypalButtonContainer.innerHTML = '';
+      if (venmoButtonContainer) venmoButtonContainer.innerHTML = '';
+      cashAppPayRendered = false;
+      if (cashAppPayObject?.destroy) cashAppPayObject.destroy().catch(() => {});
+      cashAppPayObject = null;
+      if (cashAppPayContainer) cashAppPayContainer.innerHTML = '<button class="btn secondary-square-btn" type="button" disabled>Loading Cash App Pay…</button>';
+    }
+    async function loadMerchConfig() {
+      if (merchConfig) return merchConfig;
+      const response = await fetch('/api/merch-config');
+      const result = await response.json();
+      if (!response.ok || !result.ok) throw new Error(result.error || 'Could not load payment configuration.');
+      merchConfig = result;
+      return merchConfig;
+    }
+    function loadScriptOnce(src, id) {
+      return new Promise((resolve, reject) => {
+        const existing = document.getElementById(id);
+        if (existing) {
+          if (existing.dataset.loaded === 'true') resolve();
+          else existing.addEventListener('load', () => resolve(), { once:true });
+          return;
+        }
+        const script = document.createElement('script');
+        script.src = src;
+        script.id = id;
+        script.async = true;
+        script.onload = () => { script.dataset.loaded = 'true'; resolve(); };
+        script.onerror = () => reject(new Error('Could not load payment script.'));
+        document.head.appendChild(script);
+      });
+    }
+    async function setupPaymentOptions() {
+      if (paypalButtonContainer && !paypalButtonsRendered) paypalButtonContainer.innerHTML = '<button class="btn secondary-square-btn" type="button" disabled>Loading PayPal…</button>';
+      if (venmoButtonContainer && !venmoButtonsRendered) venmoButtonContainer.innerHTML = '<button class="btn secondary-square-btn" type="button" disabled>Loading Venmo…</button>';
+      try {
+        const config = await loadMerchConfig();
+        if (!config.paypalClientId) {
+          if (paypalButtonContainer) paypalButtonContainer.innerHTML = '<button class="btn secondary-square-btn" type="button" data-paypal-missing>PayPal setup needed</button>';
+          if (venmoButtonContainer) venmoButtonContainer.innerHTML = '<button class="btn secondary-square-btn" type="button" data-venmo-missing>Venmo setup needed</button>';
+          paypalButtonContainer?.querySelector('button')?.addEventListener('click', () => showPurchaseError('PayPal is not configured yet. Add PAYPAL_CLIENT_ID and PAYPAL_CLIENT_SECRET in Cloudflare, then redeploy.'));
+          venmoButtonContainer?.querySelector('button')?.addEventListener('click', () => showPurchaseError('Venmo uses the PayPal checkout setup. Add PayPal credentials in Cloudflare first.'));
+          setupCashAppPay(config);
+          paypalButtonsRendered = true;
+          venmoButtonsRendered = true;
+          return;
+        }
+        await loadScriptOnce(`https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(config.paypalClientId)}&currency=USD&intent=capture&components=buttons&enable-funding=venmo`, 'paypal-checkout-sdk');
+        if (!window.paypal?.Buttons) throw new Error('PayPal checkout script did not initialize.');
+        renderPayPalFundingButton('paypal');
+        renderPayPalFundingButton('venmo');
+        setupCashAppPay(config);
+      } catch (error) {
+        if (paypalButtonContainer && !paypalButtonsRendered) paypalButtonContainer.innerHTML = '<button class="btn secondary-square-btn" type="button" disabled>PayPal unavailable</button>';
+        if (venmoButtonContainer && !venmoButtonsRendered) venmoButtonContainer.innerHTML = '<button class="btn secondary-square-btn" type="button" disabled>Venmo unavailable</button>';
+        showPurchaseError(error.message || 'Some payment options could not be loaded. You can still use Square Checkout.');
+        try { const config = merchConfig || await loadMerchConfig(); setupCashAppPay(config); } catch (_) {}
+      }
+    }
+    function validateBeforePayment(actions) {
+      purchaseError.classList.remove('show');
+      purchaseError.textContent = '';
+      try {
+        validatePurchaseForm();
+        return actions?.resolve ? actions.resolve() : true;
+      } catch (error) {
+        showPurchaseError(error.message || 'Please complete the required order details first.');
+        return actions?.reject ? actions.reject() : false;
+      }
+    }
+
+    function buildVenmoFallbackUrl() {
+      const order = formDataObject();
+      const total = Math.max(0, cartSubtotal() + (selectedDelivery() === 'ship' ? shippingCost : 0)).toFixed(2);
+      const itemSummary = cartArray().map(item => `${item.quantity} ${item.name}`).join(', ');
+      const note = `NoahGrove.com merch order${order.fullName ? ` for ${order.fullName}` : ''}${itemSummary ? `: ${itemSummary}` : ''}`.slice(0, 240);
+      const params = new URLSearchParams({ txn: 'pay', recipients: 'noahgrovemusic', amount: total, note });
+      return `https://venmo.com/noahgrovemusic?${params.toString()}`;
+    }
+    function showVenmoFallbackButton(container, reason) {
+      if (!container) return;
+      container.innerHTML = '<button class="btn venmo-fallback-btn" type="button" data-venmo-fallback>Pay with Venmo @noahgrovemusic</button>';
+      container.querySelector('button')?.addEventListener('click', () => {
+        try {
+          validatePurchaseForm();
+          window.open(buildVenmoFallbackUrl(), '_blank', 'noopener,noreferrer');
+          showPurchaseError('Venmo opened in a new tab/app. Please include the merch order note so the order can be matched manually. This direct Venmo fallback is not automatically verified by the website.');
+        } catch (error) {
+          showPurchaseError(error.message || 'Please complete the required order details first.');
+        }
+      });
+      if (reason) console.info(reason);
+    }
+    function renderPayPalFundingButton(kind) {
+      if (!window.paypal?.Buttons) return;
+      const isVenmo = kind === 'venmo';
+      const container = isVenmo ? venmoButtonContainer : paypalButtonContainer;
+      if (!container) return;
+      if (isVenmo && venmoButtonsRendered) return;
+      if (!isVenmo && paypalButtonsRendered) return;
+      const fundingSource = isVenmo ? window.paypal.FUNDING?.VENMO : window.paypal.FUNDING?.PAYPAL;
+      if (!fundingSource) {
+        if (isVenmo) {
+          showVenmoFallbackButton(container, 'PayPal SDK did not expose Venmo funding. Showing direct Venmo fallback.');
+          venmoButtonsRendered = true;
+        } else {
+          container.innerHTML = '<button class="btn secondary-square-btn" type="button" disabled>PayPal unavailable</button>';
+          paypalButtonsRendered = true;
+        }
+        return;
+      }
+      container.innerHTML = '';
+      const button = window.paypal.Buttons({
+        fundingSource,
+        style: isVenmo ? { layout: 'vertical', shape: 'pill' } : { layout: 'vertical', shape: 'pill', label: 'paypal' },
+        onClick: (data, actions) => validateBeforePayment(actions),
+        createOrder: async () => {
+          validatePurchaseForm();
+          const response = await fetch('/api/create-paypal-merch-order', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(formDataObject()) });
+          const result = await response.json();
+          if (!response.ok || !result.ok || !result.id) throw new Error(result.error || `Could not create ${isVenmo ? 'Venmo' : 'PayPal'} order.`);
+          return result.id;
+        },
+        onApprove: async data => {
+          const response = await fetch('/api/capture-paypal-merch-order', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ ...formDataObject(), paypalOrderId: data.orderID }) });
+          const result = await response.json();
+          if (!response.ok || !result.ok) throw new Error(result.error || `Could not capture ${isVenmo ? 'Venmo' : 'PayPal'} payment.`);
+          window.location.href = '/support?merch=thanks';
+        },
+        onError: error => showPurchaseError(error?.message || `${isVenmo ? 'Venmo' : 'PayPal'} checkout could not be completed.`)
+      });
+      if (!button.isEligible || button.isEligible()) {
+        button.render(isVenmo ? '#venmo-button-container' : '#paypal-button-container').catch(error => {
+          if (isVenmo) showVenmoFallbackButton(container, `PayPal could not render Venmo: ${error?.message || 'unknown error'}`);
+          else showPurchaseError(error?.message || 'PayPal button could not be shown.');
+        });
+      } else if (isVenmo) {
+        showVenmoFallbackButton(container, 'PayPal returned Venmo button.isEligible() = false. If this happens on mobile with Live credentials, the PayPal merchant app is not Venmo-eligible yet.');
+      } else {
+        container.innerHTML = '<button class="btn secondary-square-btn" type="button" disabled>PayPal unavailable</button>';
+      }
+      if (isVenmo) venmoButtonsRendered = true; else paypalButtonsRendered = true;
+    }
+    async function setupCashAppPay(config) {
+      if (!cashAppPayContainer || cashAppPayRendered) return;
+      const appId = String(config?.squareApplicationId || '').trim();
+      const locationId = String(config?.squareLocationId || '').trim();
+      if (!appId || !locationId) {
+        cashAppPayContainer.innerHTML = '<button class="btn secondary-square-btn" type="button" data-cashapp-missing>Cash App Pay setup needed</button>';
+        cashAppPayContainer.querySelector('button')?.addEventListener('click', () => showPurchaseError('Real Cash App Pay requires Square Web Payments SDK credentials. Add SQUARE_APPLICATION_ID and SQUARE_LOCATION_ID in Cloudflare, then redeploy.'));
+        cashAppPayRendered = true;
+        return;
+      }
+      try {
+        cashAppPayContainer.innerHTML = '<button class="btn secondary-square-btn" type="button" disabled>Loading Cash App Pay…</button>';
+        const sdkUrl = config.squareEnvironment === 'sandbox' ? 'https://sandbox.web.squarecdn.com/v1/square.js' : 'https://web.squarecdn.com/v1/square.js';
+        await loadScriptOnce(sdkUrl, 'square-web-payments-sdk');
+        if (!window.Square?.payments) throw new Error('Square Web Payments SDK did not initialize.');
+        const totalAmount = (cartSubtotal() + (selectedDelivery() === 'ship' ? shippingCost : 0)).toFixed(2);
+        const payments = window.Square.payments(appId, locationId);
+        const paymentRequest = payments.paymentRequest({
+          countryCode: 'US',
+          currencyCode: 'USD',
+          total: { amount: totalAmount, label: 'NoahGrove.com merch order' }
+        });
+        cashAppPayObject = await payments.cashAppPay(paymentRequest, {
+          redirectURL: `${window.location.origin}/support`,
+          referenceId: `NG-MERCH-${Date.now()}`
+        });
+        cashAppPayContainer.innerHTML = '<div id="cash-app-pay-sdk"></div><p class="payment-note">Cash App Pay opens the Cash App flow directly. Complete the order form before authorizing payment.</p>';
+        cashAppPayObject.addEventListener('ontokenization', async event => {
+          const { tokenResult, error } = event.detail || {};
+          if (error) {
+            showPurchaseError(error.message || 'Cash App Pay could not be authorized.');
+            return;
+          }
+          if (tokenResult?.status === 'Cancel') {
+            showPurchaseError('Cash App Pay was canceled.');
+            return;
+          }
+          if (tokenResult?.status !== 'OK' || !tokenResult?.token) {
+            showPurchaseError('Cash App Pay did not return a valid payment token.');
+            return;
+          }
+          try {
+            validatePurchaseForm();
+            showPurchaseError('Processing Cash App Pay…');
+            const response = await fetch('/api/create-square-merch-payment', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ ...formDataObject(), sourceId: tokenResult.token, verificationToken: tokenResult?.details?.verificationToken || tokenResult?.verificationToken || '' })
+            });
+            const result = await parsePaymentResponse(response, 'Could not complete Cash App Pay payment.');
+            if (!result.ok) throw new Error(result.error || 'Could not complete Cash App Pay payment.');
+            window.location.href = '/support?merch=thanks';
+          } catch (paymentError) {
+            showPurchaseError(paymentError.message || 'Cash App Pay payment could not be completed.');
+          }
+        });
+        await cashAppPayObject.attach('#cash-app-pay-sdk');
+        cashAppPayRendered = true;
+      } catch (error) {
+        cashAppPayContainer.innerHTML = '<button class="btn secondary-square-btn" type="button" data-cashapp-unavailable>Cash App Pay unavailable</button>';
+        cashAppPayContainer.querySelector('button')?.addEventListener('click', () => showPurchaseError(error.message || 'Cash App Pay could not be loaded. Use Square Checkout instead.'));
+        cashAppPayRendered = true;
+      }
+    }
+    async function parsePaymentResponse(response, fallbackMessage) {
+      const text = await response.text();
+      let result = {};
+      try { result = text ? JSON.parse(text) : {}; } catch (_) { result = { error: text }; }
+      if (!response.ok || !result.ok) {
+        const squareDetail = result?.details?.errors?.[0]?.detail || result?.details?.errors?.[0]?.field || result?.details?.raw || result?.squareCode;
+        const rawError = String(result.error || '');
+        if (rawError.includes('<!DOCTYPE html>') || rawError.includes('Bad gateway')) {
+          throw new Error('The checkout server returned a Cloudflare error page. Check Cloudflare Pages Function logs for the exact crash.');
+        }
+        throw new Error(result.error ? `${result.error}${squareDetail && !rawError.includes(String(squareDetail)) ? ` ${squareDetail}` : ''}` : fallbackMessage);
+      }
+      return result;
+    }
+
+    function showPurchaseError(message) {
+      purchaseError.textContent = message;
+      purchaseError.classList.add('show');
+    }
+    purchaseForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      cartInput.value = JSON.stringify(cartArray());
+      purchaseError.classList.remove('show');
+      purchaseError.textContent = '';
+      purchaseSubmit.disabled = true;
+      purchaseSubmit.textContent = 'Opening Square Checkout…';
+      try {
+        validatePurchaseForm();
+        const data = formDataObject();
+        const response = await fetch('/api/create-merch-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const result = await parsePaymentResponse(response, 'Could not create Square checkout.');
+        if (!result.checkoutUrl) throw new Error('Square did not return a checkout URL.');
+        window.location.href = result.checkoutUrl;
+      } catch (error) {
+        purchaseError.textContent = error.message || 'Could not create Square checkout.';
+        purchaseError.classList.add('show');
+        purchaseSubmit.disabled = false;
+        purchaseSubmit.textContent = 'Continue to Square Checkout';
+      }
+    });
+    function escapeHtml(value) {
+      return String(value || '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+    }
+    renderCart();
+  </script>
+  <script src="/analytics.js" defer></script>
+</body>
+</html>

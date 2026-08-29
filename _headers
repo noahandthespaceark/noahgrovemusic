@@ -1,0 +1,105 @@
+/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+  X-Robots-Tag: index, follow
+
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  X-Robots-Tag: index, follow
+
+/*.html
+  X-Robots-Tag: index, follow
+
+/songlist-step4-full.html
+  X-Robots-Tag: noindex, follow
+
+# Clean URL pages
+/about-noah-grove
+  X-Robots-Tag: index, follow
+
+/about-noah-grove/
+  X-Robots-Tag: index, follow
+
+/original-music
+  X-Robots-Tag: index, follow
+
+/original-music/
+  X-Robots-Tag: index, follow
+
+/live-looping-charleston
+  X-Robots-Tag: index, follow
+
+/live-looping-charleston/
+  X-Robots-Tag: index, follow
+
+/spaceark
+  X-Robots-Tag: index, follow
+
+/spaceark/
+  X-Robots-Tag: index, follow
+
+/the-grove-studio
+  X-Robots-Tag: index, follow
+
+/the-grove-studio/
+  X-Robots-Tag: index, follow
+
+/big-picture-tour
+  X-Robots-Tag: index, follow
+
+/big-picture-tour/
+  X-Robots-Tag: index, follow
+
+/projects
+  X-Robots-Tag: index, follow
+
+/projects/
+  X-Robots-Tag: index, follow
+
+/press
+  X-Robots-Tag: index, follow
+
+/press/
+  X-Robots-Tag: index, follow
+
+/faq
+  X-Robots-Tag: index, follow
+
+/faq/
+  X-Robots-Tag: index, follow
+
+/charleston-music-community
+  X-Robots-Tag: index, follow
+
+/charleston-music-community/
+  X-Robots-Tag: index, follow
+
+/music-technology
+  X-Robots-Tag: index, follow
+
+/music-technology/
+  X-Robots-Tag: index, follow
+
+/ai-music-creative-workflow
+  X-Robots-Tag: index, follow
+
+/ai-music-creative-workflow/
+  X-Robots-Tag: index, follow
+
+/image-archive
+  X-Robots-Tag: index, follow
+
+/image-archive/
+  X-Robots-Tag: index, follow
+
+/outreach
+  Cache-Control: no-store
+  X-Robots-Tag: noindex, nofollow, noarchive
+/outreach/*
+  Cache-Control: no-store
+  X-Robots-Tag: noindex, nofollow, noarchive
+/api/outreach
+  Cache-Control: no-store
+  X-Robots-Tag: noindex, nofollow, noarchive
