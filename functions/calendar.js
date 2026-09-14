@@ -24,6 +24,7 @@ export async function onRequestGet(context) {
     const response = await fetch(gigsUrl, {
       headers: {
         "Accept": "application/json",
+        "Cache-Control": "no-cache",
         "User-Agent": "NoahGroveMusic-TimeBrain/1.0"
       }
     });
@@ -36,7 +37,10 @@ export async function onRequestGet(context) {
     }
 
     const data = await response.json();
-    const events = (Array.isArray(data?.events) ? data.events : [])
+    if (data?.ok === false || data?.source !== "timebrain" || !Array.isArray(data?.events)) {
+      throw new Error("Invalid TimeBrain gigs feed");
+    }
+    const events = data.events
       .map(cleanEvent)
       .filter((event) => event.start && !Number.isNaN(new Date(event.start).getTime()))
       .filter((event) => new Date(event.end || event.start).getTime() >= Date.now())
@@ -49,7 +53,7 @@ export async function onRequestGet(context) {
         category: "Gigs",
         generatedAt: data?.generatedAt || new Date().toISOString()
       },
-      { headers: { "Cache-Control": "public, max-age=60, s-maxage=300" } }
+      { headers: { "Cache-Control": "no-store" } }
     );
   } catch (error) {
     return Response.json(

@@ -1,0 +1,57 @@
+name: Deploy Noah Grove Music
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: noahgrovemusic-production
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Test calendar integration
+        run: node --test tests/calendar.test.mjs
+      - name: Verify deployment credentials
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo 'Missing CLOUDFLARE_API_TOKEN repository secret'; exit 1; }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo 'Missing CLOUDFLARE_ACCOUNT_ID repository secret'; exit 1; }
+      - name: Deploy website
+        run: npm run deploy -- --branch main
+      - name: Verify live TimeBrain calendar
+        run: |
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          for (const origin of ['https://noahgrovemusic.pages.dev', 'https://www.noahgrove.com', 'https://noahgrove.com']) {
+            let passed = false;
+            for (let attempt = 0; attempt < 12; attempt++) {
+              try {
+                const response = await fetch(`${origin}/calendar?verify=${Date.now()}`);
+                assert(response.ok);
+                const data = await response.json();
+                assert.equal(data.source, 'timebrain');
+                assert(Array.isArray(data.events));
+                assert(data.events.every((event, i, events) => event.source === 'timebrain' && Number.isFinite(Date.parse(event.start)) && (!i || Date.parse(events[i-1].start) <= Date.parse(event.start))));
+                const page = await (await fetch(origin)).text();
+                assert(page.includes('let showsLoaded = false;'));
+                console.log(`${origin}: TimeBrain feed and current page verified (${data.events.length} events)`);
+                passed = true;
+                break;
+              } catch (error) {
+                if (attempt === 11) throw error;
+                await new Promise(resolve => setTimeout(resolve, 5000));
+              }
+            }
+            assert(passed);
+          }
+          JS

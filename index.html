@@ -5080,21 +5080,33 @@
         .join("");
     }
 
+    let showsLoading = false;
+    let showsLoaded = false;
     async function loadShows() {
-      if (!showsCalendar) return;
+      if (!showsCalendar || showsLoading) return;
+      showsLoading = true;
 
       try {
-        const response = await fetch("/calendar", { headers: { "Accept": "application/json" } });
+        const response = await fetch("/calendar", { cache: "no-store", headers: { "Accept": "application/json" } });
         if (!response.ok) throw new Error("Calendar request failed");
         const data = await response.json();
-        allShows = Array.isArray(data.events) ? data.events : [];
+        if (data.source !== "timebrain" || !Array.isArray(data.events)) throw new Error("Invalid calendar feed");
+        allShows = data.events
+          .filter(event => Number.isFinite(Date.parse(event.start)) && Date.parse(event.end || event.start) >= Date.now())
+          .sort((a, b) => Date.parse(a.start) - Date.parse(b.start));
+        showsLoaded = true;
         renderShows();
       } catch (error) {
-        showsCalendar.innerHTML = '<div class="shows-error">The show list could not load right now. Please check back soon.</div>';
+        if (!showsLoaded) showsCalendar.innerHTML = '<div class="shows-error">The show list could not load right now. Please check back soon.</div>';
+      } finally {
+        showsLoading = false;
       }
     }
 
     loadShows();
+    setInterval(() => { if (!document.hidden) loadShows(); }, 60000);
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) loadShows(); });
+    window.addEventListener("pageshow", event => { if (event.persisted) loadShows(); });
 
     /* Sticky player code moved to sticky-player.js */
   </script>
