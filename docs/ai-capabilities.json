@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "application": "noahgrovemusic",
+  "domain_purpose": "Public musician website and presence",
+  "system_of_record": "NoahGroveMusic",
+  "risk_policy": {
+    "read": "low",
+    "draft": "medium",
+    "write": "confirmation_required"
+  },
+  "capabilities": {
+    "read": [
+      {
+        "name": "getPublicEvents",
+        "risk": "low",
+        "confirmation_required": false
+      },
+      {
+        "name": "getPublicContent",
+        "risk": "low",
+        "confirmation_required": false
+      },
+      {
+        "name": "getContactOptions",
+        "risk": "low",
+        "confirmation_required": false
+      }
+    ],
+    "draft": [
+      {
+        "name": "prepareContentChange",
+        "risk": "medium",
+        "confirmation_required": false,
+        "review_recommended": true
+      },
+      {
+        "name": "prepareEventUpdate",
+        "risk": "medium",
+        "confirmation_required": false,
+        "review_recommended": true
+      }
+    ],
+    "write": [
+      {
+        "name": "publishContent",
+        "risk": "high",
+        "confirmation_required": true,
+        "idempotency_required": true,
+        "audit_required": true
+      },
+      {
+        "name": "publishEventUpdate",
+        "risk": "high",
+        "confirmation_required": true,
+        "idempotency_required": true,
+        "audit_required": true
+      }
+    ]
+  },
+  "implementation_notes": "Public publishing is a later phase and must not become an authority duplicate."
+}
