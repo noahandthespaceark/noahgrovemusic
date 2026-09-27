@@ -21,8 +21,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Test calendar integration
-        run: node --test tests/calendar.test.mjs
+      - name: Test calendar and AI read boundaries
+        run: node --test tests/calendar.test.mjs tests/ai-read.test.mjs
       - name: Verify deployment credentials
         run: |
           test -n "$CLOUDFLARE_API_TOKEN" || { echo 'Missing CLOUDFLARE_API_TOKEN repository secret'; exit 1; }
