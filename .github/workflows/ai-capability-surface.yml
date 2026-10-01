@@ -1,0 +1,49 @@
+name: AI capability surface
+on:
+  pull_request:
+    paths:
+      - '**/*.html'
+      - '**/*.js'
+      - '**/*.jsx'
+      - '**/*.ts'
+      - '**/*.tsx'
+      - '**/*.mjs'
+      - '**/*.cjs'
+      - '**/*.css'
+      - '**/*.vue'
+      - '**/*.svelte'
+      - 'ai-capability-surface.json'
+      - 'scripts/ai-capability-surface.mjs'
+      - '.github/workflows/ai-capability-surface.yml'
+      - '.github/pull_request_template.md'
+  push:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - '**/*.js'
+      - '**/*.jsx'
+      - '**/*.ts'
+      - '**/*.tsx'
+      - '**/*.mjs'
+      - '**/*.cjs'
+      - '**/*.css'
+      - '**/*.vue'
+      - '**/*.svelte'
+      - 'ai-capability-surface.json'
+      - 'scripts/ai-capability-surface.mjs'
+      - '.github/workflows/ai-capability-surface.yml'
+      - '.github/pull_request_template.md'
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify source inventory and fingerprints
+        run: node scripts/ai-capability-surface.mjs --check
+      - name: Require capability disposition on pull requests
+        if: github.event_name == 'pull_request'
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: node scripts/ai-capability-surface.mjs --check --require-review
