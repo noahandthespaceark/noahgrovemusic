@@ -54,16 +54,16 @@ async function processEvents(events, source) {
       continue;
     }
 
-    seenEventIds.add(event.id);
-
-    // ACK before Firebot so a local trigger/restart cannot replay paid tips forever.
-    await acknowledge([event.id]);
-    console.log(`Acknowledged ${event.id} (${source})`);
-
     const plan = normalizeTriggerPlan(event);
-    console.log(`[${new Date().toLocaleTimeString()}] Tip paid: $${Number(event.amount || 0).toFixed(2)} (${event.provider || 'unknown'} / ${event.id})`);
-    console.log(`Trigger plan: ${plan.map(item => `$${item.denomination} x${item.count}`).join(', ') || 'none'}`);
+    console.log(`[${new Date().toLocaleTimeString()}] Tip paid: ${Number(event.amount || 0).toFixed(2)} (${event.provider || 'unknown'} / ${event.id})`);
+    console.log(`Trigger plan: ${plan.map(item => `${item.denomination} x${item.count}`).join(', ') || 'none'}`);
+
+    // Keep the event pending until every Firebot trigger succeeds. This preserves retryability when
+    // Firebot is offline or a preset fails.
     await runTriggerPlan(event, plan);
+    await acknowledge([event.id]);
+    seenEventIds.add(event.id);
+    console.log(`Acknowledged ${event.id} (${source})`);
   }
 }
 
