@@ -39,10 +39,13 @@ async function processEvents(events) {
       continue;
     }
 
-    seenEventIds.add(event.id);
-    await acknowledge([event.id]);
-    console.log(`[${new Date().toLocaleTimeString()}] Merch purchased: $${Number(event.amount || 0).toFixed(2)} (${event.provider || 'unknown'} / ${event.id})`);
+    console.log(`[${new Date().toLocaleTimeString()}] Merch purchased: ${Number(event.amount || 0).toFixed(2)} (${event.provider || 'unknown'} / ${event.id})`);
+
+    // Keep the event pending until Firebot succeeds so a failed effect can be retried.
     await triggerMerchPurchase(event);
+    await acknowledge([event.id]);
+    seenEventIds.add(event.id);
+    console.log(`Acknowledged ${event.id}`);
   }
 }
 
