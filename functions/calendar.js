@@ -2,6 +2,7 @@ const DEFAULT_TIMEBRAIN_GIGS_URL = "https://timebrain.pages.dev/api/public/gigs"
 
 function hasExplicitPrivacy(event = {}) {
   const visibility = String(event.visibility || event.access || "").trim().toLowerCase();
+  if (typeof event.isPrivate === "boolean") return event.isPrivate;
   if (typeof event.isPublic === "boolean") return !event.isPublic;
   if (typeof event.public === "boolean") return !event.public;
   if (visibility === "private") return true;
