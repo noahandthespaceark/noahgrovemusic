@@ -765,6 +765,18 @@
       background: rgba(255,255,255,0.025);
     }
 
+    .shows-more-wrap {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      margin: 18px auto 0;
+    }
+
+    .show-action-btn {
+      padding: 12px 22px;
+    }
+
     .shows-footnote {
       position: relative;
       z-index: 1;
@@ -1445,6 +1457,10 @@
 
       <div id="showsCalendar" class="shows-calendar" aria-live="polite">
         <div class="shows-loading">Loading upcoming shows…</div>
+      </div>
+
+      <div id="showsMoreWrap" class="shows-more-wrap" hidden>
+        <button id="showsMoreButton" class="show-action-btn" type="button">Show more</button>
       </div>
 
       <p class="shows-footnote">🌴 More shows may be added. Follow along on socials for the latest updates!</p>
@@ -4922,7 +4938,11 @@
 
 
     const showsCalendar = document.getElementById("showsCalendar");
+    const showsMoreWrap = document.getElementById("showsMoreWrap");
+    const showsMoreButton = document.getElementById("showsMoreButton");
+    const SHOWS_INCREMENT = 5;
     let allShows = [];
+    let visibleShowCount = 10;
 
     function escapeHtml(value) {
       return String(value || "").replace(/[&<>\"]/g, (char) => ({
@@ -5064,17 +5084,26 @@
     function renderShows() {
       if (!showsCalendar) return;
       const filtered = filterShows(allShows);
-      const upcoming = filtered.slice(0, 10);
+      const upcoming = filtered.slice(0, visibleShowCount);
 
       if (!upcoming.length) {
         showsCalendar.innerHTML = '<div class="shows-empty">No upcoming shows are listed right now.</div>';
+        if (showsMoreWrap) showsMoreWrap.hidden = true;
         return;
       }
 
       showsCalendar.innerHTML = upcoming
         .map((event, index) => renderShowCard(event, allShows.indexOf(event), index === 0))
         .join("");
+
+      if (showsMoreWrap) showsMoreWrap.hidden = visibleShowCount >= filtered.length;
     }
+
+    showsMoreButton?.addEventListener("click", () => {
+      const filtered = filterShows(allShows);
+      visibleShowCount = Math.min(visibleShowCount + SHOWS_INCREMENT, filtered.length);
+      renderShows();
+    });
 
     let showsLoading = false;
     let showsLoaded = false;
