@@ -25,7 +25,7 @@ function sanitizePrivateLocation(location = "") {
   const parts = raw.split(",").map((part) => part.trim()).filter(Boolean);
   const statePattern = /^(?:AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC)(?:\s+\d{5}(?:-\d{4})?)?$/i;
   const cityState = parts.length > 1 && statePattern.test(parts[parts.length - 1])
-    ? parts.slice(-2).join(", ")
+    ? parts.slice(-2).join(", ").replace(/\s+\d{5}(?:-\d{4})?$/, "")
     : "";
 
   const streetPattern = /\b(?:street|st|road|rd|avenue|ave|boulevard|blvd|drive|dr|lane|ln|circle|cir|court|ct|highway|hwy|parkway|pkwy|way)\b/i;
