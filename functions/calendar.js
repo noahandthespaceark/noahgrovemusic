@@ -32,6 +32,7 @@ function sanitizePrivateLocation(location = "") {
   const withoutAddress = raw
     .replace(/^\d+\s+[^,]+\b(?:street|st|road|rd|avenue|ave|boulevard|blvd|drive|dr|lane|ln|circle|cir|court|ct|highway|hwy|parkway|pkwy|way)\b\s*,?\s*/i, "")
     .replace(/\s+\d+\s+[^,]+\b(?:street|st|road|rd|avenue|ave|boulevard|blvd|drive|dr|lane|ln|circle|cir|court|ct|highway|hwy|parkway|pkwy|way)\b\s*,?/i, " ")
+    .replace(/\b\d{5}(?:-\d{4})?\b/g, "")
     .replace(/\s+/g, " ")
     .replace(/^,|,$/g, "")
     .trim();
