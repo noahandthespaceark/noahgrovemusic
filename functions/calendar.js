@@ -38,10 +38,10 @@ function sanitizePrivateLocation(location = "") {
 
   if (cityState) {
     const venue = withoutAddress.replace(new RegExp(`\\s*,?\\s*${cityState.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\$&")}\\s*$`, "i"), "").trim();
-    return venue && !/^\\d+\\s/.test(venue) ? `${venue}, ${cityState}` : cityState;
+    return venue && !/^\d+\s/.test(venue) ? `${venue}, ${cityState}` : cityState;
   }
 
-  if (streetPattern.test(raw) || /^\\d+\\s/.test(raw)) return "Private event";
+  if (streetPattern.test(raw) || /^\d+\s/.test(raw)) return "Private event";
   return withoutAddress;
 }
 
