@@ -741,6 +741,23 @@
       color: #ffd56f;
     }
 
+    .show-privacy-pill {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      margin-top: 10px;
+      padding: 4px 9px;
+      border: 1px solid rgba(255,199,78,0.42);
+      border-radius: 999px;
+      background: rgba(255,199,78,0.12);
+      color: #ffd56f;
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
     .show-location-icon {
       color: #ffd56f;
       font-size: 15px;
@@ -5060,6 +5077,7 @@
       const safeTitle = escapeHtml(title);
       const safeTime = escapeHtml(formatShowTime(event.start, event.end, event.allDay));
       const safeLocation = escapeHtml(event.location || "");
+      const privateBadge = isPrivateEvent ? '<span class="show-privacy-pill">Private event</span>' : "";
       const directions = event.location ? directionsUrl(event.location) : "";
       const locationMarkup = isPrivateEvent
         ? (event.location ? `<p class="show-location private-location"><span class="show-location-icon">●</span>${safeLocation}</p>` : "")
@@ -5075,6 +5093,7 @@
           <div class="show-details">
             <p class="show-time">${safeTime}</p>
             <h3 class="show-title">${safeTitle}</h3>
+            ${privateBadge}
             ${locationMarkup}
           </div>
         </article>
