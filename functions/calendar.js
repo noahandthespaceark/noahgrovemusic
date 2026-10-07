@@ -31,7 +31,9 @@ function sanitizePrivateLocation(location = "") {
   for (let index = parts.length - 1; index >= 1; index -= 1) {
     const state = parts[index].replace(/\s+\d{5}(?:-\d{4})?$/, "").trim();
     if (statePattern.test(parts[index]) || statePattern.test(state)) {
-      const city = parts[index - 1].trim();
+      const cityPart = parts[index - 1].trim();
+      const inMatch = cityPart.match(/\bin\s+([A-Za-z][A-Za-z .'-]+)$/i);
+      const city = (inMatch ? inMatch[1] : cityPart).trim();
       if (city && !/^\d+\s/.test(city)) return city + ", " + state;
     }
   }
