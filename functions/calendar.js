@@ -32,7 +32,7 @@ function sanitizePrivateLocation(location = "") {
     const state = parts[index].replace(/\s+\d{5}(?:-\d{4})?$/, "").trim();
     if (statePattern.test(parts[index]) || statePattern.test(state)) {
       const city = parts[index - 1].trim();
-      if (city && !/^\d+\s/.test(city)) return \`\${city}, \${state}\`;
+      if (city && !/^\d+\s/.test(city)) return city + ", " + state;
     }
   }
 
