@@ -5036,7 +5036,7 @@
     function renderShowCard(event, index, isNext = false) {
       const date = formatShowDateParts(event.start);
       const title = event.title || "Noah Grove Music";
-      const isPrivateEvent = event.private === true || /\\bprivate\\b/i.test(title);
+      const isPrivateEvent = event.private === true || /\bprivate\b/i.test(title);
       const safeTitle = escapeHtml(title);
       const safeTime = escapeHtml(formatShowTime(event.start, event.end, event.allDay));
       const safeLocation = escapeHtml(event.location || "");
