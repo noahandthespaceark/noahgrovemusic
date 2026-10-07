@@ -50,6 +50,7 @@ function cleanEvent(event = {}) {
     allDay: Boolean(event.allDay),
     recurring: Boolean(event.recurring),
     private: privateEvent,
+    public: !privateEvent,
     source: "timebrain",
     category: "Gigs"
   };
