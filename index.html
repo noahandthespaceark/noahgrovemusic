@@ -758,6 +758,12 @@
       text-transform: uppercase;
     }
 
+    .show-privacy-pill.public {
+      border-color: rgba(104,205,255,0.42);
+      background: rgba(104,205,255,0.12);
+      color: #8edcff;
+    }
+
     .show-location-icon {
       color: #ffd56f;
       font-size: 15px;
@@ -5077,11 +5083,13 @@
       const safeTitle = escapeHtml(title);
       const safeTime = escapeHtml(formatShowTime(event.start, event.end, event.allDay));
       const safeLocation = escapeHtml(event.location || "");
-      const privateBadge = isPrivateEvent ? '<span class="show-privacy-pill">Private event</span>' : "";
+      const privacyBadge = isPrivateEvent
+        ? '<span class="show-privacy-pill">Private event</span>'
+        : '<span class="show-privacy-pill public">Public event</span>';
       const directions = event.location ? directionsUrl(event.location) : "";
       const locationMarkup = isPrivateEvent
-        ? (event.location ? `<p class="show-location private-location"><span class="show-location-icon">●</span>${safeLocation}</p>` : "")
-        : (event.location ? `<a class="show-location" href="${directions}" target="_blank" rel="noopener noreferrer"><span class="show-location-icon">●</span>${safeLocation}</a>` : "");
+        ? (event.location ? `<p class="show-location private-location">${safeLocation}</p>` : "")
+        : (event.location ? `<a class="show-location" href="${directions}" target="_blank" rel="noopener noreferrer">${safeLocation}</a>` : "");
 
       return `
         <article class="show-card${isNext ? " is-next" : ""}" data-show-index="${index}">
@@ -5093,7 +5101,7 @@
           <div class="show-details">
             <p class="show-time">${safeTime}</p>
             <h3 class="show-title">${safeTitle}</h3>
-            ${privateBadge}
+            ${privacyBadge}
             ${locationMarkup}
           </div>
         </article>
