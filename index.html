@@ -5036,16 +5036,13 @@
     function renderShowCard(event, index, isNext = false) {
       const date = formatShowDateParts(event.start);
       const title = event.title || "Noah Grove Music";
-      const isPrivateEvent = /\bprivate\b/i.test(title);
+      const isPrivateEvent = event.private === true || /\\bprivate\\b/i.test(title);
       const safeTitle = escapeHtml(title);
       const safeTime = escapeHtml(formatShowTime(event.start, event.end, event.allDay));
       const safeLocation = escapeHtml(event.location || "");
-      const privateCityState = isPrivateEvent ? extractCityState(event.location || "") : "";
-      const safePrivateCityState = escapeHtml(privateCityState);
-      const description = event.description ? `<p class="show-description">${escapeHtml(event.description)}</p>` : "";
       const directions = event.location ? directionsUrl(event.location) : "";
       const locationMarkup = isPrivateEvent
-        ? (privateCityState ? `<p class="show-location private-location"><span class="show-location-icon">●</span>${safePrivateCityState}</p>` : "")
+        ? (event.location ? `<p class="show-location private-location"><span class="show-location-icon">●</span>${safeLocation}</p>` : "")
         : (event.location ? `<a class="show-location" href="${directions}" target="_blank" rel="noopener noreferrer"><span class="show-location-icon">●</span>${safeLocation}</a>` : "");
 
       return `
@@ -5059,7 +5056,6 @@
             <p class="show-time">${safeTime}</p>
             <h3 class="show-title">${safeTitle}</h3>
             ${locationMarkup}
-            ${description}
           </div>
         </article>
       `;
