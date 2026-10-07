@@ -19,31 +19,24 @@ function isPrivateEvent(event = {}) {
 }
 
 function sanitizePrivateLocation(location = "") {
-  const raw = String(location || "").replace(/\s+/g, " ").trim();
+  const raw = String(location || "")
+    .replace(/\\r?\\n/g, ", ")
+    .replace(/\\s+/g, " ")
+    .trim();
   if (!raw) return "";
 
   const parts = raw.split(",").map((part) => part.trim()).filter(Boolean);
-  const statePattern = /^(?:AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC)(?:\s+\d{5}(?:-\d{4})?)?$/i;
-  const cityState = parts.length > 1 && statePattern.test(parts[parts.length - 1])
-    ? parts.slice(-2).join(", ").replace(/\s+\d{5}(?:-\d{4})?$/, "")
-    : "";
+  const statePattern = /^(?:AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC)(?:\\s+\\d{5}(?:-\\d{4})?)?$/i;
 
-  const streetPattern = /\b(?:street|st|road|rd|avenue|ave|boulevard|blvd|drive|dr|lane|ln|circle|cir|court|ct|highway|hwy|parkway|pkwy|way)\b/i;
-  const withoutAddress = raw
-    .replace(/^\d+\s+[^,]+\b(?:street|st|road|rd|avenue|ave|boulevard|blvd|drive|dr|lane|ln|circle|cir|court|ct|highway|hwy|parkway|pkwy|way)\b\s*,?\s*/i, "")
-    .replace(/\s+\d+\s+[^,]+\b(?:street|st|road|rd|avenue|ave|boulevard|blvd|drive|dr|lane|ln|circle|cir|court|ct|highway|hwy|parkway|pkwy|way)\b\s*,?/i, " ")
-    .replace(/\b\d{5}(?:-\d{4})?\b/g, "")
-    .replace(/\s+/g, " ")
-    .replace(/^,|,$/g, "")
-    .trim();
-
-  if (cityState) {
-    const venue = withoutAddress.replace(new RegExp(`\\s*,?\\s*${cityState.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\$&")}\\s*$`, "i"), "").trim();
-    return venue && !/^\d+\s/.test(venue) ? `${venue}, ${cityState}` : cityState;
+  for (let index = parts.length - 1; index >= 1; index -= 1) {
+    const state = parts[index].replace(/\\s+\\d{5}(?:-\\d{4})?$/, "").trim();
+    if (statePattern.test(parts[index]) || statePattern.test(state)) {
+      const city = parts[index - 1].trim();
+      if (city && !/^\\d+\\s/.test(city)) return `${city}, ${state}`;
+    }
   }
 
-  if (streetPattern.test(raw) || /^\d+\s/.test(raw)) return "Private event";
-  return withoutAddress;
+  return "";
 }
 
 function cleanEvent(event = {}) {
