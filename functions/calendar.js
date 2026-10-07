@@ -20,19 +20,19 @@ function isPrivateEvent(event = {}) {
 
 function sanitizePrivateLocation(location = "") {
   const raw = String(location || "")
-    .replace(/\\r?\\n/g, ", ")
-    .replace(/\\s+/g, " ")
+    .replace(/\r?\n/g, ", ")
+    .replace(/\s+/g, " ")
     .trim();
   if (!raw) return "";
 
   const parts = raw.split(",").map((part) => part.trim()).filter(Boolean);
-  const statePattern = /^(?:AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC)(?:\\s+\\d{5}(?:-\\d{4})?)?$/i;
+  const statePattern = /^(?:AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NV|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC)(?:\s+\d{5}(?:-\d{4})?)?$/i;
 
   for (let index = parts.length - 1; index >= 1; index -= 1) {
-    const state = parts[index].replace(/\\s+\\d{5}(?:-\\d{4})?$/, "").trim();
+    const state = parts[index].replace(/\s+\d{5}(?:-\d{4})?$/, "").trim();
     if (statePattern.test(parts[index]) || statePattern.test(state)) {
       const city = parts[index - 1].trim();
-      if (city && !/^\\d+\\s/.test(city)) return `${city}, ${state}`;
+      if (city && !/^\d+\s/.test(city)) return \`\${city}, \${state}\`;
     }
   }
 
