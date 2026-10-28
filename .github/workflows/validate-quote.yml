@@ -1,0 +1,16 @@
+name: Validate website changes
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test tests/*.test.mjs
+      - run: node --check quote-calculator.js && node --check functions/api/send-quote.js
+      - run: npx --yes wrangler@4.84.1 pages functions build functions --outdir /tmp/noah-quote-functions
