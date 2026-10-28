@@ -56,7 +56,7 @@ test('Places autocomplete returns normalized public data with session and city b
   assert.equal(response.status,503);assert.match((await response.json()).error,/manually/);
 });
 test('public configuration returns booleans only',async()=>{
-  assert.deepEqual(await config({env}).json(),{ok:true,version:'quote-2',venueSearchConfigured:true,travelConfigured:true});
+  assert.deepEqual(await config({env}).json(),{ok:true,version:'quote-2',venueSearchConfigured:true,travelConfigured:true,emailConfigured:true});
 });
 test('burst guard limits a client without consuming a different client quota',()=>{
   const a=request('quote-estimate',{}),b=request('quote-estimate',{});
