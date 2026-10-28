@@ -146,3 +146,27 @@ test('Workers unsupported redirect mode is identified as application setup, not 
     assert.doesNotMatch(JSON.stringify(data),/private-key|private-origin/);
   });
 });
+test('Google requests use Workers-supported manual redirects and never follow or expose a redirect target',async()=>{
+  let count=0;
+  await mocked(async(url,options)=>{
+    count++;assert.equal(options.redirect,'manual');
+    if(options.redirect==='error')throw new TypeError('Unsupported redirect mode: error');
+    return new Response('private-origin',{status:302,headers:{location:'https://private-target.example/?key=private-key'}});
+  },async()=>{
+    const data=await estimate({destination:'Venue'},env);
+    assert.equal(count,1);assert.equal(data.travel,null);assert.equal(data.diagnostic.reason,'UPSTREAM_REDIRECT_BLOCKED');
+    assert.equal(data.diagnostic.httpStatus,302);
+    assert.doesNotMatch(JSON.stringify(data),/private-origin|private-key|private-target/);
+  });
+});
+test('venue and route calls succeed under a Workers-style fetch that rejects unsupported redirect modes',async()=>{
+  await mocked(async(url,options)=>{
+    if(options.redirect==='error')throw new TypeError('Unsupported redirect mode: error');
+    assert.equal(options.redirect,'manual');
+    return url.includes('places.googleapis.com')?Response.json({suggestions:[{placePrediction:{placeId:'venue',text:{text:'Synthetic Venue'}}}]}):Response.json({routes:[{distanceMeters:16093.44}]});
+  },async()=>{
+    const venue=await places({request:new Request('https://www.noahgrove.com/api/quote-locations?q=Venue'),env});
+    assert.equal((await venue.json()).suggestions[0].id,'venue');
+    const price=await estimate({destination:'Venue'},env);assert.equal(price.travelStatus,'ready');assert.equal(price.total,620);
+  });
+});
