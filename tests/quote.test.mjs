@@ -138,3 +138,11 @@ test('request setup, bad key formatting, timeouts, network errors and response p
   try{globalThis.AbortSignal={};const data=await estimate({destination:'Venue'},env);assert.equal(data.diagnostic.reason,'TIMEOUT_API_UNSUPPORTED');assert.equal(data.diagnostic.stage,'request_setup');}
   finally{globalThis.AbortSignal=original;}
 });
+test('Workers unsupported redirect mode is identified as application setup, not a Google key rejection',async()=>{
+  await mocked(async()=>{throw new TypeError('Unsupported redirect mode: error. private-key private-origin');},async()=>{
+    const data=await estimate({destination:'Venue'},env);
+    assert.equal(data.diagnostic.reason,'UNSUPPORTED_REDIRECT_MODE');assert.equal(data.diagnostic.stage,'request_setup');
+    assert.equal(data.diagnostic.exceptionType,'TypeError');
+    assert.doesNotMatch(JSON.stringify(data),/private-key|private-origin/);
+  });
+});

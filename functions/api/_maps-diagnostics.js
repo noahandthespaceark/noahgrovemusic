@@ -40,3 +40,20 @@ export function diagnosticFor(error,operation){
   // Only our own allowlisted diagnostic objects may leave the server.
   return error instanceof MapsFailure?error.diagnostic:{version:1,operation,stage:'application',reason:'UNCLASSIFIED_APPLICATION_ERROR'};
 }
+export function transportFailure(operation,error){
+  // Inspect messages only for fixed signatures; never return or log the message itself.
+  const message=String(error?.message||'');
+  const exceptionType=['TypeError','TimeoutError','AbortError','Error','NetworkError'].includes(error?.name)?error.name:'UnknownError';
+  if(/redirect/i.test(message)&&/unsupported|not supported|invalid/i.test(message)){
+    return failure(operation,'request_setup','UNSUPPORTED_REDIRECT_MODE',{exceptionType,
+      explanation:'The deployed runtime rejects the redirect mode in this application’s outgoing request. The request fails before reaching Google.'});
+  }
+  if(/header|ByteString/i.test(message)&&/invalid|unsupported|convert|character/i.test(message)){
+    return failure(operation,'request_setup','REQUEST_HEADERS_REJECTED',{exceptionType});
+  }
+  if(['TimeoutError','AbortError'].includes(error?.name))return failure(operation,'transport','REQUEST_TIMED_OUT',{exceptionType});
+  const code=error?.cause?.code||error?.code;
+  if(['ENOTFOUND','EAI_AGAIN'].includes(code))return failure(operation,'transport','DNS_LOOKUP_FAILED',{exceptionType});
+  if(['ECONNRESET','ECONNREFUSED','UND_ERR_CONNECT_TIMEOUT'].includes(code))return failure(operation,'transport','CONNECTION_FAILED',{exceptionType});
+  return failure(operation,'transport','NETWORK_REQUEST_FAILED',{exceptionType});
+}
