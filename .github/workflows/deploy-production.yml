@@ -48,9 +48,19 @@ jobs:
             const vars=project?.deployment_configs?.production?.env_vars||{};
             console.log('Quote-related production setting names:',Object.keys(vars).filter(k=>/GOOGLE|MAPS|QUOTE/.test(k)));
           } else console.log('Could not inspect setting names; HTTP '+res.status);
-          const res2=await fetch('https://www.noahgrove.com/api/quote-config?verify='+Date.now());
-          if(res2.ok){const config=await res2.json();console.log('Quote readiness:',config);}
-          else console.log('Quote readiness endpoint not yet propagated; HTTP '+res2.status);
+          let verified=false;
+          for(let attempt=0;attempt<12;attempt++){
+            try{
+              const res2=await fetch('https://www.noahgrove.com/api/quote-config?verify='+Date.now());
+              const config=await res2.json();
+              if(res2.ok&&config.version==='quote-2'&&typeof config.emailConfigured==='boolean'){
+                console.log('Quote readiness:',config);verified=true;break;
+              }
+            }catch{}
+            console.log('Waiting for quote endpoint propagation.');
+            await new Promise(resolve=>setTimeout(resolve,5000));
+          }
+          if(!verified)throw new Error('Live quote endpoint could not be verified.');
           JS
       - name: Verify live TimeBrain calendar
         run: |
