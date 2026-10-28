@@ -81,7 +81,7 @@ test('email totals are recalculated and pending travel is labeled; confirmation 
     if(url==='https://api.resend.com/emails')return Response.json({id:'email'}, {status:calls.length===1?200:500});
     return Response.json({ok:true});
   },async()=>{
-    const response=await send({request:request('send-quote',{fullName:'Test <person>',email:'person@example.test',phone:'5550100000',hours:2,destination:'Venue',total:1,travel:0,submissionId:'test'}),env:{...env,GOOGLE_MAPS_API_KEY:'',GIGDASHBOARD_POSSIBLE_CLIENTS_URL:'https://lead.example.test'}});
+    const response=await send({request:request('send-quote',{fullName:'Test <person>',email:'person@example.test',phone:'5550100000',hours:2,destination:'Venue',total:1,travel:0,submissionId:'test'}),env:{...env,GOOGLE_MAPS_API_KEY:'',GIGDASHBOARD_POSSIBLE_CLIENTS_URL:'https://lead.example.test',GIGDASHBOARD_API_KEY:'lead-secret'}});
     const d=await response.json();assert.equal(d.ok,true);assert.equal(d.customerConfirmation,false);assert.equal(d.estimate.total,null);assert.equal(d.estimate.subtotal,600);
     assert.equal(calls.length,3);assert.match(calls[0].b.text,/Subtotal — travel not included: \$600/);assert.match(calls[0].b.html,/&lt;person&gt;/);
     assert.equal(calls[2].b.estimate.total,null);assert.equal(calls[2].b.estimate.travelStatus,'unavailable');

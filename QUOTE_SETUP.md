@@ -19,6 +19,17 @@ Production Cloudflare Pages settings for project noahgrovemusic:
 - Explicit invalid addresses fail closed, rather than silently rerouting mail.
 - Existing optional GigDashboard integration settings are unchanged.
 
+GigDashboard lead capture requires GIGDASHBOARD_API_KEY and
+GIGDASHBOARD_POSSIBLE_CLIENTS_URL (legacy GIGDASHBOARD_API_URL is also supported).
+Use the HTTPS `/api/possible-clients` endpoint; a dashboard base URL is normalized
+to that path. Surrounding whitespace is trimmed; invalid URLs/headers fail closed.
+The key must match the existing key on GigDashboard. Never paste it into chat.
+`/api/quote-lead-health` performs only a credentialed GET and reports safe status
+codes. Reachable does not establish that a lead was saved. Each submitted lead
+includes the stable quote reference as estimateId so GigDashboard can upsert it.
+Only a JSON receipt containing the matching estimateId and saved prospect ID
+counts as success; redirects, login HTML, empty receipts and failures do not.
+
 Do not commit secrets or paste them into chat. No new service/account is required.
 Configure Cloudflare WAF rate limits for /api/quote-locations,
 /api/quote-estimate and /api/send-quote, plus Google quotas/budget alerts.
