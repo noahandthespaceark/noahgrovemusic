@@ -13,3 +13,4 @@ jobs:
           node-version: 22
       - run: node --test tests/*.test.mjs
       - run: node --check quote-calculator.js && node --check functions/api/send-quote.js
+      - run: npx --yes wrangler@4.84.1 pages functions build functions --outdir /tmp/noah-quote-functions
