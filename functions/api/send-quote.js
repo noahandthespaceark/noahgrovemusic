@@ -1,5 +1,6 @@
 import {estimate,sameSite,text,limited} from './_quote.js';
 import {quoteMailConfig,sendQuoteMail,validEmail} from './_quote-mail.js';
+import {captureQuoteLead} from './_quote-leads.js';
 export async function onRequestPost(context) {
   try {
     const { request, env } = context;
@@ -162,17 +163,8 @@ function moneyRow(label, value, show = true) {
 }
 
 async function addToGigDashboardPossibleClients(data, env) {
-  const endpoint = env.GIGDASHBOARD_POSSIBLE_CLIENTS_URL || env.GIGDASHBOARD_API_URL;
-
-  if (!endpoint) {
-    return {
-      ok: false,
-      skipped: true,
-      reason: "Missing GIGDASHBOARD_POSSIBLE_CLIENTS_URL. Emails were still sent."
-    };
-  }
-
   const possibleClient = {
+    estimateId:data.reference,
     source: "NoahGrove.com estimate popup",
     status: "possible",
     name: data.fullName || "",
@@ -201,34 +193,7 @@ async function addToGigDashboardPossibleClients(data, env) {
     submittedAt: new Date().toISOString()
   };
 
-  try {
-    const headers = {
-      "Content-Type": "application/json"
-    };
-
-    if (env.GIGDASHBOARD_API_KEY) {
-      headers.Authorization = `Bearer ${env.GIGDASHBOARD_API_KEY}`;
-      headers["X-API-Key"] = env.GIGDASHBOARD_API_KEY;
-    }
-
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(possibleClient),signal:AbortSignal.timeout(8000),redirect:'manual'
-    });
-
-    await response.body?.cancel();
-
-    return {
-      ok: response.ok,
-      status: response.status
-    };
-  } catch (error) {
-    return {
-      ok: false,
-      error: "Lead capture could not be confirmed."
-    };
-  }
+  return captureQuoteLead(possibleClient,env);
 }
 
 function buildAdminHtml(data) {
