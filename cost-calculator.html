@@ -419,8 +419,10 @@
           <button id="resetBtn" class="btn btn-secondary" type="button">Reset</button>
         </div>
 
-        <div id="calcError" class="error"></div>
-        <div id="bookingHint" class="success"></div>
+        <p id="emailReadiness" role="status" style="font-size:13px;color:var(--muted);"></p>
+        <p style="font-size:13px;">Prefer direct email? <a style="color:#9fc4ff;" href="mailto:noah@noahgrove.com">Contact Noah</a>. A quote request does not reserve your date.</p>
+        <div id="calcError" class="error" role="alert"></div>
+        <div id="bookingHint" class="success" role="status" aria-live="polite"></div>
       </div>
 
       <div class="card">
@@ -462,7 +464,7 @@
     </div>
   </div>
 
-  <script type="module" src="/quote-calculator.js?v=quote-2"></script>
+  <script type="module" src="/quote-calculator.js?v=quote-email-3"></script>
   <script src="/analytics.js" defer></script>
 </body>
 </html>

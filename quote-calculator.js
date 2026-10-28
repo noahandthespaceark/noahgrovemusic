@@ -5,10 +5,15 @@ let version=0,controller=null,routeTimer,searchTimer,searchController,searchVers
 let result=null,submission=null,routeCache=null;
 const error=message=>{$('calcError').textContent=message;$('calcError').style.display=message?'block':'none';};
 const hint=message=>{$('bookingHint').textContent=message;$('bookingHint').style.display=message?'block':'none';};
+async function checkEmailReadiness(){
+  $('emailReadiness').textContent='Checking online quote email…';
+  try{const config=await api('/api/quote-config');$('emailReadiness').textContent=config.emailConfigured?'Your request will be emailed to Noah, with a copy requested for you.':'Online quote email is temporarily unavailable. Use the direct email link below.';}
+  catch{$('emailReadiness').textContent='Email readiness could not be checked. You can still try submitting or email Noah directly.';}
+}
 async function api(url,options={}){
   const response=await fetch(url,{...options,cache:'no-store',signal:options.signal||AbortSignal.timeout(12000)});
   const data=await response.json();
-  if(!response.ok||!data.ok)throw new Error(data.error||'The service is unavailable. Please try again.');
+  if(!response.ok||!data.ok)throw new Error((data.error||'The service is unavailable. Please try again.')+(data.reference?` Reference: ${data.reference}.`:''));
   return data;
 }
 function render(data){
@@ -100,23 +105,25 @@ $('resetBtn').addEventListener('click',()=>{
 });
 $('bookNowBtn').addEventListener('click',async()=>{
   if(sending)return;hint('');
-  if($('contactPanel').classList.contains('hidden')){$('contactPanel').classList.remove('hidden');$('fullName').focus();return;}
+  if($('contactPanel').classList.contains('hidden')){$('contactPanel').classList.remove('hidden');$('fullName').focus();checkEmailReadiness();return;}
   if(!['fullName','email','phone'].every(id=>$(id).value.trim())){error('Please enter your full name, email address, and phone number.');return;}
   if(!$('email').checkValidity()){error('Please enter a valid email address.');return;}
   const payload={...selection()};
   for(const id of ['eventDate','startTime','venueName','destination','notes','fullName','email','phone'])payload[id]=$(id).value.trim();
   payload.eventDetails=payload.notes;
   const signature=JSON.stringify(payload);if(submission?.signature!==signature)submission={signature,id:crypto.randomUUID()};
-  if(submission.delivered){hint('This request has already reached Noah. Edit the details to send a different request.');return;}
+  if(submission.delivered){hint('This request was already accepted for email to Noah. Please do not resubmit.'+(submission.reference?` Reference: ${submission.reference}.`:''));return;}
   payload.submissionId=submission.id;
   sending=true;$('bookNowBtn').disabled=true;$('resetBtn').disabled=true;$('bookNowBtn').textContent='Sending…';error('');
   // Freeze the submitted snapshot so edits cannot disagree with the displayed confirmation.
-  const fields=[...document.querySelectorAll('input,textarea')];fields.forEach(n=>n.disabled=true);clearSuggestions();
+  const fields=[...document.querySelectorAll('input,textarea')];fields.forEach(n=>n.disabled=true);clearSuggestions();clearTimeout(routeTimer);
   try{
     const data=await api('/api/send-quote',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(45000)});
     submission.delivered=true;
+    submission.reference=data.reference;
     if(data.estimate){version++;controller?.abort();result=data.estimate;render(result);}
-    hint(data.customerConfirmation===false?'Your request reached Noah, but the confirmation email could not be sent. Please do not resubmit.':'Success — your request reached Noah and a confirmation was sent to your email.');
+    const reference=data.reference?` Reference: ${data.reference}.`:'';
+    hint((data.customerConfirmation===false?'Your request was accepted for email to Noah, but your confirmation could not be confirmed. Please do not resubmit.':'Your request and confirmation were accepted for email delivery. Check your inbox or spam folder. This does not reserve your date.')+reference);
   }catch(e){error(e.message||'Could not confirm delivery. Please contact Noah before resubmitting.');}
   finally{sending=false;fields.forEach(n=>n.disabled=false);$('bookNowBtn').disabled=false;$('resetBtn').disabled=false;$('bookNowBtn').textContent='Email Me the Quote';}
 });

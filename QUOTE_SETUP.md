@@ -10,7 +10,13 @@ Production Cloudflare Pages settings for project noahgrovemusic:
   Enable Places API (New) and Routes API, with billing and suitable API restrictions.
   Do not use a browser HTTP-referrer-restricted key for server REST requests.
 - QUOTE_TRAVEL_ORIGIN: server-side departure address. Never return it in public JSON.
-- Existing mail settings remain RESEND_API_KEY, QUOTE_TO_EMAIL, QUOTE_FROM_EMAIL.
+- RESEND_API_KEY: existing server-side Resend secret (sending-only access is sufficient).
+- QUOTE_FROM_EMAIL: verified Resend sender, optionally `Noah Grove Music <address>`.
+  Falls back to legacy FROM_EMAIL, then `Noah Grove Music <noah@noahgrove.com>`.
+- QUOTE_TO_EMAIL: owner inbox; falls back to legacy TO_EMAIL, then noah@noahgrove.com.
+- QUOTE_REPLY_TO_EMAIL: optional reply address for customer confirmations; defaults
+  to the owner inbox. Replies to owner notifications go to the customer instead.
+- Explicit invalid addresses fail closed, rather than silently rerouting mail.
 - Existing optional GigDashboard integration settings are unchanged.
 
 Do not commit secrets or paste them into chat. No new service/account is required.
@@ -19,6 +25,23 @@ Configure Cloudflare WAF rate limits for /api/quote-locations,
 The in-code per-isolate burst guard is best-effort, not a global quota.
 
 Read /api/quote-config to check booleans without exposing keys or the origin.
+The emailConfiguration object reports address setting sources and safe issue codes;
+ready means locally valid configuration, not verified delivery. Read-only
+/api/quote-email-health checks whether the configured sender domain is verified
+with Resend. It sends no email and returns no addresses, keys, or domain lists.
+Sending-only keys may return read_scope_unavailable; do not broaden permissions
+just for this diagnostic. Sender verification still does not prove inbox delivery.
+After changing Cloudflare production settings, redeploy to activate them.
+
+Owner email must be accepted before attempting the customer confirmation. A
+confirmation failure does not turn an accepted owner request into a failed inquiry.
+Responses distinguish accepted, rejected, and unknown outcomes; raw provider
+messages and lead response bodies are never exposed. Provider redirects are blocked.
+Both emails include an itemized estimate, event details and a stable request reference.
+Resend idempotency keys protect identical retries within its 24-hour retention
+window, not forever. Do not automatically retry uncertain deliveries; contact Noah
+with the reference before resubmitting. This is not durable exactly-once storage.
+No customer or owner inbox delivery is claimed solely from provider acceptance.
 Failed venue and route responses include a diagnostic with a fixed operation,
 failure stage, HTTP status (when received), and allowlisted Google status/reason.
 Raw Google messages, metadata, URLs, keys, addresses and stack traces are never
