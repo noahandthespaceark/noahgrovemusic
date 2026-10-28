@@ -19,6 +19,11 @@ Configure Cloudflare WAF rate limits for /api/quote-locations,
 The in-code per-isolate burst guard is best-effort, not a global quota.
 
 Read /api/quote-config to check booleans without exposing keys or the origin.
+Failed venue and route responses include a diagnostic with a fixed operation,
+failure stage, HTTP status (when received), and allowlisted Google status/reason.
+Raw Google messages, metadata, URLs, keys, addresses and stack traces are never
+returned or logged. Unknown values are replaced with generic classifications.
+Runtime setup, network/timeout, JSON parsing and no-route failures are distinct.
 Configured does not prove the key is authorized: test a venue search and a route.
 The deployment logs list quote-related setting names only, never their values.
 

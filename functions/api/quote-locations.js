@@ -1,4 +1,5 @@
 import {google,json,sameSite,text,limited} from './_quote.js';
+import {diagnosticFor} from './_maps-diagnostics.js';
 export async function onRequestGet({request,env}){
   if(!sameSite(request))return json({ok:false,error:'Use the quote form on this website.'},403);
   if(limited(request,'maps'))return json({ok:false,error:'Too many lookups. Please wait a minute.'},429);
@@ -9,15 +10,15 @@ export async function onRequestGet({request,env}){
   if(!id&&query.length<3)return json({ok:true,suggestions:[]});
   try{
     if(id){
-      const data=await google(env,'https://places.googleapis.com/v1/places/'+encodeURIComponent(id)+(session?'?sessionToken='+encodeURIComponent(session):''),null,'id,displayName,formattedAddress');
+      const data=await google(env,'https://places.googleapis.com/v1/places/'+encodeURIComponent(id)+(session?'?sessionToken='+encodeURIComponent(session):''),null,'id,displayName,formattedAddress','place_details');
       return json({ok:true,place:{id:data.id,name:data.displayName?.text||'',address:data.formattedAddress||''}});
     }
     const data=await google(env,'https://places.googleapis.com/v1/places:autocomplete',{
       input:query,languageCode:'en',includedRegionCodes:['us'],...(session?{sessionToken:session}:{}),
       locationBias:{circle:{center:{latitude:32.7765,longitude:-79.9311},radius:50000}}
-    });
+    },undefined,'places_autocomplete');
     return json({ok:true,suggestions:(data.suggestions||[]).filter(s=>s.placePrediction?.placeId).slice(0,5).map(s=>({
       id:s.placePrediction.placeId,label:s.placePrediction.text?.text||''
     }))});
-  }catch{return json({ok:false,error:'Venue suggestions are unavailable. You can enter the name and address manually.'},503);}
+  }catch(error){return json({ok:false,error:'Venue suggestions are unavailable. You can enter the name and address manually.',diagnostic:diagnosticFor(error,id?'place_details':'places_autocomplete')},503);}
 }

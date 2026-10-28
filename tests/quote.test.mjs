@@ -5,6 +5,8 @@ import vm from 'node:vm';
 import {coreCosts} from '../quote-pricing.js';
 import {estimate} from '../functions/api/_quote.js';
 import {limited} from '../functions/api/_quote.js';
+import {google} from '../functions/api/_quote.js';
+import {diagnosticFor} from '../functions/api/_maps-diagnostics.js';
 import {onRequestPost as route} from '../functions/api/quote-estimate.js';
 import {onRequestGet as places} from '../functions/api/quote-locations.js';
 import {onRequestGet as config} from '../functions/api/quote-config.js';
@@ -93,4 +95,46 @@ test('frontend ignores obsolete routes and reset cancels pending work',async()=>
   deferred[1](Response.json({ok:true,...coreCosts(),travel:20,total:620,travelMeta:'New route'}));await new Promise(resolve=>setImmediate(resolve));
   deferred[0](Response.json({ok:true,...coreCosts(),travel:999,total:1599,travelMeta:'Old route'}));await new Promise(resolve=>setImmediate(resolve));
   assert.equal(node('grandTotal').textContent,'$620');assert.equal(node('travelMeta').textContent,'New route');
+});
+test('provider diagnostics distinguish disabled services, invalid keys, restriction failures and quota without leaking raw details',async()=>{
+  for(const reason of ['SERVICE_DISABLED','API_KEY_INVALID','API_KEY_SERVICE_BLOCKED','API_KEY_HTTP_REFERRER_BLOCKED','QUOTA_EXCEEDED']){
+    await mocked(async()=>Response.json({error:{status:'PERMISSION_DENIED',message:'private-key private-origin secret-query',details:[
+      {'@type':'type.googleapis.com/google.rpc.ErrorInfo',reason,metadata:{consumer:'private-project',service:'private-service',apiKey:'private-key'}},
+      {'@type':'type.googleapis.com/google.rpc.LocalizedMessage',message:'private-origin'}
+    ]}},{status:403}),async()=>{
+      const response=await places({request:new Request('https://www.noahgrove.com/api/quote-locations?q=Venue'),env});
+      const data=await response.json();assert.equal(data.diagnostic.reason,reason);assert.equal(data.diagnostic.httpStatus,403);
+      assert.equal(data.diagnostic.providerStatus,'PERMISSION_DENIED');assert.equal(data.diagnostic.operation,'places_autocomplete');
+      assert.doesNotMatch(JSON.stringify(data),/private-key|private-origin|secret-query|private-project|private-service/);
+    });
+  }
+});
+test('unrecognized provider fields, reasons, status and arbitrary error diagnostics are withheld',async()=>{
+  await mocked(async()=>Response.json({error:{status:'private-key',message:'private-origin',details:[
+    {'@type':'type.googleapis.com/google.rpc.ErrorInfo',reason:'private-key',metadata:{secret:'private-origin'}}
+  ]}},{status:400}),async()=>{
+    const data=await estimate({destination:'private-destination'},env);
+    assert.equal(data.diagnostic.reason,'UPSTREAM_HTTP_ERROR');assert.equal(data.diagnostic.providerStatus,'UNKNOWN');assert.equal(data.diagnostic.httpStatus,400);
+    assert.doesNotMatch(JSON.stringify(data),/private-key|private-origin|private-destination/);
+  });
+  assert.equal(diagnosticFor({diagnostic:{secret:'private-key'}},'routes').reason,'UNCLASSIFIED_APPLICATION_ERROR');
+});
+test('request setup, bad key formatting, timeouts, network errors and response parsing have distinct diagnostics',async()=>{
+  const url='https://routes.googleapis.com/directions/v2:computeRoutes';
+  for(const key of [' private-key','private-key\n','"private-key"','private-keyé']){
+    await assert.rejects(google({...env,GOOGLE_MAPS_API_KEY:key},url,{},'', 'routes'),e=>e.diagnostic.reason==='KEY_FORMAT_INVALID'&&!JSON.stringify(e.diagnostic).includes(key));
+  }
+  for(const [name,reason] of [['TimeoutError','REQUEST_TIMED_OUT'],['TypeError','NETWORK_REQUEST_FAILED']]){
+    await mocked(async()=>{const e=new Error('private-key private-origin');e.name=name;throw e;},async()=>{
+      const data=await estimate({destination:'Venue'},env);assert.equal(data.diagnostic.reason,reason);assert.equal(data.diagnostic.stage,'transport');
+      assert.doesNotMatch(JSON.stringify(data),/private-key|private-origin/);
+    });
+  }
+  await mocked(async()=>new Response('private-key private-origin'),async()=>{
+    const data=await estimate({destination:'Venue'},env);assert.equal(data.diagnostic.reason,'INVALID_JSON_RESPONSE');
+    assert.doesNotMatch(JSON.stringify(data),/private-key|private-origin/);
+  });
+  const original=globalThis.AbortSignal;
+  try{globalThis.AbortSignal={};const data=await estimate({destination:'Venue'},env);assert.equal(data.diagnostic.reason,'TIMEOUT_API_UNSUPPORTED');assert.equal(data.diagnostic.stage,'request_setup');}
+  finally{globalThis.AbortSignal=original;}
 });
