@@ -26,11 +26,18 @@ export async function google(env,url,body,mask,operation='maps_request'){
   try{
     options={method:body?'POST':'GET',headers:{'Content-Type':'application/json','X-Goog-Api-Key':key,
       ...(mask?{'X-Goog-FieldMask':mask}:{})},...(body?{body:JSON.stringify(body)}:{}),
-      signal:AbortSignal.timeout(8000),redirect:'error'};
+      signal:AbortSignal.timeout(8000),redirect:'manual'};
   }catch{throw failure(operation,'request_setup','REQUEST_SETUP_FAILED');}
   let response;
   try{response=await fetch(url,options);}
   catch(error){throw transportFailure(operation,error);}
+  // Workers does not support redirect:"error". Do not follow redirects or forward
+  // the API key/private request body to a different location.
+  if(response.status>=300&&response.status<400){
+    await response.body?.cancel();
+    throw failure(operation,'google_response','UPSTREAM_REDIRECT_BLOCKED',{httpStatus:response.status,
+      explanation:'The Google endpoint returned a redirect, which was not followed.'});
+  }
   let data;try{data=await response.json();}catch{
     if(!response.ok)throw providerFailure(operation,response,null);
     throw failure(operation,'response_decode','INVALID_JSON_RESPONSE',{httpStatus:response.status});
