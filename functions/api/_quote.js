@@ -1,5 +1,5 @@
 import {PRICING,coreCosts} from '../../quote-pricing.js';
-import {failure,providerFailure,diagnosticFor} from './_maps-diagnostics.js';
+import {failure,providerFailure,diagnosticFor,transportFailure} from './_maps-diagnostics.js';
 
 export function json(data,status=200){return Response.json(data,{status,headers:{'Cache-Control':'no-store'}});}
 export function sameSite(request){
@@ -30,7 +30,7 @@ export async function google(env,url,body,mask,operation='maps_request'){
   }catch{throw failure(operation,'request_setup','REQUEST_SETUP_FAILED');}
   let response;
   try{response=await fetch(url,options);}
-  catch(error){throw failure(operation,'transport',['TimeoutError','AbortError'].includes(error?.name)?'REQUEST_TIMED_OUT':'NETWORK_REQUEST_FAILED');}
+  catch(error){throw transportFailure(operation,error);}
   let data;try{data=await response.json();}catch{
     if(!response.ok)throw providerFailure(operation,response,null);
     throw failure(operation,'response_decode','INVALID_JSON_RESPONSE',{httpStatus:response.status});
