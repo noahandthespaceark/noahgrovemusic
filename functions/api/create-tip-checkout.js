@@ -1,3 +1,4 @@
+import { saveCheckoutContext } from './_tip-history.js';
 export async function onRequestPost(context) {
   try {
     const { request, env } = context;
@@ -9,6 +10,8 @@ export async function onRequestPost(context) {
     if (!env.SQUARE_LOCATION_ID) return json({ ok: false, error: 'Missing SQUARE_LOCATION_ID.' }, 500);
 
     const origin = new URL(request.url).origin;
+    const tipContext={guestName:String(body.guest_name||'').trim().slice(0,120),message:String(body.message||'').trim().slice(0,1000)};
+    const returnUrl=body.source==='setbliss' ? 'https://setbliss.noahgrove.com/request-tip/?tip=thanks' : `${origin}/support?tip=thanks`;
     const referenceId = `NG-TIP-${Date.now()}-${crypto.randomUUID().slice(0, 8)}`;
     const squareBase = env.SQUARE_ENVIRONMENT === 'sandbox'
       ? 'https://connect.squareupsandbox.com'
@@ -25,14 +28,14 @@ export async function onRequestPost(context) {
           base_price_money: { amount: dollarsToCents(amount), currency: 'USD' }
         }],
         metadata: {
-          source: 'noahgrove.com support tip',
+          source: body.source==='setbliss' ? 'setbliss request page tip' : 'noahgrove.com support tip',
           trigger_firebot: 'true',
           tip_amount: String(amount),
           page: '/support'
         }
       },
       checkout_options: {
-        redirect_url: `${origin}/support?tip=thanks`,
+        redirect_url: returnUrl,
         ask_for_shipping_address: false,
         merchant_support_email: env.MERCH_SUPPORT_EMAIL || env.QUOTE_TO_EMAIL || 'noah@noahgrove.com'
       },
@@ -57,7 +60,8 @@ export async function onRequestPost(context) {
     const checkoutUrl = squareData?.payment_link?.url;
     if (!checkoutUrl) return json({ ok: false, error: 'Square did not return a checkout URL.', details: squareData }, 502);
 
-    return json({ ok: true, checkoutUrl, referenceId });
+    await saveCheckoutContext(env,referenceId,squareData.payment_link.order_id,tipContext);
+    return json({ ok: true, checkoutUrl, referenceId, orderId:squareData.payment_link.order_id });
   } catch (error) {
     return json({ ok: false, error: error?.message || 'Unexpected server error.' }, 500);
   }
