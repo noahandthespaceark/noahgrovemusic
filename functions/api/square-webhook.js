@@ -1,3 +1,4 @@
+import { ensureTipHistory, isSquareTip, saveTipReceipt, squareTipReceipt } from './_tip-history.js';
 import { buildTipEvent, storeTipEvent as queueTipEvent, timingSafeEqual } from './_tip-shared.js';
 import { buildMerchEvent, storeMerchEvent } from './_merch-firebot-shared.js';
 import { findMerchReference, loadPendingMerchOrder, sendMerchReceiptEmails } from './_merch-shared.js';
@@ -31,6 +32,7 @@ export async function onRequestPost(context) {
   if (isCompletedPayment) {
     const orderId = payment.order_id || '';
     const order = orderId ? await fetchSquareOrder(orderId, env) : null;
+    if(isSquareTip(payment,order) && env.SQUARE_WEBHOOK_SIGNATURE_KEY){await ensureTipHistory(env);await saveTipReceipt(env,await squareTipReceipt(env,payment,order));}
     const source = detectSquareSource(payment, order);
     const shouldTriggerFirebot = source.includes('support tip') || source.includes('merch') || payment?.metadata?.trigger_firebot === 'true' || order?.metadata?.trigger_firebot === 'true';
     if (shouldTriggerFirebot) await storeFirebotEvent({ event, payment, order, source }, env);
