@@ -25,14 +25,17 @@ export async function readCheckoutContext(env, referenceId, orderId) {
 export async function saveTipReceipt(env, receipt) {
   await ensureTipHistory(env);
   const fields = Object.fromEntries(Object.entries(receipt).filter(([,v]) => v !== undefined && v !== null && v !== ''));
-  await env.DB.prepare(`INSERT INTO tip_receipts (id,paid_at,provider,data_json,updated_at) VALUES (?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET data_json=json_patch(tip_receipts.data_json,excluded.data_json),updated_at=excluded.updated_at`).bind(receipt.id, new Date(receipt.paidAt).toISOString(), receipt.provider, JSON.stringify(fields), new Date().toISOString()).run();
+  await env.DB.prepare(`INSERT INTO tip_receipts (id,paid_at,provider,data_json,updated_at) VALUES (?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET data_json=json_patch(tip_receipts.data_json,excluded.data_json),updated_at=excluded.updated_at
+    WHERE json_extract(excluded.data_json,'$.providerUpdatedAt') IS NULL
+       OR json_extract(tip_receipts.data_json,'$.providerUpdatedAt') IS NULL
+       OR julianday(json_extract(excluded.data_json,'$.providerUpdatedAt')) >= julianday(json_extract(tip_receipts.data_json,'$.providerUpdatedAt'))`).bind(receipt.id, new Date(receipt.paidAt).toISOString(), receipt.provider, JSON.stringify(fields), new Date().toISOString()).run();
 }
 export function isSquareTip(payment, order) {
   const meta = order?.metadata || {};
   const source = clean(meta.source).toLowerCase();
   const items = (order?.line_items || []).map(x => clean(x.name).toLowerCase());
   // Exact integrations/line items only. A generic note containing "tip" is not evidence.
-  return !source.includes('merch') && (/^(SB|NG)-TIP-/.test(String(order?.reference_id || '')) || items.some(x => ['tip the music','support the music'].includes(x)) || /^setbliss request page tip\b/.test(source));
+  return !source.includes('merch') && !items.some(x => !['tip the music','support the music'].includes(x)) && (/^(SB|NG)-TIP-/.test(String(order?.reference_id || '')) || items.some(x => ['tip the music','support the music'].includes(x)) || /^setbliss request page tip\b/.test(source));
 }
 export async function squareGet(env, path) {
   const base = env.SQUARE_ENVIRONMENT === 'sandbox' ? 'https://connect.squareupsandbox.com' : 'https://connect.squareup.com';
