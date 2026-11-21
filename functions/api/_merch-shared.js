@@ -7,7 +7,7 @@ export const MERCH_CATALOG = {
   'sticker-spaceark-logo': { name: 'Space ARK Logo Sticker', price: 1 },
   shirt: { name: 'SpaceArk Shirt', price: 20, sizes: ['S', 'M', 'L', 'XL'] },
   hat: { name: 'SpaceArk Hat', price: 10 },
-  mug: { name: 'SpaceArk Mug', price: 15 }
+  mug: { name: 'SpaceArk Mug', price: 20 }
 };
 
 export function json(data, status = 200) {
